@@ -1,0 +1,15 @@
+Individual Reflections - Week 2
+David Azizi - Team Navarro
+
+• What do I want to learn or understand better?
+The current situation is that I'm not accustomed to the aglie development method.
+I want to become more efficient at the aglie development method and I plan on getting closer at that by adopting agile practises.
+
+• How can I help someone else, or the entire team, to learn something new?
+Since the team and I are not familiar with React I can consider working with it during the project so that I and the team can learn something new.
+
+• What is my contribution towards the team’s use of Scrum?
+My contribution to the team's use of scrum is to aid in the creation of fiting User Stories. To make sure that they are of appropriate size.
+
+• What is my contribution towards the team’s deliveries?
+I contributed to the presentation pitch and to the creation of the Buisness Model Canvas.
