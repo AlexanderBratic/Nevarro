@@ -1,0 +1,12 @@
+WEEK 2
+what do I want to learn or understand better?
+	I would like to learn how the setup between the backend and frontend works more. So far I'm quite unknowledgable in the technologies that we're planning on using in the project as well, so I'm hoping to learn a bit of everything if possible.
+
+how can I help someone else, or the entire team, to learn something new?
+	I don't know of any specific technology related skill where i can help someone or my team but it seems like I've got a bit more experience working in the agile framework than everyone else, so I think that knowledge could be useful for the rest of the team.
+
+what is my contribution towards the team’s use of Scrum?
+	We still havent started working on the actual project yet but so far I've set up a project board on trello which we're going to create tasks for today.
+
+what is my contribution towards the team’s deliveries?
+	None so far as deliveries for the project, but i've been part of coming up with the core idea and also creating the presentation.
