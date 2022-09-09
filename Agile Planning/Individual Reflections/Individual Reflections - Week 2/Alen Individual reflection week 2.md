@@ -1,4 +1,4 @@
-# Individual reflection for sprint 1
+# Individual reflection for planning week 2
 ### Alen Mukaca
 
 <br>
