@@ -1,6 +1,0 @@
-1. No meetings on weekends.
-2. Listen to other peoples ideas and come with constructive critisism.
-3. If someone can't attend a meeting, then the rest of the team should enable that person to join remotely somehow.  
-4. Be helpful if someone needs help.
-5. If you need help, ask for it. 
-6. Weekly meetings, monday 09:00 and friday 13:00. (Sprint planning & Sprint retrospective)
