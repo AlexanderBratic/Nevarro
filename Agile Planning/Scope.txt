@@ -1,0 +1,9 @@
+Scope
+* Website with a travelplanner which estimates the carbon equivalent emissions of the trip.
+* Website should have the capability of giving you the directions from one place to another
+* Website should be able to give you the emissions statistics of a trip
+* The different alternative transportation modes are compared with each other when it comes to relative carbon equivalent emissions.
+* Personal customization of carbon emission estimation based on own vehicle. 
+* Comparisons of trips with a set of other climate emitting activities, like for example the emissions from consumer goods and services.
+* APIn should have two routes, one that delivers the travel path for various modes of transportation and one route for indepth data about the emissions.
+
