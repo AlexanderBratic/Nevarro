@@ -10,11 +10,13 @@ For linux command line in API directory:
 ```
 
 #### Installing dependencies
+Needs to be done at least once to be able to un the API.
 ``` bash
 gradlew.bat dependencies
 ```
 
 #### Running the api in dev mode
+Running this will start an devolpment server at http://localhost:8080. A program like [postman](https://www.postman.com/) or [insomnia](https://insomnia.rest/download) can be used to test the API.
 ``` bash
 gradlew.bat bootRun
 ```
