@@ -1,0 +1,12 @@
+WEEK 2
+what do I want to learn or understand better?
+	Right now I mainly want to learn Java and Spring 
+
+how can I help someone else, or the entire team, to learn something new?
+	I don't know quite yet, I'm planning on being at the campus more so that we can meet up and code together.
+
+what is my contribution towards the team’s use of Scrum?
+	This sprint I've set up a survey to get peoples thoughts about the points on the stories we've created. We're later going to use that information to discuss and set points to the stories. Furthermore I've also worked on writing the userstories and adding more information.
+
+what is my contribution towards the team’s deliveries?
+	This week i had planned to gather information about co2e emissions of different modes of transportation, I did however underestimate the time it would take to find all the required data. I still hadn't finished by the retrospective on friday, but i left the story in progress and plan to complete it in this week.
