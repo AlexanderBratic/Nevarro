@@ -1,0 +1,13 @@
+kg CO2 per passenger km
+0-0.05/0.26	Walking	fuelling walking and cycling:human powered locomotion isassociated with non-negligiblegreenhouse gas emissions	Comment, 0.05-0,26 depending on diet/and which part of the world
+0.006-0.011	Bicycle	A comparison of carbon dioxide emissions associated with motorised transport modes and cycling in Ireland
+0.025	Electric Bicycle	https://iopscience.iop.org/article/10.1088/1748-9326/ab2da8/pdf	
+0.093	Electric Scooter (elspark)	https://iopscience.iop.org/article/10.1088/1748-9326/ab2da8/pdf	Comment, the main reason for the high Co2 is the fact that they have a high rate of replacement, lasting on average 0.5 to 4 years. 
+0.031	Intercity bus	A comparison of carbon dioxide emissions associated with motorised transport modes and cycling in Ireland
+0.053	City bus	A comparison of carbon dioxide emissions associated with motorised transport modes and cycling in Ireland
+0.1	Moped	Martin Weiss, Peter Dekker, Alberto Moro, Harald Scholz, Martin K. Patel, On the electrification of road transportation – A review of the environmental, economic, and social performance of electric two-wheelers, Transportation Research Part D: Transport and Environment
+0.15	Motorcycle	Martin Weiss, Peter Dekker, Alberto Moro, Harald Scholz, Martin K. Patel, On the electrification of road transportation – A review of the environmental, economic, and social performance of electric two-wheelers, Transportation Research Part D: Transport and Environment
+0.075	Train	IPCC report 2018
+0.18	Flight-short A320	A Life Cycle Assessment of the Passenger Air Transport System Using Three Flight Scenarios, Tyler Lewis
+0.105	Flight-long A330	A Life Cycle Assessment of the Passenger Air Transport System Using Three Flight Scenarios, Tyler Lewis
+	Tram	
