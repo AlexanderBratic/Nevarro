@@ -1,9 +1,9 @@
 Individual Reflection week 3 Andin Blomgren
 
-I can spend more time coding and interacting with the code I'm trying to learn. Rather than only study theories and reading documentation.
+I have spent the week learning react and knowing how to implement it into our project, I would've liked to write some actual useful code but not so much yet. I will reach this goal by when I learn something through documentation or reading, I test the kind of code that I've read about.
 
-I can help the rest of the team by sharing my interactions with git, other programming languages and also other project experiances.
+I can help this team by sharing how interactions with git, and programming logic kind of works. I have had a lot on my hands the part week so my goal is to increase my activity within the gruop outside of meetings.
 
-My contribution to the teams use of scrum is to try and help the rest of the team in ways to inprove our scrum usage and things to think about.
+My contribution to the teams use of scrum is talking about ways to improve our communication within the group and how to work together, ask questions and dos/don'ts. I reached what I wanted to contribute with and is something I only would want to improve, what can be improved I am not aware of yet.
 
-My contribution so far to our team deliveries isn't that much, so far this week it's only been learning react and creating a mockup of the task at hand.
+My contribution so far to our team deliveries isn't that much, so far this week it's only been learning react and creating a mockup of the task at hand. So to fix this I am going to work on the project during the weekend and next week spend more of my "free time" learning and experimenting with code so I reach results faster.
