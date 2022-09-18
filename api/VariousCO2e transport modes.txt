@@ -10,4 +10,5 @@ kg CO2 per passenger km
 0.075	Train	IPCC report 2018
 0.18	Flight-short A320	A Life Cycle Assessment of the Passenger Air Transport System Using Three Flight Scenarios, Tyler Lewis
 0.105	Flight-long A330	A Life Cycle Assessment of the Passenger Air Transport System Using Three Flight Scenarios, Tyler Lewis
-	Tram	
+0.006	Tram	Comprehensive Analysis of the Built Environment through the Introduction of Induced Impacts via Transportation, John E. Anderson, Gebhard Wulfhorst, and Werner Lang	Virtually all co2e cost comes from the initial infrastructure
+0.026	Subway	Comprehensive Analysis of the Built Environment through the Introduction of Induced Impacts via Transportation, John E. Anderson, Gebhard Wulfhorst, and Werner Lang	Same as the tram but building underground is significantly more expensive
