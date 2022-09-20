@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.*;
 import java.awt.*;
 
 @RestController
-@RequestMapping("/")
 public class HelloWorld {
 
 
     // the json response object
     public static class HelloWorldData {
         public String hello = "world";
+        public String test = "success";
     }
 
     // the api endpoint for /, returns a json object of hello world
@@ -27,6 +27,7 @@ public class HelloWorld {
     // the api endpoint for /, that receives and returns a json object of hello world
     @PostMapping(path = "/", produces = "application/json", consumes = "application/json")
     public HelloWorldData postHelloWorld(@RequestBody HelloWorldData data) {
+
         return data;
     }
 }
