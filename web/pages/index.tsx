@@ -7,10 +7,10 @@ import Button from '@mui/material/Button';
 import {MouseEvent, useEffect, useRef, useState} from "react";
 import Grid from "@mui/material/Unstable_Grid2";
 
-const Home: NextPage<{ 
+const Home: NextPage<{
   // prop types
   onSearch: (from:string, to: string) => void | undefined
-}>  = ( 
+}>  = (
   // props
   { onSearch }
   ) => {
@@ -60,14 +60,14 @@ const Home: NextPage<{
                 />
             </Grid>
             <Grid xs>
-              <Button 
+              <Button
                 style={{height: '100%'}}
-                variant="contained" 
+                variant="contained"
                 fullWidth
                 disabled={from === '' || to === ''}
                 type="submit"
-              > 
-                Sök 
+              >
+                Sök
               </Button>
             </Grid>
         </Grid>
@@ -75,14 +75,14 @@ const Home: NextPage<{
 
       <br/>
 
-      <Typography variant="h5"> Why use Eco Travel Planer </Typography>
+      <Typography variant="h5"> Varför använda Eco Travel Planer? </Typography>
 
       <Typography textAlign="justify">
-        Ever wondered how much carbon dioxide emissions you produce when traveling between two between two places, 
-        such as from home to work? You can compare multiple travel methods such as walking, cycling, driving and public transport
-        to find the best option. Sometimes a car can be more efficient than switching between multiple busses. You can also find
-        out an estimated yearly emission if you take that route regularly. To get started you can choose a start point and destination
-        along with customizing vehicle options.
+            Har du någonsin undrat hur mycket koldioxidutsläpp du producerar när du reser mellan två platser,
+            till exempel från hemmet till jobbet? Du kan jämföra flera resmetoder såsom promenad, cykling, körning och kollektivtrafik
+            för att hitta det bästa alternativet. Ibland kan en bil vara mer effektiv än att byta mellan flera bussar. Du kan också hitta
+            ut en uppskattad årlig utsläpp om du tar samma rutt regelbundet. För att komma igång kan du välja en startpunkt och destination
+            tillsammans med anpassning av fordonet.
       </Typography>
 
     </Container>
