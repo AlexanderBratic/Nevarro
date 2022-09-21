@@ -24,7 +24,12 @@ export default function MyApp(props: MyAppProps) {
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
-        <Component {...pageProps} />
+
+        {/* append page props here to pass data between pages and template */}
+        <Component 
+          {...pageProps}
+          onSearch={(a: string, b: string) => console.log("App: " + a + ' ' + b)} 
+        />
       </ThemeProvider>
     </CacheProvider>
   );
