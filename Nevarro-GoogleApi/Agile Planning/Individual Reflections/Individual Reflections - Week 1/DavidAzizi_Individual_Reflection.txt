@@ -1,0 +1,15 @@
+Individual Reflections - Week 1
+David Azizi - Team Navarro
+
+• What do I want to learn or understand better?
+My knowledge of Git is limited and in order to streamline the development of the coming project I will read on how to solve merge conflicts.
+
+• How can I help someone else, or the entire team, to learn something new?
+Since I am new to Chalmers and to the team I am not familiar with the skills which my team members possess and can therefore not know if I can show my team something the already don't know.
+
+• What is my contribution towards the team’s use of Scrum?
+During the agile lego project I was the designer of the buildings 
+and the legacy builder. I currently don't believe that I need to switch from this role.
+
+• What is my contribution towards the team’s deliveries?
+I added content to the social contract.

@@ -1,0 +1,14 @@
+Individual Reflections - Week 3
+David Azizi - Team Navarro
+
+• What do I want to learn or understand better?
+The current situation is that I'm not accustomed to working with the React.js framework. I want to become more prolific with the React framework and I plan on becoming that by developing small websites in React.js.
+
+• How can I help someone else, or the entire team, to learn something new?
+Since the team and I am not familiar with React.js, Next.js and API development I can consider working with those technologies during the project so that I and the team can learn something new. I can also assist my team by picking up a User story when I have completed mine.
+
+• What is my contribution towards the team’s use of Scrum?
+My contribution to the team's use of scrum is to aid in the creation of fiting User Stories by adding more descriptive acceptance criterias. This had to be done because of the feed-back our team received from the supervisor during the supervising session in week 3.
+
+• What is my contribution towards the team’s deliveries?
+I contributed to the team’s deliveries by finding relevant data for our project. This data is to used for providing the service our producted is expected to deliver.

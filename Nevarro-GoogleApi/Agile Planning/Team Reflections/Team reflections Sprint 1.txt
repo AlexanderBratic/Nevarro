@@ -1,0 +1,12 @@
+Team Nevarro Retrospective Sprint 1
+	How did it go?
+		The sprint could have gone better as a whole, at the start of the retrospective only a single task had been closed. We reflected on why this was and came to the conclusion that the general reasons were that we both overplanned a few tasks and there were also some issues with the specifics of the tasks. We didn't write userstories for all our stories and we also didn't estimate time through planning-poker or other methods. 
+		We also didnt think it helped that we were all new to the project and many in the group felt like they needed some time to grow into it and get to know the project.
+	What could we have done better?
+		We should have written the userstories earlier to make it easier to understand and grapple with the stories, this would also make it easier to understand who to contact in case they wanted clarifications on something (like for example if a specific developer wanted a feature, then that may not have been clear to everyone from the task description who needed it and for what).
+		We also felt like we needed to have better communication in general. Some people in the team may have needed different degrees of help getting started with their tasks and with better communication this could probably make things smoother.
+	What are we going to do to improve?
+		We're going to spend some time before the next sprint planning meeting to write the userstories and add time to the stories so that we can discuss the changes in the sprint planning. Hopefully this will make the tasks clearer to everyone.
+		Partially based on feedback from the consultation and our own reflection we're going to add a third standing meeting in the middle of the week as kind of a "stand up meeting", due to clashing schedules we've designated 15 minutes during lunch to go through what we're doing and for people to bring up any problems they're facing.
+		We've also decided on moving around the scrummaster and PO roles on a weekly basis to allow everyone to assume the roles during the course.
+	Other
