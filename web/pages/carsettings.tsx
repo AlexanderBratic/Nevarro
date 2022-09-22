@@ -10,8 +10,8 @@ import {FormEvent, useState} from "react";
             console.log(`reg=${reg}, vehicle=${vehicle}, fuel=${fuel}`)
      }
 
-     const vehicleTypes = [ "Bil", "Elbil", "Lastbil", "Buss", "SUV" ]
-     const fuelTypes = [ "Bensin", "Diesel", "El", "Biogas" ]
+     const vehicleTypes = [ "bil", "lastbil", "skåpbil", "combi", "buss", "suv" ]
+     const fuelTypes = [ "bensin", "diesel", "el", "biogas", "etanol" ]
 
      const [vehicle, setVehicle] = useState(vehicleTypes[0])
      const [fuel, setFuel] = useState(fuelTypes[0])
@@ -24,7 +24,7 @@ import {FormEvent, useState} from "react";
                     <Grid xs={12}>
                         <Typography variant="h3" textAlign="center"> Bil Inställningar </Typography>
                     </Grid>
-                    <Grid xs>
+                    <Grid xs minWidth="300px">
                         <TextField
                             label="Registreringsnummer"
                             variant="filled"
@@ -33,12 +33,12 @@ import {FormEvent, useState} from "react";
                             onChange={(event) => setReg(event.target.value)}
                         />
                     </Grid>
-                    <Grid xs>
+                    <Grid xs minWidth="300px">
                         <Typography variant="subtitle2"> Bil typ </Typography>
                         <ToggleButtonGroup
                             size="small"
                             exclusive
-                            onChange={(e,v) => setVehicle(v)}
+                            onChange={(e,v) => v ? setVehicle(v): null}
                             value={vehicle}
                             color="primary"
                             fullWidth
@@ -48,12 +48,12 @@ import {FormEvent, useState} from "react";
                             )) }
                         </ToggleButtonGroup>
                     </Grid>
-                    <Grid xs>
+                    <Grid xs minWidth="300px">
                         <Typography variant="subtitle2"> Bränsle typ </Typography>
                         <ToggleButtonGroup
                             size="small"
                             exclusive
-                            onChange={(e,v) => setFuel(v)}
+                            onChange={(e,v) => v ? setFuel(v): null}
                             value={fuel}
                             color="primary"
                             fullWidth
@@ -62,6 +62,10 @@ import {FormEvent, useState} from "react";
                                 <ToggleButton value={fuelType}>{fuelType}</ToggleButton>
                             )) }
                         </ToggleButtonGroup>
+                    </Grid>
+                    <Grid xs maxWidth="90px">
+                        <Typography variant="subtitle2"> Utsläpp: </Typography>
+                        <Typography variant="body2"> 0.0 CO2/km </Typography>
                     </Grid>
                     <Grid xs={12}>
                         <Button type="submit" variant="contained" fullWidth> Spara </Button>
