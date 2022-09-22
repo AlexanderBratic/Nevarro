@@ -10,9 +10,6 @@ import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import Divider from '@mui/material/Divider';
-import InboxIcon from '@mui/icons-material/Inbox';
-import DraftsIcon from '@mui/icons-material/Drafts';
 
 import MenuIcon from '@mui/icons-material/MenuRounded';
 import ComparisonIcon from '@mui/icons-material/BarChartRounded';
@@ -26,11 +23,43 @@ import WalkIcon from '@mui/icons-material/DirectionsWalkRounded';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
-import { ReactComponent as DropdownIcon } from '../icons/dropdown.svg';
-
 import { useRouter } from 'next/router';
 
-export default function Template(props) {
+const isBrowser: boolean = ((): boolean => typeof window !== 'undefined')();
+function getItem(key: string, value: number|boolean|object|string) {
+	if (!isBrowser)
+		return value;
+	let sessionValue = window.sessionStorage[key];
+	if (sessionValue === undefined)
+		return value;
+	
+	if (typeof value === 'number')
+		return parseFloat(sessionValue);
+	if (typeof sessionValue === 'boolean')
+		return value === 'true';
+	if (typeof sessionValue === 'object')
+		return JSON.parse(sessionValue);
+	return sessionValue;
+}
+function setItem(key: string, value: number|boolean|object|string) {
+	if (isBrowser) {
+		let storedValue = value;
+		if (typeof value === 'number')
+			storedValue = value.toString();
+		else if (typeof value === 'boolean')
+			storedValue = value ? 'true' : 'false';
+		else if (typeof value === 'object')
+			storedValue = JSON.stringify(value);
+		
+		
+		window.sessionStorage.setItem(key, storedValue);
+		return true;
+	}
+
+	return false;
+}
+
+function Template(props) {
 	const router = useRouter();
   const [selectedLinkPathname, setSelectedLinkPathname] = React.useState(router.pathname);
 	const [menuHeight, setMenuHeight] = React.useState(0);
@@ -135,3 +164,7 @@ export default function Template(props) {
 		</Container>
 	);
 }
+
+
+export { setItem, getItem, Template };
+export default Template;
