@@ -28,7 +28,6 @@ public class RoutesDirectionApi {
     }
 
     /**
-     *
      * @return A JSON object as a String
      */
     public String getInfo() {
