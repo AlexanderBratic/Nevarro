@@ -3,19 +3,19 @@ import * as React from 'react';
 import type { NextPage } from 'next';
 import Template from '../src/components/Template';
 
-function ComparisonPage(props) {
-	
+
+function CarPage(props) {
 	
 	return (
-			<h1>Comparison</h1>
+		<h1>Car</h1>
 	);
+	
 }
-
 
 const About: NextPage = () => {
 
   return (
-		<Template page={ComparisonPage} />
+		<Template page={CarPage} />
   );
 };
 

@@ -3,7 +3,9 @@ import * as React from 'react';
 import { red } from '@mui/material/colors';
 
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
+import Link from '@mui/material/Link';
+import IconButton from '@mui/material/IconButton';
 import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -12,110 +14,90 @@ import Divider from '@mui/material/Divider';
 import InboxIcon from '@mui/icons-material/Inbox';
 import DraftsIcon from '@mui/icons-material/Drafts';
 
+import MenuIcon from '@mui/icons-material/MenuRounded';
+import ComparisonIcon from '@mui/icons-material/BarChartRounded';
+import CarIcon from '@mui/icons-material/DirectionsCarRounded';
+import AirplaneIcon from '@mui/icons-material/AirplanemodeActiveRounded';
+import PublicTransportIcon from '@mui/icons-material/CommuteRounded';
+import BikeIcon from '@mui/icons-material/DirectionsBikeRounded';
+import ElectricScooterIcon from '@mui/icons-material/ElectricScooterRounded';
+import WalkIcon from '@mui/icons-material/DirectionsWalkRounded';
+
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 import { ReactComponent as DropdownIcon } from '../icons/dropdown.svg';
 
+import { useRouter } from 'next/router';
 
 export default function Template(props) {
-  const [selectedIndex, setSelectedIndex] = React.useState(0);
+	const router = useRouter();
+  const [selectedLinkPathname, setSelectedLinkPathname] = React.useState(router.pathname);
 	const [menuHeight, setMenuHeight] = React.useState(0);
 	
+  const renderDropdown = useMediaQuery(useTheme().breakpoints.down('md'), { noSsr: true });
 	
-  const handleListItemClick = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    index: number,
-  ) => {
-    setSelectedIndex(index);
-  };
-	
-  const theme = useTheme();
-  const renderDropdown = useMediaQuery(theme.breakpoints.down('sm'), { noSsr: true });
-	
-	function calcHeight(el) {
-		if (menuHeight < 10) {
-			const height = el.offsetHeight;
+	function calcHeight(dropDown) {
+		if (menuHeight == 0) {
+			const height = dropDown.current.childNodes[0].offsetHeight;
+			console.log(dropDown.current.childNodes[0]);
 			setMenuHeight(height);
 		} else {
 			setMenuHeight(0);
 		}
 	}
 	
+	function ListItem(Icon, name, link) {
+		return (
+			<ListItemButton
+				selected={selectedLinkPathname === link}
+				onClick={(event) => {setSelectedLinkPathname(link); router.push(link);}}
+			>
+					<ListItemIcon><Icon /></ListItemIcon>
+					<ListItemText primary={name} />
+			</ListItemButton>
+		);
+	}
+	
 	let body = (
 		<List component="nav">
-			<ListItemButton
-				selected={selectedIndex === 0}
-				onClick={(event) => handleListItemClick(event, 0)}
-			>
-				<ListItemIcon><InboxIcon /></ListItemIcon>
-				<ListItemText primary="Comparison" />
-			</ListItemButton>
-			<ListItemButton
-				selected={selectedIndex === 1}
-				onClick={(event) => handleListItemClick(event, 0)}
-			>
-				<ListItemIcon><InboxIcon /></ListItemIcon>
-				<ListItemText primary="Car" />
-			</ListItemButton>
-			<ListItemButton
-				selected={selectedIndex === 2}
-				onClick={(event) => handleListItemClick(event, 1)}
-			>
-				<ListItemIcon><DraftsIcon /></ListItemIcon>
-				<ListItemText primary="Plane" />
-			</ListItemButton>
-			<ListItemButton
-				selected={selectedIndex === 3}
-				onClick={(event) => handleListItemClick(event, 2)}
-			>
-				<ListItemIcon><DraftsIcon /></ListItemIcon>
-				<ListItemText primary="Public Transport" />
-			</ListItemButton>
-			<ListItemButton
-				selected={selectedIndex === 4}
-				onClick={(event) => handleListItemClick(event, 3)}
-			>
-				<ListItemIcon><DraftsIcon /></ListItemIcon>
-				<ListItemText primary="Bicycle" />
-			</ListItemButton>
-			<ListItemButton
-				selected={selectedIndex === 5}
-				onClick={(event) => handleListItemClick(event, 4)}
-			>
-				<ListItemIcon><DraftsIcon /></ListItemIcon>
-				<ListItemText primary="Electric Scooter" />
-			</ListItemButton>
-			<ListItemButton
-				selected={selectedIndex === 6}
-				onClick={(event) => handleListItemClick(event, 5)}
-			>
-				<ListItemIcon><DraftsIcon /></ListItemIcon>
-				<ListItemText primary="Walking" />
-			</ListItemButton>
+			{ListItem(ComparisonIcon, "Comparison", "/comparison")}
+			{ListItem(CarIcon, "Car", "/car")}
+			{ListItem(AirplaneIcon, "Plane", "/plane")}
+			{ListItem(PublicTransportIcon, "Public Transport", "/public-transport")}
+			{ListItem(BikeIcon, "Bicycle", "/bicycle")}
+			{ListItem(ElectricScooterIcon, "Electric Scooter", "/electric-scooter")}
+			{ListItem(WalkIcon, "Walking", "/walking")}
 		</List>
 	);
 	
 	let result;
 	if (renderDropdown) {
+		let dropDownMenuRef = React.createRef();
+	
 		result = (
 			<Box>
-				<Box sx={{
+				<Box 
+					ref={dropDownMenuRef}
+				  sx={{
 					transition: "height 100ms linear",
 					height: menuHeight,
 					overflow: "hidden"
-				}}>
+				  }}
+				>
 					{ body }
 				</Box>
-				<Box>
-					<Button 
+				<Box sx={{float: "right", marginTop: "10px"}}>
+					<IconButton 
 						variant="contained" 
-						onClick={(e) => calcHeight(e.target.parentNode.parentNode)}
+						onClick={(e) => calcHeight(dropDownMenuRef)}
 					>
-						Toggle Dropdown
-					</Button>
+						<MenuIcon />
+					</IconButton>
 				</Box>
-				<Box>{ props.children }</Box>
+				<Box>
+					<props.page />
+				</Box>
 			</Box>
 		);
 	} else {
@@ -127,8 +109,18 @@ export default function Template(props) {
 					justifyContent: 'center',
 					alignItems: 'top',
 				}}>
-				<Box>{ props.children }</Box>
-				<Box>
+				<Box sx={{
+						flex: "1 0 auto"
+					}}
+				>
+					<props.page />
+				</Box>
+				<Box sx={{
+						width: "20%",
+						maxWidth: "260px",
+						flex: "0 0 auto"
+					}}
+				>
 					<Box marginLeft="20px">
 						<h1>Hello!</h1>
 					</Box>
@@ -137,5 +129,9 @@ export default function Template(props) {
 			</Box>
 		);
 	}
-	return result;
+	return (
+    <Container maxWidth="xl">
+			{result}
+		</Container>
+	);
 }

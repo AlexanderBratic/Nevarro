@@ -3,19 +3,19 @@ import * as React from 'react';
 import type { NextPage } from 'next';
 import Template from '../src/components/Template';
 
-function ComparisonPage(props) {
-	
+
+function PlanePage(props) {
 	
 	return (
-			<h1>Comparison</h1>
+		<h1>Plane</h1>
 	);
 }
 
-
 const About: NextPage = () => {
-
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
+	
   return (
-		<Template page={ComparisonPage} />
+		<Template page={PlanePage} />
   );
 };
 
