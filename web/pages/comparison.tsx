@@ -4,7 +4,8 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 
 import type { NextPage } from 'next';
-import {setItem, getItem, Template } from '../src/components/Template';
+import Template from '../src/components/Template';
+import {setItem, getItem } from '../src/sessionStorage';
 
 function ComparisonPage(props) {
 	const [count, actuallySetCount] = React.useState(getItem('comparison-count', 0));
