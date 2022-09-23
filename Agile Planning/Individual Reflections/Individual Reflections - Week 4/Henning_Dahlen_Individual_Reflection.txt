@@ -1,0 +1,12 @@
+WEEK 4
+what do I want to learn or understand better?
+	How to work with Gradle within the java project. This week I've had some serious issues with the project configuration. 
+
+how can I help someone else, or the entire team, to learn something new?
+	Right now I don't think there's a lot of things that i can teach my team since my knowledge about our chosen technologies is quite limited. 
+
+what is my contribution towards the team’s use of Scrum?
+	This week i was the acting scrummaster so i've been trying to lead the meetings to some degree which i think has gone quite well. Though due to some technical difficulties the mid-week-standup didn't work out that well. 
+
+what is my contribution towards the team’s deliveries?
+	As mentioned in the team reflections we had some issues with the fact that we planned the sprints around the whole userstories instead of breaking them down into tasks. I had a userstory of setting up some webscraping for the project. After spending a lot of time on setting up the environment need i actually did some investigation of the website i became apparent that the website was using a recaptcha to stop bots from using it so in the end we had to scrap the entire story. I think there is a chance that this could have been avoided if we had created some better tasks for the story. Like for example investigating the website would have been an obvious start of the story.
