@@ -1,13 +1,11 @@
-import * as React from 'react';
-
 import type { NextPage } from 'next';
 import Template from '../src/components/Template';
 
 
-function CarPage() {
+function BicyclePage() {
 	
 	return (
-		<h1>Car</h1>
+		<h1>Bicycle</h1>
 	);
 	
 }
@@ -15,7 +13,7 @@ function CarPage() {
 const About: NextPage = () => {
 
   return (
-		<Template page={CarPage} />
+		<Template page={BicyclePage} />
   );
 };
 
