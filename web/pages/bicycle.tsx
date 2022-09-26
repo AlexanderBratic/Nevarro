@@ -5,7 +5,7 @@ import Template from '../src/components/Template';
 function BicyclePage() {
 	
 	return (
-		<h1>Bicycle</h1>
+		<h1>Bicycle Settings</h1>
 	);
 	
 }
