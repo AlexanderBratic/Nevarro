@@ -17,7 +17,7 @@ import WalkIcon from '@mui/icons-material/DirectionsWalkRounded';
 
 
 
-function ComparisonPage() {
+const ComparisonPage: NextPage = () => {
 	const [count, actuallySetCount] = React.useState(getItem('comparison-count', 0));
 
 	function setCount(value: number) {
@@ -79,21 +79,15 @@ function ComparisonPage() {
 	};
 
 	return (
-		<Box>
-			<h1>Comparison {count}</h1>
-			<Button onClick={() => setCount(count + 1)}>Increment</Button>
+        <Template>
+            <Box>
+                <h1>Comparison {count}</h1>
+                <Button onClick={() => setCount(count + 1)}>Increment</Button>
 
-			<StapleDiagram staples={stapleData} />
-		</Box>
+                <StapleDiagram staples={stapleData} />
+            </Box>
+        </Template>
 	);
 }
 
-
-const About: NextPage = () => {
-
-  return (
-		<Template page={ComparisonPage} />
-  );
-};
-
-export default About;
+export default ComparisonPage;

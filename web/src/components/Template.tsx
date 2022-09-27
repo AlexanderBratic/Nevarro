@@ -26,13 +26,13 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { useRouter } from 'next/router';
 
 
-function Template(props) {
+function Template({ children }: any) {
 	const router = useRouter();
   const [selectedLinkPathname, setSelectedLinkPathname] = React.useState(router.pathname);
 	const [menuHeight, setMenuHeight] = React.useState(0);
-	
+
   const renderDropdown = useMediaQuery(useTheme().breakpoints.down('md'), { noSsr: true });
-	
+
 	function calcHeight(dropDown) {
 		if (menuHeight == 0) {
 			const height = dropDown.current.childNodes[0].offsetHeight;
@@ -42,7 +42,7 @@ function Template(props) {
 			setMenuHeight(0);
 		}
 	}
-	
+
 	function ListItem(Icon, name, link) {
 		return (
 			<ListItemButton
@@ -54,7 +54,7 @@ function Template(props) {
 			</ListItemButton>
 		);
 	}
-	
+
 	let body = (
 		<List component="nav">
 			{ListItem(ComparisonIcon, "Comparison", "/comparison")}
@@ -66,14 +66,14 @@ function Template(props) {
 			{ListItem(WalkIcon, "Walking", "/walking")}
 		</List>
 	);
-	
+
 	let result;
 	if (renderDropdown) {
 		let dropDownMenuRef = React.createRef();
-	
+
 		result = (
 			<Box>
-				<Box 
+				<Box
 					ref={dropDownMenuRef}
 				  sx={{
 					transition: "height 100ms linear",
@@ -84,15 +84,17 @@ function Template(props) {
 					{ body }
 				</Box>
 				<Box sx={{float: "right", marginTop: "10px"}}>
-					<IconButton 
-						variant="contained" 
+					<IconButton
+						variant="contained"
 						onClick={(e) => calcHeight(dropDownMenuRef)}
 					>
 						<MenuIcon />
 					</IconButton>
 				</Box>
 				<Box>
-					<props.page />
+                    <main>
+                        { children }
+                    </main>
 				</Box>
 			</Box>
 		);
@@ -109,7 +111,9 @@ function Template(props) {
 						flex: "1 0 auto"
 					}}
 				>
-					<props.page />
+                    <main>
+                        { children }
+                    </main>
 				</Box>
 				<Box sx={{
 						width: "20%",
