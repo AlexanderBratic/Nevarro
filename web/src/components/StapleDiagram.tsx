@@ -14,19 +14,26 @@ interface StaplePart {
 interface Staple {
 	icon: any;
 	title: string;
-	parts: object;
+	parts: StaplePart[];
 }
 
+interface StapleDiagramProps {
+	staples: Staple[];
+}
 
-function StapleDiagramComponent({ staples }) {
-	staples = staples ?? [];
+function StapleDiagramComponent(props: StapleDiagramProps) {
+	console.log(props);
+	
+	let staples = props.staples ?? [];
+	
+	console.log(staples);
 	
 	let highestStaple = 0.0;
 	
-	Object.entries(staples).forEach(([name, staple]) => {
+	staples.forEach(staple => {
 		let stapleHeight = 0.0;
-		Object.entries(staple.parts).forEach(
-			([key, part]) => { stapleHeight += part.value; }
+		staple.parts.forEach(
+			part => { stapleHeight += part.value; }
 		);
 		highestStaple = Math.max(highestStaple, stapleHeight);
 	});
@@ -123,7 +130,7 @@ function StapleDiagramComponent({ staples }) {
 	
 	let stapleComponents = [];
 	let stapleTitles = [];
-	Object.entries(staples).forEach(([name, staple]) => {
+	staples.forEach(staple => {
 		stapleComponents.push(Staple(staple));
 		
 		stapleTitles.push(
@@ -131,8 +138,7 @@ function StapleDiagramComponent({ staples }) {
 				whiteSpace: "nowrap",
 				width: "40px",
 				marginTop: "15px",
-				transform: "translateX(-45px) translateY(-37px) rotate(70deg)",
-				
+				transform: "translateX(-45px) translateY(-37px) rotate(70deg)"
 			}}>
 				{staple.icon}
 				{staple.title}

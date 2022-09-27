@@ -16,17 +16,16 @@ import ElectricScooterIcon from '@mui/icons-material/ElectricScooterRounded';
 import WalkIcon from '@mui/icons-material/DirectionsWalkRounded';
 
 
-
 const ComparisonPage: NextPage = () => {
 	const [count, actuallySetCount] = React.useState(getItem('comparison-count', 0));
-
+	
 	function setCount(value: number) {
 		setItem('comparison-count', value);
 		actuallySetCount(value);
 	}
-
-	let stapleData = {
-		"car": {
+	
+	let stapleData = [
+		{ 
 			title: "Car",
 			icon: <CarIcon />,
 			parts: [
@@ -36,7 +35,7 @@ const ComparisonPage: NextPage = () => {
 				{ color: 0xecf0f1, value: 50, hint: "Emissions for the route"  }
 			]
 		},
-		"plane": {
+		{ 
 			title: "Plane",
 			icon: <AirplaneIcon />,
 			parts: [
@@ -44,7 +43,7 @@ const ComparisonPage: NextPage = () => {
 				{ color: 0xecf0f1, value: 50, hint: "Emissions for the route"  }
 			]
 		},
-		"public-transport": {
+		{ 
 			title: "Public Transport",
 			icon: <PublicTransportIcon />,
 			parts: [
@@ -52,7 +51,7 @@ const ComparisonPage: NextPage = () => {
 				{ color: 0xecf0f1, value: 50, hint: "Emissions for the route"  }
 			]
 		},
-		"bicycle": {
+		{ 
 			title: "Bicycle",
 			icon: <BikeIcon />,
 			parts: [
@@ -60,7 +59,7 @@ const ComparisonPage: NextPage = () => {
 				{ color: 0xecf0f1, value: 50, hint: "Emissions for the route"  }
 			]
 		},
-		"electric-scooter": {
+		{ 
 			title: "Electric Scooter",
 			icon: <ElectricScooterIcon />,
 			parts: [
@@ -68,7 +67,7 @@ const ComparisonPage: NextPage = () => {
 				{ color: 0xecf0f1, value: 50, hint: "Emissions for the route"  }
 			]
 		},
-		"walking": {
+		{ 
 			title: "Walking",
 			icon: <WalkIcon />,
 			parts: [
@@ -76,18 +75,19 @@ const ComparisonPage: NextPage = () => {
 				{ color: 0xecf0f1, value: 50, hint: "Emissions for the route"  }
 			]
 		}
-	};
-
+	];
+	
 	return (
-        <Template>
-            <Box>
-                <h1>Comparison {count}</h1>
-                <Button onClick={() => setCount(count + 1)}>Increment</Button>
-
-                <StapleDiagram staples={stapleData} />
-            </Box>
-        </Template>
+		<Template>
+			<Box>
+				<h1>Comparison {count}</h1>
+				<Button onClick={() => setCount(count + 1)}>Increment</Button>
+				
+				<StapleDiagram staples={stapleData} />
+			</Box>
+		</Template>
 	);
 }
+
 
 export default ComparisonPage;
