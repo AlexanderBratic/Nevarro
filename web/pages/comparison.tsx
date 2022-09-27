@@ -17,16 +17,16 @@ import WalkIcon from '@mui/icons-material/DirectionsWalkRounded';
 
 
 
-function ComparisonPage(props) {
+function ComparisonPage() {
 	const [count, actuallySetCount] = React.useState(getItem('comparison-count', 0));
-	
+
 	function setCount(value: number) {
 		setItem('comparison-count', value);
 		actuallySetCount(value);
 	}
-	
+
 	let stapleData = {
-		"car": { 
+		"car": {
 			title: "Car",
 			icon: <CarIcon />,
 			parts: [
@@ -36,7 +36,7 @@ function ComparisonPage(props) {
 				{ color: 0xecf0f1, value: 50, hint: "Emissions for the route"  }
 			]
 		},
-		"plane": { 
+		"plane": {
 			title: "Plane",
 			icon: <AirplaneIcon />,
 			parts: [
@@ -44,7 +44,7 @@ function ComparisonPage(props) {
 				{ color: 0xecf0f1, value: 50, hint: "Emissions for the route"  }
 			]
 		},
-		"public-transport": { 
+		"public-transport": {
 			title: "Public Transport",
 			icon: <PublicTransportIcon />,
 			parts: [
@@ -52,7 +52,7 @@ function ComparisonPage(props) {
 				{ color: 0xecf0f1, value: 50, hint: "Emissions for the route"  }
 			]
 		},
-		"bicycle": { 
+		"bicycle": {
 			title: "Bicycle",
 			icon: <BikeIcon />,
 			parts: [
@@ -60,7 +60,7 @@ function ComparisonPage(props) {
 				{ color: 0xecf0f1, value: 50, hint: "Emissions for the route"  }
 			]
 		},
-		"electric-scooter": { 
+		"electric-scooter": {
 			title: "Electric Scooter",
 			icon: <ElectricScooterIcon />,
 			parts: [
@@ -68,7 +68,7 @@ function ComparisonPage(props) {
 				{ color: 0xecf0f1, value: 50, hint: "Emissions for the route"  }
 			]
 		},
-		"walking": { 
+		"walking": {
 			title: "Walking",
 			icon: <WalkIcon />,
 			parts: [
@@ -77,12 +77,12 @@ function ComparisonPage(props) {
 			]
 		}
 	};
-	
+
 	return (
 		<Box>
 			<h1>Comparison {count}</h1>
 			<Button onClick={() => setCount(count + 1)}>Increment</Button>
-			
+
 			<StapleDiagram staples={stapleData} />
 		</Box>
 	);

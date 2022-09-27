@@ -4,12 +4,12 @@ import type { NextPage } from 'next';
 import Template from '../src/components/Template';
 
 
-function CarPage(props) {
-	
+function CarPage() {
+
 	return (
 		<h1>Car</h1>
 	);
-	
+
 }
 
 const About: NextPage = () => {

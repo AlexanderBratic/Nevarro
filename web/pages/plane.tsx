@@ -4,8 +4,8 @@ import type { NextPage } from 'next';
 import Template from '../src/components/Template';
 
 
-function PlanePage(props) {
-	
+function PlanePage() {
+
 	return (
 		<h1>Plane</h1>
 	);
@@ -13,7 +13,7 @@ function PlanePage(props) {
 
 const About: NextPage = () => {
   const [selectedIndex, setSelectedIndex] = React.useState(0);
-	
+
   return (
 		<Template page={PlanePage} />
   );
