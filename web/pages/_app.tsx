@@ -26,10 +26,7 @@ export default function MyApp(props: MyAppProps) {
         <CssBaseline />
 
         {/* append page props here to pass data between pages and template */}
-        <Component 
-          {...pageProps}
-          onSearch={(a: string, b: string) => console.log("App: " + a + ' ' + b)} 
-        />
+        <Component {...pageProps} />
       </ThemeProvider>
     </CacheProvider>
   );

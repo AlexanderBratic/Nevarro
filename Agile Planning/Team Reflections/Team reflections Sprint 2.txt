@@ -1,0 +1,13 @@
+Team Nevarro Retrospective Sprint 1
+
+	How did it go?
+It could have gone better, we had some issues both with technical overhead and our workflow. One large reason why our workflow struggled was because of the fact that we didn't attach Tasks to the Userstories, this meant that we picked very large Issues covering the entire sprint. In turn this meant that we once again managed to close fewer issues and the burndown chart looked like a stock. We also ran into some issues with our teamwork from the fact that we assigned one task to two people who were orignially intended to work together on the task. In the end they couldn't sync their schedules and their work overwrote each other. Furthermore we had some issues with people not being on the same page with the vision of the project.
+
+	What could we have done better?
+People could do tasks more individually as to not rely so much on each other's schedule and work during the sprint. We also could have done better if we had been better at splitting the userstories into Tasks before the sprint to make the work more granular. We also could have made a better job at making sure that we were on the same page with the vision, both by asking more questions and also by making sure that the group understands. 
+
+	What are we going to do to improve?
+We're going to try to work more on our communication, like if there are issues we will try to help each other online through screensharing or similar if needed. We're also going to split the Userstories down into smaller more manageable Tasks. 
+
+	What has gone well? :)
+People are feeling that they're starting to understand the technologies better. During this retrospective most of us had something to show the team from their sprint. We also have something to deliver to the customer. Product Owner is happy with everyone's effort!

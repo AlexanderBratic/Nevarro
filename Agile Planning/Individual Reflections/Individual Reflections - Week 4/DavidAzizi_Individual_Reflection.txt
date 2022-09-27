@@ -1,0 +1,14 @@
+Individual Reflections - Week 4
+David Azizi - Team Navarro
+
+• What do I want to learn or understand better?
+As a member of my team I am not fully aware of what my team is trying to achieve. I want to understand the greater picture in this project and I will achieve this by improving the communication between me and my team.
+
+• How can I help someone else, or the entire team, to learn something new?
+Since the team and I am not familiar with secure and sanitized web development I can consider working with secure practises to ensure a secure development paradigm. This can lead to me and the team to learn something new even if we don't neccessarily apply every security measure, only that we know of them.
+
+• What is my contribution towards the team’s use of Scrum?
+My contribution to the team's use of scrum is to aid in the creation of User Stories. I also contributed to the teams communication network by making every one more onboard on the project at hand.
+
+• What is my contribution towards the team’s deliveries?
+I contributed to the team’s deliveries by creating a settings page for the bicycle and electric scooter options.
