@@ -6,29 +6,21 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import {MouseEvent, useEffect, useRef, useState} from "react";
 import Grid from "@mui/material/Unstable_Grid2";
+import {useRouter} from "next/router";
+import {getItem, getTypedItem, updateItemObj} from "../src/sessionStorage";
+import {ComparisonType} from "../types/sessionStorageTypes";
 
-const Home: NextPage<{
-  // prop types
-  onSearch: (from:string, to: string) => void | undefined
-}>  = (
-  // props
-  { onSearch }
-  ) => {
-
+const Home: NextPage  = () => {
     const [from, setFrom] = useState('');
     const [to, setTo] = useState('');
+    const router = useRouter();
 
-    const handleSubmit = (event: React.FormEvent) => {
-      // prevent refresh
-      event.preventDefault()
+    const handleSubmit = async (event: React.FormEvent) => {
+        // prevent refresh
+        event.preventDefault()
+        updateItemObj("comparison", {from, to});
 
-      // send callbsck function to template if provided
-      if(onSearch){
-        onSearch(from, to)
-      }
-      else{
-        console.log(`from=${from} & to=${to}`)
-      }
+        await router.push('/comparison')
     }
 
     // html
