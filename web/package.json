@@ -14,6 +14,7 @@
     "@emotion/react": "latest",
     "@emotion/server": "latest",
     "@emotion/styled": "latest",
+    "@googlemaps/react-wrapper": "^1.1.35",
     "@mui/icons-material": "latest",
     "@mui/material": "latest",
     "next": "latest",
@@ -21,12 +22,12 @@
     "react-dom": "latest"
   },
   "devDependencies": {
+    "@types/google.maps": "^3.50.1",
     "@types/node": "latest",
     "@types/react": "latest",
     "eslint": "latest",
     "eslint-config-next": "latest",
     "typescript": "latest"
   },
-
-    "packageManager": "^yarn@1.22.18"
+  "packageManager": "^yarn@1.22.18"
 }
