@@ -33,8 +33,8 @@ public class RoutesDirectionApiController {
 
     @GetMapping
     public String routesDirection(@RequestParam String destination, @RequestParam String origin,
-                                  @RequestParam (value = "transportationMean", defaultValue = "driving")
-                                          String transportationMean) throws IOException {
+                                  @RequestParam (value = "mean", defaultValue = "driving")
+                                          String mean) throws IOException {
 
         String pathToKey = "api//apiKey";
         String pathToMoch = "api//GoogleApiMockResponse.txt";
@@ -44,7 +44,7 @@ public class RoutesDirectionApiController {
         if(Files.exists(keyPath)){
             System.out.println("Try to load apiKey");
             contents = Files.readString(keyPath);
-            return routesDirectionApiService.routesDirectionCon(destination, origin, transportationMean, contents);
+            return routesDirectionApiService.routesDirectionCon(destination, origin, mean, contents);
         }
         else{
             System.out.println("Try to load mochfile");
