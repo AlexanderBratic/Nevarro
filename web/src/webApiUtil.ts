@@ -8,7 +8,7 @@ function dirRequest(destination: String, origin: String, mean: String){
     let httpAddress= {url:"http://localhost:8080/routes?destination="+destination+"&origin="+origin+"&mean="+mean};
     fetch(httpAddress.url)
         .then(response => response.json())
-        .then(res => console.log(res.routes[0].legs[0].distance)) //.routes[0].legs[0].distance, JSON path to get the distant from origen to destination.
+        .then(res => console.log(res.routes[0].legs[0].distance)) //.routes[0].legs[0].distance, JSON path to get the distant from origin to destination.
         .catch(error => console.log(error))
 
     return httpAddress.url;
