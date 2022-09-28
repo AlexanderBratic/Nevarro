@@ -1,9 +1,35 @@
 import type { NextPage } from 'next';
 import * as React from 'react';
 import { useState } from 'react';
-import {ToggleButton, ToggleButtonGroup, Container, Typography, Grid, Box} from "@mui/material";
+import { borders, shadows } from "@mui/system";
+import { ToggleButton, ToggleButtonGroup, Button, Container, Typography, Grid, Box, TextField } from "@mui/material";
 import Template from '../src/components/Template';
 import DirectionsBikeIcon from '@mui/icons-material/DirectionsBike';
+
+function DisplayEmission() {
+	const [hide, setHide] = useState(false);
+
+	const toggleHide = () => {
+		setHide((oldState) => !oldState);
+	};
+
+	let carbonEmission= (distance : number) => {
+		return (12 * distance / 100).toFixed(2).toString();
+	};
+
+	return (
+		<Box>
+			<Box mt={2} pb={1} textAlign="center" sx={{ borderBottom: 1 }}>
+				<Button color="primary" variant='contained' onClick={toggleHide}>Show Emission Data</Button>
+			</Box>
+			{hide && (
+				<Box mt={1}>
+					<Typography textAlign="center" variant='h5'>CO2 emission: {carbonEmission(470)} g</Typography>
+				</Box>
+			)}
+		</Box>
+	);
+}
 
 function ToggleButtonDiet() {
 	const [alignment, setAlignment] = React.useState('web');
@@ -77,17 +103,21 @@ function BicyclePage() {
 			<Typography variant='h3' textAlign="left">Bicycle Settings Page</Typography>
 			<Box mt={1} mb={1}>
 				<Grid container spacing={1}>
-					<Grid item xs={5.5}>
-						<Typography variant='h4' textAlign="right">Göteborg</Typography>
+					<Grid item xs={4}></Grid>
+					<Grid item xs={2}>
+						<TextField variant='standard' defaultValue="Göteborg"/>
 					</Grid>
 					<Grid item xs={.5} alignContent="center">
 						<DirectionsBikeIcon fontSize='large'/>
 					</Grid>
-					<Grid item xs={5}>
-						<Typography variant='h4'>Stockholm: 470km</Typography>
+					<Grid item xs={2}>
+						<TextField variant='standard' defaultValue="Stockholm"/>
 					</Grid>
+					<Grid item xs={3}>: 470km</Grid>
 				</Grid>
 				<DietAndFuel/>
+				<DisplayEmission/>
+				
 			</Box>
 			
 		</Container>
@@ -99,7 +129,9 @@ function BicyclePage() {
 const About: NextPage = () => {
 
 	return (
-		<Template page={BicyclePage} />
+		<Template>
+			<BicyclePage/>
+		</Template>
 	);
 };
 
