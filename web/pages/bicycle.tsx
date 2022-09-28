@@ -74,7 +74,7 @@ function BicyclePage() {
 	
 	return (
 		<Container>
-			<Typography variant='h3' textAlign="left">Bicycle Settings</Typography>
+			<Typography variant='h3' textAlign="left">Bicycle Settings Page</Typography>
 			<Box mt={1} mb={1}>
 				<Grid container spacing={1}>
 					<Grid item xs={5.5}>
