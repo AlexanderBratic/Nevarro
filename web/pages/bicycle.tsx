@@ -24,7 +24,30 @@ function DisplayEmission() {
 			</Box>
 			{hide && (
 				<Box mt={1}>
-					<Typography textAlign="center" variant='h5'>CO2 emission: {carbonEmission(470)} g</Typography>
+					<Box>
+						<Grid container spacing={1}>
+							<Grid item xs={6}>
+								<Typography textAlign="center" variant='h5'>CO2 emission: {carbonEmission(470)} g</Typography>
+							</Grid>
+
+							<Grid item xs={6}>
+								<Typography textAlign="center" variant='h5'>Oil consumption: 300g</Typography>
+							</Grid>
+						</Grid>
+					</Box>
+					
+					<Box mt={1}>
+						<Grid container spacing={1}>
+							<Grid item xs={6}>
+								<Typography textAlign="center" variant='h5'>CO emission: 0.48 g</Typography>
+							</Grid>
+
+							<Grid item xs={6}>
+								<Typography textAlign="center" variant='h5'>NOx emission: 0.12 g</Typography>
+							</Grid>
+						</Grid>
+					</Box>
+					
 				</Box>
 			)}
 		</Box>
@@ -82,7 +105,7 @@ function DietAndFuel() {
 			{hide && (
 				<Box mt={1}>
 					<Grid container spacing={1}>
-						<Grid item xs={1.5} alignContent="">
+						<Grid item xs={1.5}>
 							<Typography variant='h5'>Diet:</Typography>
 						</Grid>
 
