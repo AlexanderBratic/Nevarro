@@ -6,8 +6,10 @@ import Box from '@mui/material/Box';
 import Link from '../src/components/Link';
 import ProTip from '../src/components/ProTip';
 import Copyright from '../src/components/Copyright';
+import {dirRequest} from '../src/webApiUtil'; // test!
 
 const Home: NextPage = () => {
+    let hej = dirRequest("Göteborg","Malmö","driving"); // test!
   return (
     <Container maxWidth="lg">
       <Box

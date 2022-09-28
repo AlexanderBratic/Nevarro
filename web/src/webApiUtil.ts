@@ -1,7 +1,7 @@
 
 /**
  * Function to connect to RoutesDirectionApiService.
- * Prints the distant from origin to destination in terminal on form: { text: '(some distant)  km', value: (som value in meters) }
+ * Prints the distant from origin to destination in terminal on format: { text: '(some distant)  km', value: (som value in meters) }
  */
 
 function dirRequest(destination: String, origin: String, mean: String){
