@@ -11,16 +11,12 @@ import {setItem, getItem } from '../src/sessionStorage';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
-import ListSubheader from '@mui/material/ListSubheader';
-
 import CarIcon from '@mui/icons-material/DirectionsCarRounded';
 import AirplaneIcon from '@mui/icons-material/AirplanemodeActiveRounded';
 import PublicTransportIcon from '@mui/icons-material/CommuteRounded';
 import BikeIcon from '@mui/icons-material/DirectionsBikeRounded';
 import ElectricScooterIcon from '@mui/icons-material/ElectricScooterRounded';
 import WalkIcon from '@mui/icons-material/DirectionsWalkRounded';
-import internal from 'stream';
-
 
 import ItemsJson from "../items.json";
 
@@ -84,6 +80,7 @@ const ComparisonPage: NextPage = () => {
 			]
 		}
 	];
+
 
 	let Everyday_image_list = (
 		<ImageList sx={{ }} cols={4} >
