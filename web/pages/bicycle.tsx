@@ -55,36 +55,51 @@ function DisplayEmission() {
 }
 
 function ToggleButtonDiet() {
-	const [alignment, setAlignment] = React.useState('web');
+	const [alignment, setAlignment] = useState('left');
 
 	const handleChange = (
 		event: React.MouseEvent<HTMLElement>,
-		newAlignment: string
+		newAlignment: string | null
 	) => {
-		setAlignment(newAlignment);
+		if(newAlignment !== null) {
+			setAlignment(newAlignment);
+		}
 	}
 
 	return (
-		<ToggleButtonGroup
-			color="primary"
-			value={alignment}
-			exclusive={true}
-			onChange={handleChange} 
-			aria-label="outlined button group"
-		>
-			<ToggleButton value="left" color='secondary'>Vegan/Vegetarian</ToggleButton>
-			<ToggleButton value="center">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Normal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</ToggleButton>
-			<ToggleButton value="right" color='error'>&nbsp; &nbsp; &nbsp; &nbsp; Carnivore &nbsp; &nbsp; &nbsp; &nbsp;</ToggleButton>
-		</ToggleButtonGroup>
+		<Grid container>
+			<Grid item xs={7}>
+				<ToggleButtonGroup
+					fullWidth
+					color="primary"
+					value={alignment}
+					exclusive
+					onChange={handleChange} 
+					aria-label="outlined button group"
+				>
+					<ToggleButton value="left" color='secondary'>Vegan/Vegetarian</ToggleButton>
+					<ToggleButton value="center">Normal</ToggleButton>
+					<ToggleButton value="right" color='error'>Carnivore</ToggleButton>
+				</ToggleButtonGroup>
+			</Grid>
+		</Grid>
 	);
 }
 
-function DietAndFuel() {
-	const [hide, setHide] = useState(false);
 
-	const toggleHide = () => {
-		setHide((oldState) => !oldState);
-	};
+function DietAndFuel() {
+	const [hide, setHide] = useState(true);
+	const [alignment, setAlignment] = React.useState('left');
+
+	const handleAlignment = (
+		event: React.MouseEvent<HTMLElement>,
+		newAlignment: string | null
+	) => {
+		if(newAlignment !== null) {
+			setHide((oldState) => newAlignment == 'left');
+			setAlignment(newAlignment);
+		}
+	}
 
 	return (
 		<Box>
@@ -94,10 +109,16 @@ function DietAndFuel() {
 						<Typography variant='h5'>Bike Type:</Typography>
 					</Grid>
 
-					<Grid item xs={1}>
-						<ToggleButtonGroup aria-label="outlined button group">
-							<ToggleButton value="left" onClick={toggleHide}>Conventional</ToggleButton>
-							<ToggleButton value="right">Electric</ToggleButton>
+					<Grid item xs={4}>
+						<ToggleButtonGroup 
+							fullWidth
+							aria-label="outlined button group"
+							value={alignment}
+							exclusive
+							onChange={handleAlignment}
+							>
+							<ToggleButton value="left"  color="info">Conventional</ToggleButton>
+							<ToggleButton value="right" color="warning">Electric</ToggleButton>
 						</ToggleButtonGroup>
 					</Grid>
 				</Grid>
