@@ -13,36 +13,51 @@ import {
 import React, {FormEvent, useState} from "react";
 import Template from "../src/components/Template";
 import {ExpandMore} from "@mui/icons-material";
-import {getTypedItem} from "../src/sessionStorage";
-import {ComparisonType} from "../types/sessionStorageTypes";
+import {getTypedItem, setItem} from "../src/sessionStorage";
+import {CarType, ComparisonType} from "../types/sessionStorageTypes";
+import {useRouter} from "next/router";
 
  const CarSettings: NextPage = () => {
+
+     const router = useRouter()
 
      const submitHandler = (event: FormEvent) => {
             event.preventDefault()
             console.log(`vehicle=${JSON.stringify(vehicle)}, emission=${emission}, distance=${data.distance}`)
+            setItem("car", {emissionPerKm: emission, vehicleType: vehicleName, litersPerKm: LiterPerKm, CO2PerLiter: CO2PerLiter} as CarType)
+            router.push('/comparison')
      }
 
-     const data = getTypedItem<ComparisonType>("comparison", {from: "", to: "", distance: 1})
-
      const vehicleTypes: {name: string, variants: {name: string, emission: number }[] }[] = [
-         {name: "suv", variants: [{name: "bensin", emission: 0.1694}]},
-         {name: "car", variants: [{name: "bensin", emission: 0.136}, {name: "diesel", emission: 0.119}]},
-         {name: "motorcycle", variants: [{name: "bensin", emission: 0.075}]},
+         {name: "bil", variants: [
+                 {name: "bensin", emission: 168},
+                 {name: "diesel", emission: 188},
+                 {name: "el", emission: 100},
+                 {name: "väte", emission: 120},
+                 {name: "hybrid", emission: 143},
+                 {name: "etanol", emission: 108},
+                 {name: "gasol", emission: 111},
+                 {name: "biodiesel", emission: 179},
+             ]},
+         {name: "Lätt lastbil", variants: [{name: "bensin", emission: 376}, {name: "diesel", emission: 421}]},
+         {name: "Lastbil", variants: [{name: "bensin", emission: 1045}, {name: "diesel", emission: 1169}]},
+         {name: "motorcykel", variants: [{name: "bensin", emission: 103}, {name: "diesel", emission: 115}]},
      ]
 
-     const [vehicle, setVehicle] = useState(vehicleTypes[0])
-     const [vehicleName, setVehicleName] = useState(vehicle.name)
-     const [emission, setEmission] = useState(vehicleTypes[0].variants[0].emission)
-     const [CO2PerLiter, setCO2PerLiter] = useState<"" | number>("")
-     const [LiterPerKm, setLiterPerKm] = useState<"" | number>("")
+     const data = getTypedItem<ComparisonType>("comparison", {from: "", to: "", distance: 0})
+     const carData = getTypedItem<CarType>("car", {emissionPerKm: 0, vehicleType: vehicleTypes[0].name, CO2PerLiter: "", litersPerKm: ""})
+
+     const [vehicle, setVehicle] = useState(vehicleTypes.find(v => v.name === carData.vehicleType) ?? vehicleTypes[0])
+     const [vehicleName, setVehicleName] = useState(carData.vehicleType)
+     const [emission, setEmission] = useState(carData.emissionPerKm)
+     const [CO2PerLiter, setCO2PerLiter] = useState<string>(carData.CO2PerLiter)
+     const [LiterPerKm, setLiterPerKm] = useState<string>(carData.litersPerKm)
 
      const changeVehicle = (e: React.MouseEvent, v: string) => {
          if(!v){
              return
          }
 
-         console.log(v)
          setVehicleName(v)
          const vehicle = vehicleTypes.find(e => e.name === v)
          if(!vehicle){
@@ -52,15 +67,22 @@ import {ComparisonType} from "../types/sessionStorageTypes";
          setEmission(vehicle.variants[0].emission)
      }
 
-     const changeEmissionManual = () => {
-         if(!CO2PerLiter || !LiterPerKm){
+     const changeEmissionManual = (cpl: string, lpk: string) => {
+         setCO2PerLiter(cpl)
+         setLiterPerKm(lpk)
+         if(!cpl || !lpk){
              return
          }
-         setEmission(CO2PerLiter / LiterPerKm)
+         const cl = parseFloat(cpl)
+         const lk = parseFloat(lpk)
+         if(isNaN(cl) || isNaN(lk)){
+            return
+         }
+         setEmission(cl / lk)
      }
 
      const getTotalEmission = () => {
-            return emission * (data.distance ?? 1)
+            return emission * (data.distance ?? 0)
      }
 
     return (
@@ -71,7 +93,7 @@ import {ComparisonType} from "../types/sessionStorageTypes";
                         <Grid xs={12}>
                             <Typography variant="h3" textAlign="center"> Bil Inställningar </Typography>
                         </Grid>
-                        <Grid xs minWidth="300px">
+                        <Grid xs={12}>
                             <Typography variant="subtitle2"> Bil typ </Typography>
                             <ToggleButtonGroup
                                 size="small"
@@ -101,9 +123,9 @@ import {ComparisonType} from "../types/sessionStorageTypes";
                                 )) }
                             </ToggleButtonGroup>
                         </Grid>
-                        <Grid xs maxWidth="90px">
+                        <Grid xs maxWidth="120px">
                             <Typography variant="subtitle2"> Utsläpp: </Typography>
-                            <Typography variant="body2"> {getTotalEmission()} CO2 kg </Typography>
+                            <Typography variant="body2"> {getTotalEmission()} g av CO2 </Typography>
                         </Grid>
                         <Grid xs={12}>
                             <Accordion>
@@ -112,23 +134,23 @@ import {ComparisonType} from "../types/sessionStorageTypes";
                                     <Grid container spacing={1}>
                                         <Grid xs minWidth="200px">
                                             <TextField fullWidth type="number" value={CO2PerLiter}
-                                                       onChange={e => {setCO2PerLiter(parseFloat(e.target.value)); changeEmissionManual()}}
-                                                       label="KG Koldioxid per Liter" />
+                                                       onChange={e => changeEmissionManual(e.target.value, LiterPerKm)}
+                                                       label="Gram Koldioxid per Liter" />
                                         </Grid>
-                                        <Grid xs minWidth="200px">
+                                        <Grid xs={12} sm minWidth="200px">
                                             <TextField fullWidth type="number" label="Liter per Kilometer" value={LiterPerKm}
-                                                       onChange={e => {setLiterPerKm(parseFloat(e.target.value)); changeEmissionManual()}}/>
+                                                       onChange={e => changeEmissionManual(CO2PerLiter, e.target.value)}/>
                                         </Grid>
                                         <Grid xs minWidth="200px">
                                             <TextField fullWidth type="number" value={emission}
-                                                       onChange={(e) => setEmission(parseFloat(e.target.value))} label="KG CO2 per Kilometer" />
+                                                       onChange={(e) => e.target.value ? setEmission(parseFloat(e.target.value)): null} label="Gram CO2 per Kilometer" />
                                         </Grid>
                                     </Grid>
                                 </AccordionDetails>
                             </Accordion>
                         </Grid>
                         <Grid xs={12}>
-                            <Button type="submit" variant="contained" fullWidth> Spara </Button>
+                            <Button type="submit" variant="contained" disabled={carData.emissionPerKm === emission} fullWidth> Spara </Button>
                         </Grid>
                     </Grid>
                 </form>
