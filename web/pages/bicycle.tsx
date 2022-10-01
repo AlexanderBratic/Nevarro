@@ -7,6 +7,8 @@ import { getItem, setItem } from "../src/sessionStorage";
 import Template from '../src/components/Template';
 import DirectionsBikeIcon from '@mui/icons-material/DirectionsBike';
 
+import { useRouter } from "next/router";
+
 function DisplayEmission() {
 	const [hide, setHide] = useState(false);
 
@@ -48,7 +50,7 @@ function DisplayEmission() {
 							</Grid>
 						</Grid>
 					</Box>
-					
+					<RedirectButton/>
 				</Box>
 			)}
 		</Box>
@@ -56,7 +58,7 @@ function DisplayEmission() {
 }
 
 function ToggleButtonDiet() {
-	const [alignment, setAlignment] = useState('left');
+	const [alignment, setAlignment] = useState("Vegan/Vegetarian");
 
 	const handleChange = (
 		event: React.MouseEvent<HTMLElement>,
@@ -143,6 +145,29 @@ function DietAndFuel() {
 	);
 }
 
+function RedirectButton() {
+	const router = useRouter();
+	const [linkName, setLinkName] = useState(router.pathname);
+
+	const handleLinkName = (
+		event: React.MouseEvent<HTMLElement>
+	) => {
+		setLinkName("/comparison");
+		router.push("/comparison");
+	};
+
+	return (
+		<Box mt={2}>
+			<Button
+				variant='contained'
+				onClick={handleLinkName}	
+			>
+				Redirect To Comparison Page
+			</Button>
+		</Box>
+	);
+}
+
 function BicyclePage() {
 	
 	return (
@@ -152,13 +177,13 @@ function BicyclePage() {
 				<Grid container spacing={1}>
 					<Grid item xs={4}></Grid>
 					<Grid item xs={2}>
-						<TextField variant='standard' defaultValue="Göteborg"/>
+						<TextField variant='standard' defaultValue="Göteborg" disabled/>
 					</Grid>
 					<Grid item xs={.5} alignContent="center">
 						<DirectionsBikeIcon fontSize='large'/>
 					</Grid>
 					<Grid item xs={2}>
-						<TextField variant='standard' defaultValue="Stockholm"/>
+						<TextField variant='standard' defaultValue="Stockholm" disabled/>
 					</Grid>
 					<Grid item xs={3}>: 470km</Grid>
 				</Grid>
