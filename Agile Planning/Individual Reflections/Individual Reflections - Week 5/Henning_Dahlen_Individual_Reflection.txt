@@ -1,0 +1,12 @@
+WEEK 4
+what do I want to learn or understand better?
+	I've started going over to programming the website instead of our API. This means that I've gone over to working more in Typescript, CSS, HTML and React. This is something i would like to learn more of and I will continue taking similar tasks next week. 
+
+how can I help someone else, or the entire team, to learn something new?
+	I think I'm able to help my team mainly by answering small questions about the environment and how to get some things up and running, hopefully I will be able to help out more the more I learn.
+
+what is my contribution towards the team’s use of Scrum?
+	This week I've mainly been active in meetings and voted on points etc, I've been sick and at home the majority of the week but I've joined the meetings over voice.
+
+what is my contribution towards the team’s deliveries?
+	This week i've mainly focused my time on learning how to work withing the aforementioned Typescript, css, html and React, this has taken a lot of time but i've managed to complete one ticket 

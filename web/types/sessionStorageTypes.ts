@@ -5,3 +5,10 @@ export interface ComparisonType {
     to: string;
     distance: number;
 }
+
+export interface CarType {
+    emissionPerKm: number
+    vehicleType: string
+    litersPerKm: string
+    CO2PerLiter: string
+}

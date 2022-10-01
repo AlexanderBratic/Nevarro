@@ -8,6 +8,9 @@ import Template from '../src/components/Template';
 import StapleDiagram from '../src/components/StapleDiagram';
 import {setItem, getItem } from '../src/sessionStorage';
 
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
+import ImageListItemBar from '@mui/material/ImageListItemBar';
 import CarIcon from '@mui/icons-material/DirectionsCarRounded';
 import AirplaneIcon from '@mui/icons-material/AirplanemodeActiveRounded';
 import PublicTransportIcon from '@mui/icons-material/CommuteRounded';
@@ -15,6 +18,7 @@ import BikeIcon from '@mui/icons-material/DirectionsBikeRounded';
 import ElectricScooterIcon from '@mui/icons-material/ElectricScooterRounded';
 import WalkIcon from '@mui/icons-material/DirectionsWalkRounded';
 
+import ItemsJson from "../items.json";
 
 const ComparisonPage: NextPage = () => {
 	const [count, actuallySetCount] = React.useState(getItem('comparison-count', 0));
@@ -76,7 +80,27 @@ const ComparisonPage: NextPage = () => {
 			]
 		}
 	];
-	
+
+
+	let Everyday_image_list = (
+		<ImageList sx={{ }} cols={4} >
+		  {ItemsJson.Items.map((item) => (
+			<ImageListItem key={item.img}>
+			  <img
+				src={`${item.img}?w=248&fit=crop&auto=format`}
+				srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
+				alt={`Item: ${item.title}: ${item.co2}`}
+				loading="lazy"
+			  />
+			  <ImageListItemBar
+				title={item.title}
+				subtitle={`Co2e: ${item.co2}g`}
+			  />
+			</ImageListItem> 
+		  ))}
+		</ImageList>
+	  );
+
 	return (
 		<Template>
 			<Box>
@@ -84,6 +108,9 @@ const ComparisonPage: NextPage = () => {
 				<Button onClick={() => setCount(count + 1)}>Increment</Button>
 				
 				<StapleDiagram staples={stapleData} />
+			</Box>
+			<Box>
+				{Everyday_image_list}
 			</Box>
 		</Template>
 	);

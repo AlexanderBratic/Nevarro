@@ -1,0 +1,9 @@
+Individual Reflection week 5 Andin Blomgren
+
+I want to understand the structure of react better than now, it's very cluttry to use and it feels like a rabbit hole when you want to understand something since it has connection to more than one language.
+
+I can help the team in the same way before and also contribute with my previous experiances coding and working with a team when programming something and some things.
+
+I've been contributing to the scrum by motivating all of us to communicate and organise our tasks better, I am not the only one who's been contributing this way but it has been very helpful and nice working together with this team.
+
+This week I've been contributing to the deams deliveries by working on the map rendering using google maps API and trying to have it work and react hasn't made it any easier.
