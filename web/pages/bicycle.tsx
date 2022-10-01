@@ -3,6 +3,7 @@ import * as React from 'react';
 import { useState } from 'react';
 import { borders, shadows } from "@mui/system";
 import { ToggleButton, ToggleButtonGroup, Button, Container, Typography, Grid, Box, TextField } from "@mui/material";
+import { getItem, setItem } from "../src/sessionStorage";
 import Template from '../src/components/Template';
 import DirectionsBikeIcon from '@mui/icons-material/DirectionsBike';
 
@@ -62,6 +63,7 @@ function ToggleButtonDiet() {
 		newAlignment: string | null
 	) => {
 		if(newAlignment !== null) {
+			sessionStorage.setItem("DietType", newAlignment);
 			setAlignment(newAlignment);
 		}
 	}
@@ -77,9 +79,9 @@ function ToggleButtonDiet() {
 					onChange={handleChange} 
 					aria-label="outlined button group"
 				>
-					<ToggleButton value="left" color='secondary'>Vegan/Vegetarian</ToggleButton>
-					<ToggleButton value="center">Normal</ToggleButton>
-					<ToggleButton value="right" color='error'>Carnivore</ToggleButton>
+					<ToggleButton value="Vegan/Vegetarian" color='secondary'>Vegan/Vegetarian</ToggleButton>
+					<ToggleButton value="Normal">Normal</ToggleButton>
+					<ToggleButton value="Carnivore" color='error'>Carnivore</ToggleButton>
 				</ToggleButtonGroup>
 			</Grid>
 		</Grid>
@@ -96,6 +98,7 @@ function DietAndFuel() {
 		newAlignment: string | null
 	) => {
 		if(newAlignment !== null) {
+			sessionStorage.setItem("PropulsionType", (newAlignment == 'left' ? "Human" : "Electric") + "Powered");
 			setHide((oldState) => newAlignment == 'left');
 			setAlignment(newAlignment);
 		}
