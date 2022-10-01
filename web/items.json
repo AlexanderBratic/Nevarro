@@ -44,6 +44,51 @@
             "title": "New Laptop",
             "img": "https://images.unsplash.com/photo-1550234646-8d03f6e034fb",
             "co2": 331000
+        },
+        {
+            "title": "Leather Jacker(cow)",
+            "img": "https://images.pexels.com/photos/6044127/pexels-photo-6044127.jpeg",
+            "co2": 176000
+        }
+        {
+            "title": "Jeans",
+            "img": "https://images.pexels.com/photos/4210857/pexels-photo-4210857.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            "co2": 20000
+        },
+        {
+            "title": "Paper Towel Roll",
+            "img": "https://images.pexels.com/photos/3958211/pexels-photo-3958211.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            "co2": 27000
+        },
+        {
+            "title": "Bike Manufacturing",
+            "img": "https://images.pexels.com/photos/100582/pexels-photo-100582.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            "co2": 96000
+        },
+        {
+            "title": "E-Bike Manufacturing",
+            "img": "https://images.pexels.com/photos/8936917/pexels-photo-8936917.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            "co2": 134000
+        },
+        {
+            "title": "An Egg",
+            "img": "https://images.pexels.com/photos/6294131/pexels-photo-6294131.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            "co2": 225
+        },
+        {
+            "title": "A Potato",
+            "img": "https://images.unsplash.com/photo-1635774855536-9728f2610245?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=435&q=80",
+            "co2": 40
+        },
+        {
+            "title": "Light Bulb(100W, 4hr)",
+            "img": "https://images.pexels.com/photos/577514/pexels-photo-577514.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            "co2": 172
+        },
+        {
+            "title": "Manufacturing TV(40\" screen)",
+            "img": "https://images.unsplash.com/photo-1558888401-3cc1de77652d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80",
+            "co2": 320000
         }
     ]
 }
