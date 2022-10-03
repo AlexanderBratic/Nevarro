@@ -1,12 +1,11 @@
 import * as React from 'react';
 
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
+import {Box, TextField, Button} from '@mui/material';
 
 import type { NextPage } from 'next';
 import Template from '../src/components/Template';
 import StapleDiagram from '../src/components/StapleDiagram';
-import {setItem, getItem } from '../src/sessionStorage';
+import {setItem, getItem, getTypedItem } from '../src/sessionStorage';
 
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
@@ -19,15 +18,14 @@ import ElectricScooterIcon from '@mui/icons-material/ElectricScooterRounded';
 import WalkIcon from '@mui/icons-material/DirectionsWalkRounded';
 
 import ItemsJson from "../src/items.json";
+import Grid from "@mui/material/Unstable_Grid2";
+import { ComparisonType } from '../types/sessionStorageTypes';
 
 const ComparisonPage: NextPage = () => {
-	const [count, actuallySetCount] = React.useState(getItem('comparison-count', 0));
-	
-	
-	function setCount(value: number) {
-		setItem('comparison-count', value);
-		actuallySetCount(value);
-	}
+
+	const data = getTypedItem<ComparisonType>('comparison', {to:'', from:'', distance:0});
+	const [from, setFrom] = React.useState(data.from);
+	const [to, setTo] = React.useState(data.to);
 	
 	let stapleData = [
 		{ 
@@ -105,8 +103,18 @@ const ComparisonPage: NextPage = () => {
 	return (
 		<Template>
 			<Box>
-				<h1>Comparison {count}</h1>
-				<Button onClick={() => setCount(count + 1)}>Increment</Button>
+				<h1>Comparison</h1>
+				<Grid container spacing={1}>
+					<Grid xs>
+						<TextField label="from" fullWidth value={from} onChange={e => setFrom(e.target.value)} />
+					</Grid>
+					<Grid xs>
+						<TextField label="to" fullWidth value={to} onChange={e => setTo(e.target.value)} />
+					</Grid>
+					<Grid>
+						<Button style={{height: '100%'}} variant="contained"> Sök </Button>
+					</Grid>
+				</Grid>
 				
 				<StapleDiagram staples={stapleData} />
 			</Box>
