@@ -1,17 +1,11 @@
 
 /**
  * Function to connect to RoutesDirectionApiService.
- * Prints the distant from origin to destination in terminal on format: { text: '(some distant)  km', value: (som value in meters) }
  */
-
 function dirRequest(destination: String, origin: String, mean: String){
     let httpAddress= {url:"http://localhost:8080/routes?destination="+destination+"&origin="+origin+"&mean="+mean};
-    fetch(httpAddress.url)
-        .then(response => response.json())
-        .then(res => console.log(res.routes[0].legs[0].distance)) //.routes[0].legs[0].distance, JSON path to get the distant from origin to destination.
-        .catch(error => console.log(error))
-
-    return httpAddress.url;
+    return fetch(httpAddress.url)
+        .then(response => response.json());
 }
 
 export {dirRequest};
@@ -34,3 +28,8 @@ let httpAddress: String = "http://localhost:8080/routes?destination="+destinatio
 fetch("http://localhost:8080/routes?destination="+destination+"&origin="+origin+"&mean="+mean)
 .then(res => console.log(res.routes[0].legs[0])) //Vägbeskrivning Göteborg till Malmö
 */
+//  .then(res => console.log(res.routes[0].legs[0].distance)) //.routes[0].legs[0].distance, JSON path to get the distant from origin to destination.
+//  .catch(error => console.log(error))
+//console.log("Jajajajajajjaja");
+// return httpAddress.url;
+//* Prints the distant from origin to destination in terminal on format: { text: '(some distant)  km', value: (som value in meters) }
