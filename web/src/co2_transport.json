@@ -1,0 +1,64 @@
+{
+    "Transport": [
+        {
+            "title": "Walking",
+            "co2_prod": 0,
+            "co2_fuel": 260
+        },
+        {
+            "title": "Bicycle",
+            "co2_prod": 6,
+            "co2_fuel": 11
+        },
+        {
+            "title": "Electric Bicycle",
+            "co2_prod": 37,
+            "co2_fuel": 3
+        },
+        {
+            "title": "Electric Scooter",
+            "co2_prod": 90,
+            "co2_fuel": 3
+        },
+        {
+            "title": "Intercity Bus",
+            "co2_prod": 10,
+            "co2_fuel": 21
+        },
+        {
+            "title": "City bus",
+            "co2_prod": 28,
+            "co2_fuel": 25
+        },
+        {
+            "title": "Moped",
+            "co2_prod": 70,
+            "co2_fuel": 30
+        },
+        {
+            "title": "Train",
+            "co2_prod": 60,
+            "co2_fuel": 15
+        },
+        {
+            "title": "Tram",
+            "co2_prod": 5,
+            "co2_fuel": 1
+        },
+        {
+            "title": "Subway",
+            "co2_prod": 25,
+            "co2_fuel": 1
+        },
+        {
+            "title": "Flight-short A320",
+            "co2_prod": 30,
+            "co2_fuel": 150
+        },
+        {
+            "title": "Flight-long A330",
+            "co2_prod": 20,
+            "co2_fuel": 85
+        }
+    ]
+}

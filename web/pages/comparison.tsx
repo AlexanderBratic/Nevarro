@@ -18,10 +18,11 @@ import BikeIcon from '@mui/icons-material/DirectionsBikeRounded';
 import ElectricScooterIcon from '@mui/icons-material/ElectricScooterRounded';
 import WalkIcon from '@mui/icons-material/DirectionsWalkRounded';
 
-import ItemsJson from "../items.json";
+import ItemsJson from "../src/items.json";
 
 const ComparisonPage: NextPage = () => {
 	const [count, actuallySetCount] = React.useState(getItem('comparison-count', 0));
+	
 	
 	function setCount(value: number) {
 		setItem('comparison-count', value);
