@@ -8,7 +8,8 @@ public class RoutesDirectionApiService {
 
     @GetMapping
     public String routesDirectionCon(String destination, String origin,
-                                     String transportationMean, String apiKey){
-        return new RoutesDirectionApi(destination, origin, transportationMean, apiKey).getInfo();
+                                     String mean, String apiKey){
+        return new RoutesDirectionApi(destination, origin, mean, apiKey).getInfo();
     }
 }
+
