@@ -1,0 +1,39 @@
+Team Nevarro Retrospective Sprint 3
+
+	How did it go?
+We've tried to implement some new agile concepts in our meetings which has led to them taking a bit more time. For instance in the sprint planning meeting on monday we didn't have time to fully choose the tasks/stories for the sprint before we had to conclude the meeting. Many people in the team had a lot of other courses and hand-ins which has taken some time away from the project. 
+
+	What are we going to do to improve? 
+We're aiming to be a lot faster with deciding the points on the tasks/stories. We're 
+
+	What has gone well? :)
+We're starting to get more things added to the website which is gives some feeling of the project progressing which is good. 
+
+	Chosen Scope:
+The choosen scope of the product is quite small, but since the cost of educating the development team in the framework/langauges used this has made it quite reasonable.
+
+	Success Criteria:
+We're starting to get a clearer picture of what we want the final product to look like even if that picture is shifting each week. One big thinkg though is that we've come to realize that considering how many new technologies that we're utilizing, we have started seeing the learning of those technologies as a goal in and of itself as well.
+
+	Social contract:
+The social contract we wrote in the beginning has served us well. So far we've strived to follow it to the best of our abilities. We've only done one change to the social contract as of yet which is to add a third meeting on the wednesday which is basically a short standup meeting were we go over what everyone's doing and if anyone needs help.
+
+	Time spent:
+This week we've been somewhat busy, there has been other courses and such that has made progress in the beginning of this sprint sluggish and we didn't complete as much as we set out to on the planning meeting. It's probably not only because of this weeks reduced time committment. 
+
+	Design Decisions:
+We've chosen to exclude a few features in favour of being able to work on a more complete but smaller product. This is to focus on creating some sort of value and working product first and then expand on that baseline.
+
+	Technical documentation:
+So far we've only written very little documentation, mainly in the shape of Read me's to help the teammembers to get up and running with the environment. Considering the scale of the project we're mainly planning on writing documentation as comments to for example functions/classes and such.
+
+	Roles within team:
+So far we've tried to have two people each sprint assume the role of Project Owner and Scrum Master. This has been a bit of a slow learning experience since the person hasn't really known their role any better than the other team members. But each sprint has gotten better at the same rate as us learning how to work together and in the agile framework.
+
+	Agile practices:
+We've aimed to implement the most important meetings in the shape of sprint-planning, stand-up-meeting and retrospective.
+- During the Sprint planning meetings we've focused on going over the coming sprint, creating some userstories/tasks, using planning poker to choose points for said tasks. Then finally adding the tasks to the sprint from the top of the backlog (which we've set the PO on prioritizing before the meeting)
+- We've only chosen to have one stand up meeting even though ideally we would have one on each weekday, but the fact that only two of us have the same course outside of this course made us focus on having only one. In this meeting we're trying to just hear what everyone's doing and see if anyone needs any help with their tasks.
+- Finally in our retrospective we start by going over what each person has done during the sprint and if they have anything to show then they've done a small Demo for the rest of the team. After that we've gone over general reflections and talked about what's gone well/poorly during the sprint. 
+
+We've attempted to use a burndown chart as our main KPI and have tried to split each userstory into smaller tasks to make them easier to manage. 
