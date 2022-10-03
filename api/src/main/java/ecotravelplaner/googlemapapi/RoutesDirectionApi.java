@@ -15,16 +15,16 @@ public class RoutesDirectionApi {
 
     private String origin;
     private String destination;
-    private String transprortationMean;
+    private String mean; //Transportmedel
     private HttpURLConnection con;
     private String inPutLine;
     private String apiKey;
 
 
-    public RoutesDirectionApi(String destination, String origin, String transportationMean, String apiKey) {
+    public RoutesDirectionApi(String destination, String origin, String mean, String apiKey) {
         this.destination = destination;
         this.origin = origin;
-        this.transprortationMean = transportationMean; //mode in http request
+        this.mean = mean;
         this.apiKey = apiKey; //key in http request
     }
 
@@ -37,7 +37,7 @@ public class RoutesDirectionApi {
         String urlAdress = "https://maps.googleapis.com/maps/api/directions/json" +
                 "?destination="+this.destination+
                 "&origin="+this.origin+
-                "&mode="+this.transprortationMean+
+                "&mean="+this.mean+
                 "&key="+this.apiKey;
         try {
             this.con = this.getConnected(urlAdress);
