@@ -9,54 +9,6 @@ import DirectionsBikeIcon from '@mui/icons-material/DirectionsBike';
 
 import { useRouter } from "next/router";
 
-function DisplayEmission() {
-	const [hide, setHide] = useState(false);
-
-	const toggleHide = () => {
-		setHide((oldState) => !oldState);
-	};
-
-	let carbonEmission= (distance : number) => {
-		return (12 * distance / 100).toFixed(2).toString();
-	};
-
-	return (
-		<Box>
-			<Box mt={2} pb={1} textAlign="center" sx={{ borderBottom: 1 }}>
-				<Button color="primary" variant='contained' onClick={toggleHide}>Show Emission Data</Button>
-			</Box>
-			{hide && (
-				<Box mt={1}>
-					<Box>
-						<Grid container spacing={1}>
-							<Grid item xs={6}>
-								<Typography textAlign="center" variant='h5'>CO2 emission: {carbonEmission(470)} g</Typography>
-							</Grid>
-
-							<Grid item xs={6}>
-								<Typography textAlign="center" variant='h5'>Oil consumption: 300g</Typography>
-							</Grid>
-						</Grid>
-					</Box>
-					
-					<Box mt={1}>
-						<Grid container spacing={1}>
-							<Grid item xs={6}>
-								<Typography textAlign="center" variant='h5'>CO emission: 0.48 g</Typography>
-							</Grid>
-
-							<Grid item xs={6}>
-								<Typography textAlign="center" variant='h5'>NOx emission: 0.12 g</Typography>
-							</Grid>
-						</Grid>
-					</Box>
-					<RedirectButton/>
-				</Box>
-			)}
-		</Box>
-	);
-}
-
 function ToggleButtonDiet() {
 	const [alignment, setAlignment] = useState("Vegan/Vegetarian");
 
@@ -65,7 +17,7 @@ function ToggleButtonDiet() {
 		newAlignment: string | null
 	) => {
 		if(newAlignment !== null) {
-			sessionStorage.setItem("DietType", newAlignment);
+			setItem("DietType", newAlignment);
 			setAlignment(newAlignment);
 		}
 	}
@@ -100,7 +52,7 @@ function DietAndFuel() {
 		newAlignment: string | null
 	) => {
 		if(newAlignment !== null) {
-			sessionStorage.setItem("PropulsionType", (newAlignment == 'left' ? "Human" : "Electric") + "Powered");
+			setItem("PropulsionType", (newAlignment == 'left' ? "Human" : "Electric") + "Powered");
 			setHide((oldState) => newAlignment == 'left');
 			setAlignment(newAlignment);
 		}
@@ -145,25 +97,28 @@ function DietAndFuel() {
 	);
 }
 
-function RedirectButton() {
+function SaveButton() {
 	const router = useRouter();
 	const [linkName, setLinkName] = useState(router.pathname);
 
 	const handleLinkName = (
 		event: React.MouseEvent<HTMLElement>
 	) => {
+		setItem("TravelData", {CarbonFootprint: carbonEmission(470), DietType: getItem("DietType", "aa"), PropulsionType: getItem("PropulsionType", "aa")});
+
 		setLinkName("/comparison");
 		router.push("/comparison");
 	};
 
+	let carbonEmission= (distance : number) => {
+		return (12 * distance / 100).toFixed(2).toString();
+	};
+
 	return (
-		<Box mt={2}>
-			<Button
-				variant='contained'
-				onClick={handleLinkName}	
-			>
-				Redirect To Comparison Page
-			</Button>
+		<Box>
+			<Box mt={2} pb={1} textAlign="center" sx={{ borderBottom: 1 }}>
+				<Button color="primary" variant='contained' onClick={handleLinkName}>APPLY</Button>
+			</Box>
 		</Box>
 	);
 }
@@ -188,7 +143,7 @@ function BicyclePage() {
 					<Grid item xs={3}>: 470km</Grid>
 				</Grid>
 				<DietAndFuel/>
-				<DisplayEmission/>
+				<SaveButton/>
 				
 			</Box>
 			
@@ -199,6 +154,9 @@ function BicyclePage() {
 }
 
 const About: NextPage = () => {
+
+	setItem("PropulsionType", "Human Powered");
+	setItem("DietType"      , "Vegan/Vegetarian");
 
 	return (
 		<Template>
