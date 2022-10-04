@@ -12,3 +12,8 @@ export interface CarType {
     litersPerKm: string
     CO2PerLiter: string
 }
+
+export interface BusType {
+    vehicleType: string
+    emissionPerKm: number
+}
