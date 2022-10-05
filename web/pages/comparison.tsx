@@ -89,29 +89,26 @@ const ComparisonPage: NextPage = () => {
 		setStaples(stapleData);
 	}, [])
 
+	useEffect(() => { // this hook will get called everytime when stapleState has changed
+		console.log('Updated State', stapleState);
+	}, [stapleState])
+
+
 	const handleClick = (event: {title: string, img: string, co2: number}) => {
 		console.log(event.title);
 		console.log('Image clicked');
 
-
-		//console.log(stapleData[stapleData.length-1]);
-		let newData = [];
-		newData = stapleData;
-
-		newData.push({
-			title: event.title,
-			icon: <CoffeeIcon/>,
-			parts: [
-				{color: 0xf1c40f, value: event.co2/1000, hint: "Production emissions"},
-				{color: 0xecf0f1, value: 0, hint: "Emissions for the route"}]
-		})
-
-		setStaples(newData);
+		setStaples((prevState) => {
+			return [...prevState, {
+				title: event.title,
+				icon: <CoffeeIcon/>,
+				parts: [
+					{color: 0xf1c40f, value: event.co2 / 1000, hint: "Production emissions"},
+					{color: 0xecf0f1, value: 0, hint: "Emissions for the route"}
+				]
+			}];});
 	};
 
-	useEffect(() => { // this hook will get called everytime when stapleState has changed
-		console.log('Updated State', stapleState)
-	}, [stapleState])
 
 	let Everyday_image_list = (
 		<ImageList sx={{ }} cols={4} >
