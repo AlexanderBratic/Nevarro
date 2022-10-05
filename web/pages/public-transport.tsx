@@ -11,14 +11,41 @@ import Template from "../src/components/Template";
 import {getTypedItem, setItem} from "../src/sessionStorage";
 import {BusType, TrainType} from "../types/sessionStorageTypes";
 import ItemsJson from "../src/co2_transport.json";
+
+const busVariants: {type: string, emission: number}[] = [{type: "Diesel", emission: 35},{type: "Electric", emission: 25},{type: "Hydrogen", emission: 30}]
+const trainVariants: {type: string, emission: number}[] = [{type: "Diesel", emission: 35},{type: "Electric", emission: 25}]
+
+function getTrainData(): TrainType {
+	const defaultData: TrainType = {
+		vehicleType: trainVariants[0].name,
+		emissionPerKm: trainVariants[0].emission
+	};
+	
+	return getTypedItem<TrainType>("train", defaultData);
+}
+
+export function getTrainCo2PerKm() {
+	let trainData = getTrainData();
+	return trainData.emissionPerKm;
+}
+
+function getBusData(): TrainType {
+	const defaultData: TrainType = {
+		vehicleType: busVariants[0].name,
+		emissionPerKm: busVariants[0].emission
+	};
+	
+	return getTypedItem<TrainType>("bus", defaultData);
+}
+
+export function getBusCo2PerKm() {
+	let busData = getBusData();
+	return busData.emissionPerKm;
+}
+
 const TransitSettings: NextPage = () => {
-
-    
-    const busVariants: {type: string, emission: number}[] = [{type: "Diesel", emission: 35},{type: "Electric", emission: 25},{type: "Hydrogen", emission: 30}]
-    const trainVariants: {type: string, emission: number}[] = [{type: "Diesel", emission: 35},{type: "Electric", emission: 25}]
-
-    const busData = getTypedItem<BusType>("bus", {vehicleType: busVariants[0].type, emissionPerKm: busVariants[0].emission})
-    const trainData = getTypedItem<BusType>("train", {vehicleType: trainVariants[0].type, emissionPerKm: trainVariants[0].emission})
+    const busData = getBusData()
+    const trainData = getTrainData()
 
     const [bus, setBus] = useState(busVariants.find(v=>v.type === busData.vehicleType) ?? busVariants[0])
     const [busType, setBusType] = useState(busData.vehicleType)

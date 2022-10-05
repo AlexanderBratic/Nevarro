@@ -3,8 +3,9 @@ import * as React from 'react';
 import { useState } from 'react';
 import { borders, shadows } from "@mui/system";
 import { ToggleButton, ToggleButtonGroup, Button, Container, Typography, Grid, Box, TextField, Icon } from "@mui/material";
-import { getItem, setItem } from "../src/sessionStorage";
+import { getItem, getTypedItem, setItem } from "../src/sessionStorage";
 import Template from '../src/components/Template';
+import { CarType, BicycleType } from '../types/sessionStorageTypes'
 
 import { useRouter } from "next/router";
 
@@ -182,6 +183,17 @@ function BicyclePage() {
 	
 }
 
+/*function getBicycleData(): CarType {
+	const defaultData: BicycleType = {emissionPerKm:23};
+	
+	return getTypedItem<CarType>("car", defaultData);
+}
+
+export function getBicycleCo2PerKm() {
+	let bicycleData = getBicycleData();
+	return bicycleData.emissionPerKm;
+}*/
+
 const About: NextPage = () => {
 
 	setItem("PropulsionType", "HumanPowered");
@@ -197,20 +209,53 @@ const About: NextPage = () => {
 			1 : Manual
 			2 : Electric
 		diet:
-			1 : Vegan
-			2 : Normal
-			3 : Carnivore
+			0 : Vegan
+			1 : Normal
+			2 : Carnivore
 		*/
+
+		let transportType = "Bicycle";
+		let driveType     = "Manual";
 
 		const carnivoreConstant = 4.43121361746;
 		const normalConstant    = 3.51923101673;
 		const veganConstant		= 2.13485714286;
 
+		const dietConst = [veganConstant, normalConstant, carnivoreConstant];
+
 		const MET_OVER_V_CONSTANT_CYCLING = 6.5/18;
 		const MET_OVER_V_CONSTANT_WALKING = 3.5/4.32;
 
+		const SWEDEN_CO2_PER_Wh = 0.017; /* g/Wh */
+
+		const eBikeWattsPerKm  = 18;
+		const eScooterWattsPer = 13.5;
+
+		let emissionPerKm = 0;
+
+		if(transport == 1) {
+			if(propulsion == 1) {
+				emissionPerKm = dietConst[diet] * 80 * MET_OVER_V_CONSTANT_CYCLING;
+			} else {
+				emissionPerKm = SWEDEN_CO2_PER_Wh * eBikeWattsPerKm;
+				driveType 	  = "Electric";
+			}
+		} else if(transport == 2) {
+			emissionPerKm = SWEDEN_CO2_PER_Wh * eScooterWattsPer;
+			transportType = "E-Scooter";
+			driveType 	  = "Electric";
+
+		} else if(transport == 3) {
+			emissionPerKm = dietConst[diet] * 80 * MET_OVER_V_CONSTANT_WALKING;
+			transportType = "Walking";
+		}
+
 		// Create object and SetItem
-		
+		let obj = {
+			vehicleType: transportType,
+			porpulsionType: driveType,
+			emissionPerKm: emissionPerKm
+		};
 	}
 
 	return (
