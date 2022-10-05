@@ -17,7 +17,40 @@ import {getTypedItem, setItem} from "../src/sessionStorage";
 import {CarType, ComparisonType} from "../types/sessionStorageTypes";
 import {useRouter} from "next/router";
 
- const CarSettings: NextPage = () => {
+
+const vehicleTypes: {name: string, variants: {name: string, emission: number }[] }[] = [
+	{name: "bil", variants: [
+		{name: "bensin", emission: 168},
+		{name: "diesel", emission: 188},
+		{name: "el", emission: 100},
+		{name: "väte", emission: 120},
+		{name: "hybrid", emission: 143},
+		{name: "etanol", emission: 108},
+		{name: "gasol", emission: 111},
+		{name: "biodiesel", emission: 179},
+	]},
+	{name: "Lätt lastbil", variants: [{name: "bensin", emission: 376}, {name: "diesel", emission: 421}]},
+	{name: "Lastbil", variants: [{name: "bensin", emission: 1045}, {name: "diesel", emission: 1169}]},
+	{name: "motorcykel", variants: [{name: "bensin", emission: 103}, {name: "diesel", emission: 115}]},
+];
+
+function getCarData(): CarType {
+	const defaultData: CarType = {
+		emissionPerKm: vehicleTypes[0].variants[0].emission, 
+		vehicleType: vehicleTypes[0].name, 
+		CO2PerLiter: "", 
+		litersPerKm: ""
+	};
+	
+	return getTypedItem<CarType>("car", defaultData);
+}
+
+export function getCarCo2PerKm() {
+	let carData = getCarData();
+	return carData.emissionPerKm;
+}
+
+const CarSettings: NextPage = () => {
 
      const router = useRouter()
 
@@ -45,7 +78,7 @@ import {useRouter} from "next/router";
      ]
 
      const data = getTypedItem<ComparisonType>("comparison", {from: "", to: "", distance: 0})
-     const carData = getTypedItem<CarType>("car", {emissionPerKm: 0, vehicleType: vehicleTypes[0].name, CO2PerLiter: "", litersPerKm: ""})
+     const carData = getCarData();
 
      const [vehicle, setVehicle] = useState(vehicleTypes.find(v => v.name === carData.vehicleType) ?? vehicleTypes[0])
      const [vehicleName, setVehicleName] = useState(carData.vehicleType)

@@ -9,6 +9,17 @@ import DirectionsBikeIcon from '@mui/icons-material/DirectionsBike';
 
 import { useRouter } from "next/router";
 
+function getBicycleData(): CarType {
+	const defaultData: BicycleType = {emissionPerKm:23};
+	
+	return getTypedItem<CarType>("car", defaultData);
+}
+
+export function getBicycleCo2PerKm() {
+	let bicycleData = getBicycleData();
+	return bicycleData.emissionPerKm;
+}
+
 function DisplayEmission() {
 	const [hide, setHide] = useState(false);
 

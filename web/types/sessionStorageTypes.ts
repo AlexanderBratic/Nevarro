@@ -21,3 +21,7 @@ export interface TrainType {
     vehicleType: string
     emissionPerKm: number
 }
+
+export interface BicycleType {
+	emissionPerKm: number
+}
