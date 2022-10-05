@@ -9,10 +9,11 @@ import Template from '../src/components/Template';
 import { useRouter } from "next/router";
 
 function ToggleButtonDiet() {
-	const [alignment, setAlignment] = useState("Vegan/Vegetarian");
+	const receivedItem = JSON.parse(getItem("DietType", JSON.stringify("Vegan/Vegetarian")));
+	const [alignment, setAlignment] = useState(receivedItem);
 
 	const handleChange = (
-		event: React.MouseEvent<HTMLElement>,
+		event: React.MouseEvent<HTMLElement> | null,
 		newAlignment: string | null
 	) => {
 		if(newAlignment !== null) {
@@ -20,7 +21,7 @@ function ToggleButtonDiet() {
 			setAlignment(newAlignment);
 		}
 	}
-
+	
 	return (
 		<Box mt={1}>
 			<Grid container spacing={1}>
@@ -53,16 +54,17 @@ function ToggleButtonDiet() {
 
 
 function DietAndFuel() {
-	const [hide, setHide] = useState(true);
-	const [alignment, setAlignment] = React.useState('left');
+	const receivedItem    = JSON.parse(getItem("PropulsionType", JSON.stringify("HumanPowered")));
+	const [hide, setHide] = useState(receivedItem == "HumanPowered");
+	const [alignment, setAlignment] = useState(receivedItem);
 
 	const handleAlignment = (
 		event: React.MouseEvent<HTMLElement>,
 		newAlignment: string | null
 	) => {
 		if(newAlignment !== null) {
-			setItem("PropulsionType", (newAlignment == 'left' ? "Human" : "Electric") + "Powered");
-			setHide((oldState) => newAlignment == 'left');
+			setItem("PropulsionType", newAlignment);
+			setHide((oldState) => newAlignment == "HumanPowered");
 			setAlignment(newAlignment);
 		}
 	}
@@ -83,8 +85,8 @@ function DietAndFuel() {
 							exclusive
 							onChange={handleAlignment}
 							>
-							<ToggleButton value="left"  color="info">Conventional</ToggleButton>
-							<ToggleButton value="right" color="warning">Electric</ToggleButton>
+							<ToggleButton value="HumanPowered"  color="info">Conventional</ToggleButton>
+							<ToggleButton value="ElectricPowered" color="warning">Electric</ToggleButton>
 						</ToggleButtonGroup>
 					</Grid>
 				</Grid>
@@ -124,7 +126,7 @@ function SaveButton() {
 
 function BicyclePage() {
 	const [condition, setCondition] = useState(0);
-	const [alignment, setAlignment] = React.useState('bicycle');
+	const [alignment, setAlignment] = React.useState('Bicycle');
 
 	const handleAlignment = (
 		event: React.MouseEvent<HTMLElement>,
@@ -182,8 +184,33 @@ function BicyclePage() {
 
 const About: NextPage = () => {
 
-	setItem("PropulsionType", "Human Powered");
+	setItem("PropulsionType", "HumanPowered");
 	setItem("DietType"      , "Vegan/Vegetarian");
+
+	function PutDataIntoSession(transport : number, propulsion : number, diet : number) : void {
+		/*
+		transport:
+			1 : Bicycle
+			2 : E-Scooter
+			3 : Walking
+		propulsion:
+			1 : Manual
+			2 : Electric
+		diet:
+			1 : Vegan
+			2 : Normal
+			3 : Carnivore
+		*/
+
+		const carnivoreConstant = 4.43121361746;
+		const normalConstant    = 3.51923101673;
+		const veganConstant		= 2.13485714286;
+
+		const MET_OVER_V_CONSTANT_CYCLING = 6.5/18;
+		const MET_OVER_V_CONSTANT_WALKING = 3.5/4.32;
+
+		// Create object and SetItem
+	}
 
 	return (
 		<Template>
