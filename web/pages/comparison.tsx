@@ -83,30 +83,31 @@ const ComparisonPage: NextPage = () => {
 			]
 		}
 	];
-	const [stapleState, setStaples] = useState<Array<object>>([]);
+
+	const [stapleState, setStaples] = useState<typeof stapleData>([]);
 
 	useEffect(() => {
 		setStaples(stapleData);
 	}, [])
 
-	useEffect(() => { // this hook will get called everytime when stapleState has changed
-		console.log('Updated State', stapleState);
-	}, [stapleState])
-
-
 	const handleClick = (event: {title: string, img: string, co2: number}) => {
-		console.log(event.title);
-		console.log('Image clicked');
+		console.log(event.title + ' image clicked');
 
-		setStaples((prevState) => {
-			return [...prevState, {
-				title: event.title,
-				icon: <CoffeeIcon/>,
-				parts: [
-					{color: 0xf1c40f, value: event.co2 / 1000, hint: "Production emissions"},
-					{color: 0xecf0f1, value: 0, hint: "Emissions for the route"}
-				]
-			}];});
+		setStaples((prevState:typeof stapleData) => {
+			const item = prevState.find(obj => {return obj.title == event.title});
+			if (typeof item === 'undefined') {
+				return [...prevState, {
+					title: event.title,
+					icon: <CoffeeIcon/>,
+					parts: [
+						{color: 0xf1c40f, value: event.co2 / 1000, hint: "Production emissions"},
+						{color: 0xecf0f1, value: 0, hint: "Emissions for the route"}
+					]
+				}];
+			} else{
+				return prevState.filter(obj => {return obj.title != event.title});
+			}
+		});
 	};
 
 
