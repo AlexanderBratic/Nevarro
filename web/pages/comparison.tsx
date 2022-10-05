@@ -20,15 +20,28 @@ import WalkIcon from '@mui/icons-material/DirectionsWalkRounded';
 import ItemsJson from "../src/items.json";
 import Grid from "@mui/material/Unstable_Grid2";
 import { ComparisonType } from '../types/sessionStorageTypes';
+import {dirRequest} from "../src/webApiUtil";
+import {useRouter} from "next/router";
+import {useState} from "react";
 
 const ComparisonPage: NextPage = () => {
 
-	const data = getTypedItem<ComparisonType>('comparison', {to:'', from:'', distance:0});
+	let [data, setData] = useState(getTypedItem<ComparisonType>('comparison', {to:'', from:'', distance:0}));
 	const [from, setFrom] = React.useState(data.from);
 	const [to, setTo] = React.useState(data.to);
-	
+    const router = useRouter();
+
+    const handleSubmit = async (event: React.FormEvent) => {
+        // prevent refresh
+        event.preventDefault()
+        //setItem("comparison", {from, to});
+        await dirRequest(from, to, "DRIVING");
+
+        setData(getTypedItem<ComparisonType>('comparison', {to:'', from:'', distance:0}));
+    }
+
 	let stapleData = [
-		{ 
+		{
 			title: "Car",
 			icon: <CarIcon />,
 			parts: [
@@ -38,7 +51,7 @@ const ComparisonPage: NextPage = () => {
 				{ color: 0xecf0f1, value: 50, hint: "Emissions for the route"  }
 			]
 		},
-		{ 
+		{
 			title: "Plane",
 			icon: <AirplaneIcon />,
 			parts: [
@@ -46,7 +59,7 @@ const ComparisonPage: NextPage = () => {
 				{ color: 0xecf0f1, value: 50, hint: "Emissions for the route"  }
 			]
 		},
-		{ 
+		{
 			title: "Public Transport",
 			icon: <PublicTransportIcon />,
 			parts: [
@@ -54,7 +67,7 @@ const ComparisonPage: NextPage = () => {
 				{ color: 0xecf0f1, value: 50, hint: "Emissions for the route"  }
 			]
 		},
-		{ 
+		{
 			title: "Bicycle",
 			icon: <BikeIcon />,
 			parts: [
@@ -62,7 +75,7 @@ const ComparisonPage: NextPage = () => {
 				{ color: 0xecf0f1, value: 50, hint: "Emissions for the route"  }
 			]
 		},
-		{ 
+		{
 			title: "Electric Scooter",
 			icon: <ElectricScooterIcon />,
 			parts: [
@@ -70,7 +83,7 @@ const ComparisonPage: NextPage = () => {
 				{ color: 0xecf0f1, value: 50, hint: "Emissions for the route"  }
 			]
 		},
-		{ 
+		{
 			title: "Walking",
 			icon: <WalkIcon />,
 			parts: [
@@ -95,7 +108,7 @@ const ComparisonPage: NextPage = () => {
 				title={item.title}
 				subtitle={`Co2e: ${item.co2}g`}
 			  />
-			</ImageListItem> 
+			</ImageListItem>
 		  ))}
 		</ImageList>
 	  );
@@ -104,18 +117,20 @@ const ComparisonPage: NextPage = () => {
 		<Template>
 			<Box>
 				<h1>Comparison</h1>
-				<Grid container spacing={1}>
-					<Grid xs>
-						<TextField label="from" fullWidth value={from} onChange={e => setFrom(e.target.value)} />
-					</Grid>
-					<Grid xs>
-						<TextField label="to" fullWidth value={to} onChange={e => setTo(e.target.value)} />
-					</Grid>
-					<Grid>
-						<Button style={{height: '100%'}} variant="contained"> Sök </Button>
-					</Grid>
-				</Grid>
-				
+                <form onSubmit={handleSubmit}>
+                    <Grid container spacing={1}>
+                        <Grid xs={12} sm>
+                            <TextField label="from" fullWidth value={from} onChange={e => setFrom(e.target.value)} />
+                        </Grid>
+                        <Grid xs={12} sm>
+                            <TextField label="to" fullWidth value={to} onChange={e => setTo(e.target.value)} />
+                        </Grid>
+                        <Grid xs sm={1}>
+                            <Button style={{height: '100%'}} fullWidth type="submit" variant="contained" disabled={to === '' || from === ''}> Sök </Button>
+                        </Grid>
+                    </Grid>
+                </form>
+
 				<StapleDiagram staples={stapleData} />
 			</Box>
 			<Box>

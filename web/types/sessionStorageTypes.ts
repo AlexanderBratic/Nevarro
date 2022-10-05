@@ -1,4 +1,4 @@
-export type SessionStorageTypes = string | "comparison" | "car" | "bicycle" | "plane" | "walking" | "public transit";
+export type SessionStorageTypes = string | "googlemaps" | "comparison" | "car" | "bicycle" | "plane" | "walking" | "public transit";
 
 export interface ComparisonType {
     from: string;
