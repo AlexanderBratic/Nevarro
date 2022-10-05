@@ -1,11 +1,14 @@
-
 /**
  * Function to connect to RoutesDirectionApiService.
  */
-function dirRequest(destination: String, origin: String, mean: String){
+import {setItem} from "./sessionStorage";
+
+async function dirRequest(destination: String, origin: String, mean: String){
     let httpAddress= {url:"http://localhost:8080/routes?destination="+destination+"&origin="+origin+"&mean="+mean};
-    return fetch(httpAddress.url)
-        .then(response => response.json());
+    let data = await fetch(httpAddress.url)
+        .then(response => response.json())
+    setItem('googlemaps',data)
+    return data;
 }
 
 export {dirRequest};
