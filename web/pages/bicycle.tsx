@@ -2,10 +2,9 @@ import type { NextPage } from 'next';
 import * as React from 'react';
 import { useState } from 'react';
 import { borders, shadows } from "@mui/system";
-import { ToggleButton, ToggleButtonGroup, Button, Container, Typography, Grid, Box, TextField } from "@mui/material";
+import { ToggleButton, ToggleButtonGroup, Button, Container, Typography, Grid, Box, TextField, Icon } from "@mui/material";
 import { getItem, setItem } from "../src/sessionStorage";
 import Template from '../src/components/Template';
-import DirectionsBikeIcon from '@mui/icons-material/DirectionsBike';
 
 import { useRouter } from "next/router";
 
@@ -23,22 +22,32 @@ function ToggleButtonDiet() {
 	}
 
 	return (
-		<Grid container>
-			<Grid item xs={7}>
-				<ToggleButtonGroup
-					fullWidth
-					color="primary"
-					value={alignment}
-					exclusive
-					onChange={handleChange} 
-					aria-label="outlined button group"
-				>
-					<ToggleButton value="Vegan/Vegetarian" color='secondary'>Vegan/Vegetarian</ToggleButton>
-					<ToggleButton value="Normal">Normal</ToggleButton>
-					<ToggleButton value="Carnivore" color='error'>Carnivore</ToggleButton>
-				</ToggleButtonGroup>
+		<Box mt={1}>
+			<Grid container spacing={1}>
+				<Grid item xs={1.5}>
+					<Typography variant='h5'>Diet:</Typography>
+				</Grid>
+
+				<Grid item xs={10}>
+					<Grid container>
+						<Grid item xs={7}>
+							<ToggleButtonGroup
+								fullWidth
+								color="primary"
+								value={alignment}
+								exclusive
+								onChange={handleChange} 
+								aria-label="outlined button group"
+							>
+								<ToggleButton value="Vegan/Vegetarian" color='secondary'>Vegan/Vegetarian</ToggleButton>
+								<ToggleButton value="Normal">Normal</ToggleButton>
+								<ToggleButton value="Carnivore" color='error'>Carnivore</ToggleButton>
+							</ToggleButtonGroup>
+						</Grid>
+					</Grid>
+				</Grid>
 			</Grid>
-		</Grid>
+		</Box>
 	);
 }
 
@@ -81,17 +90,7 @@ function DietAndFuel() {
 				</Grid>
 			</Box>
 			{hide && (
-				<Box mt={1}>
-					<Grid container spacing={1}>
-						<Grid item xs={1.5}>
-							<Typography variant='h5'>Diet:</Typography>
-						</Grid>
-
-						<Grid item xs={10}>
-							<ToggleButtonDiet/>
-						</Grid>
-					</Grid>
-				</Box>
+				<ToggleButtonDiet/>
 			)}
 		</Box>
 	);
@@ -124,27 +123,55 @@ function SaveButton() {
 }
 
 function BicyclePage() {
+	const [condition, setCondition] = useState(0);
+	const [alignment, setAlignment] = React.useState('bicycle');
+
+	const handleAlignment = (
+		event: React.MouseEvent<HTMLElement>,
+		newAlignment: string | null
+	) => {
+		if(newAlignment !== null) {
+			setCondition((oldNum) => nameToNum(newAlignment));
+			setAlignment(newAlignment);
+		}
+	}
+
+	let nameToNum = (name : string) : number => {
+		if(name == "Bicycle") {
+			return 0;
+		}
+		return (name == "Electric Scooter" ? 1 : 2);
+	}
 	
 	return (
 		<Container>
-			<Typography variant='h3' textAlign="left">Bicycle Settings Page</Typography>
+			<Typography variant='h3' textAlign="left">{alignment} Settings Page</Typography>
 			<Box mt={1} mb={1}>
-				<Grid container spacing={1}>
-					<Grid item xs={4}></Grid>
-					<Grid item xs={2}>
-						<TextField variant='standard' defaultValue="Göteborg" disabled/>
-					</Grid>
-					<Grid item xs={.5} alignContent="center">
-						<DirectionsBikeIcon fontSize='large'/>
-					</Grid>
-					<Grid item xs={2}>
-						<TextField variant='standard' defaultValue="Stockholm" disabled/>
-					</Grid>
-					<Grid item xs={3}>: 470km</Grid>
-				</Grid>
-				<DietAndFuel/>
-				<SaveButton/>
 				
+				<Container maxWidth="md" >
+					<Box mb={1}>
+						<Typography>Transport type</Typography>
+					</Box>
+					<Grid container spacing={1}>
+						<ToggleButtonGroup
+						fullWidth
+						aria-label="outlined button group"
+						value={alignment}
+						exclusive
+						onChange={handleAlignment}
+						color="primary"
+						>
+							<ToggleButton value="Bicycle">Bicycle</ToggleButton>
+							<ToggleButton value="Electric Scooter">Electric Scooter</ToggleButton>
+							<ToggleButton value="Walking">Walking</ToggleButton>
+						</ToggleButtonGroup>
+					</Grid>
+				</Container>
+				<Box mt={2}>
+					{condition == 0 && ( <DietAndFuel/> )}
+					{condition == 2 && ( <ToggleButtonDiet/> )}
+					<SaveButton/>
+				</Box>
 			</Box>
 			
 		</Container>
