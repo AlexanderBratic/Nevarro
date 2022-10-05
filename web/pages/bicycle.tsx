@@ -210,6 +210,7 @@ const About: NextPage = () => {
 		const MET_OVER_V_CONSTANT_WALKING = 3.5/4.32;
 
 		// Create object and SetItem
+		
 	}
 
 	return (
