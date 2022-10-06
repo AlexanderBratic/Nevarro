@@ -17,8 +17,10 @@ import PublicTransportIcon from '@mui/icons-material/CommuteRounded';
 import BikeIcon from '@mui/icons-material/DirectionsBikeRounded';
 import ElectricScooterIcon from '@mui/icons-material/ElectricScooterRounded';
 import WalkIcon from '@mui/icons-material/DirectionsWalkRounded';
+import CoffeeIcon from '@mui/icons-material/Coffee';
 
 import ItemsJson from "../src/items.json";
+import {useState, useEffect} from "react";
 
 import {getCarCo2PerKm} from './car.tsx';
 import {getBicycleCo2PerKm} from './bicycle.tsx';
@@ -26,50 +28,77 @@ import {getTrainCo2PerKm, getBusCo2PerKm} from './public-transport.tsx';
 
 const ComparisonPage: NextPage = () => {
 
-	const staple_color = 0x9b59b6;
+	const route_color      = 0x9b59b6;
+	const production_color = 0xf1c40f;
 	
-	let comparisonData = getTypedItem<ComparisonType>("comparison", {from: "", to: "", distance: 10});
-	let carCo2PerKm = getCarCo2PerKm();
-	let bicycleCo2PerKm = getBicycleCo2PerKm();
-	let trainCo2PerKm = getTrainCo2PerKm();
-	let busCo2PerKm = getBusCo2PerKm();
-	
-	let stapleData = [
-		{ 
+	const comparisonData = getTypedItem<ComparisonType>("comparison", {from: "", to: "", distance: 10});
+	const carCo2PerKm = getCarCo2PerKm();
+	const bicycleCo2PerKm = getBicycleCo2PerKm();
+	const trainCo2PerKm = getTrainCo2PerKm();
+	const busCo2PerKm = getBusCo2PerKm();
+
+
+	const [stapleState, setStaples] = useState<typeof stapleData>([
+		{
 			title: "Car",
 			icon: <CarIcon key={"Car"} />,
 			parts: [
-				{ color: staple_color, value: carCo2PerKm * comparisonData.distance, hint: "Emissions for the route"  }
+				{ color: route_color, value: carCo2PerKm * comparisonData.distance, hint: "Emissions for the route"  }
 			]
 		},
 		{ 
 			title: "Train",
 			icon: <PublicTransportIcon key={"Public Transport"} />,
 			parts: [
-				{ color: staple_color, value: trainCo2PerKm * comparisonData.distance, hint: "Emissions for the route"  }
+				{ color: route_color, value: trainCo2PerKm * comparisonData.distance, hint: "Emissions for the route"  }
 			]
 		},
 		{ 
 			title: "Bus",
 			icon: <PublicTransportIcon key={"Public Transport"} />,
 			parts: [
-				{ color: staple_color, value: busCo2PerKm * comparisonData.distance, hint: "Emissions for the route"  }
+				{ color: route_color, value: busCo2PerKm * comparisonData.distance, hint: "Emissions for the route"  }
 			]
 		},
-		{ 
+		{
 			title: "Bicycle",
 			icon: <BikeIcon key={"Bicycle"} />,
 			parts: [
-				{ color: staple_color, value: bicycleCo2PerKm * comparisonData.distance, hint: "Emissions for the route"  }
+				{ color: route_color, value: bicycleCo2PerKm * comparisonData.distance, hint: "Emissions for the route"  }
 			]
 		}
-	];
+	]);
 	
+	const handleClick = (event: {title: string, img: string, co2: number}) => {
+		console.log(event.title + ' image clicked');
+
+		setStaples((prevState:typeof stapleData) => {
+			const item = prevState.find(obj => {return obj.title == event.title});
+			if (typeof item === 'undefined') {
+				return [...prevState, {
+					title: event.title,
+					icon: <CoffeeIcon/>,
+					parts: [
+						{color: production_color, value: event.co2 / 1000, hint: "Production emissions"}
+					]
+				}];
+			} else{
+				return prevState.filter(obj => {return obj.title != event.title});
+			}
+		});
+	};
+
+	let css = {
+		transition: "opacity 0.2s",
+		"&:hover": {
+			opacity: "80%"
+		}
+	};
 
 	let Everyday_image_list = (
-		<ImageList sx={{ }} cols={4} >
+		<ImageList sx={{}} cols={4} >
 		  {ItemsJson.Items.map((item) => (
-			<ImageListItem key={item.img}>
+			<ImageListItem key={item.img} onClick={() => handleClick(item)} sx={css}>
 			  <img
 				src={`${item.img}?w=248&fit=crop&auto=format`}
 				srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
@@ -89,7 +118,7 @@ const ComparisonPage: NextPage = () => {
 		<Template>
 			<Box>
 				<h1>Comparison</h1>
-				<StapleDiagram staples={stapleData} />
+				<StapleDiagram staples={stapleState} />
 			</Box>
 			<Box>
 				{Everyday_image_list}

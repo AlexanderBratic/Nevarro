@@ -1,10 +1,7 @@
 package ecotravelplaner.googlemapapi;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -31,7 +28,7 @@ public class RoutesDirectionApiController {
         this.routesDirectionApiService = routesDirectionApiService;
     }
 
-    @GetMapping
+    @GetMapping@CrossOrigin(origins="*")
     public String routesDirection(@RequestParam String destination, @RequestParam String origin,
                                   @RequestParam (value = "mean", defaultValue = "driving")
                                           String mean) throws IOException {
