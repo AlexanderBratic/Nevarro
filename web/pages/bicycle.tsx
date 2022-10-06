@@ -3,14 +3,20 @@ import * as React from 'react';
 import { useState } from 'react';
 import { borders, shadows } from "@mui/system";
 import { ToggleButton, ToggleButtonGroup, Button, Container, Typography, Grid, Box, TextField, Icon } from "@mui/material";
-import { getItem, getTypedItem, setItem } from "../src/sessionStorage";
+import { getItem, getTypedItem, setItem, updateItemObj } from "../src/sessionStorage";
 import Template from '../src/components/Template';
-import { CarType, BicycleType } from '../types/sessionStorageTypes'
+import { BicycleType } from '../types/sessionStorageTypes'
 
 import { useRouter } from "next/router";
 
+const transports = ["Bicycle", "Electric Scooter", "Walking"];
+const diets 	 = ["Vegan", "Normal", "Carnivore"];
+const fuels 	 = ["Manual", "Electric"];
+
+const emissionArr = [transports[0], diets[0], fuels[0]];
+
 function ToggleButtonDiet() {
-	const receivedItem = JSON.parse(getItem("DietType", JSON.stringify("Vegan/Vegetarian")));
+	const receivedItem = emissionArr[1];
 	const [alignment, setAlignment] = useState(receivedItem);
 
 	const handleChange = (
@@ -18,7 +24,7 @@ function ToggleButtonDiet() {
 		newAlignment: string | null
 	) => {
 		if(newAlignment !== null) {
-			setItem("DietType", newAlignment);
+			emissionArr[1] = newAlignment;
 			setAlignment(newAlignment);
 		}
 	}
@@ -41,7 +47,7 @@ function ToggleButtonDiet() {
 								onChange={handleChange} 
 								aria-label="outlined button group"
 							>
-								<ToggleButton value="Vegan/Vegetarian" color='secondary'>Vegan/Vegetarian</ToggleButton>
+								<ToggleButton value="Vegan" color='secondary'>Vegan/Vegetarian</ToggleButton>
 								<ToggleButton value="Normal">Normal</ToggleButton>
 								<ToggleButton value="Carnivore" color='error'>Carnivore</ToggleButton>
 							</ToggleButtonGroup>
@@ -55,8 +61,8 @@ function ToggleButtonDiet() {
 
 
 function DietAndFuel() {
-	const receivedItem    = JSON.parse(getItem("PropulsionType", JSON.stringify("HumanPowered")));
-	const [hide, setHide] = useState(receivedItem == "HumanPowered");
+	const receivedItem = emissionArr[2];
+	const [hide, setHide] = useState(receivedItem == "Manual");
 	const [alignment, setAlignment] = useState(receivedItem);
 
 	const handleAlignment = (
@@ -64,8 +70,8 @@ function DietAndFuel() {
 		newAlignment: string | null
 	) => {
 		if(newAlignment !== null) {
-			setItem("PropulsionType", newAlignment);
-			setHide((oldState) => newAlignment == "HumanPowered");
+			emissionArr[2] = newAlignment;
+			setHide((oldState) => newAlignment == "Manual");
 			setAlignment(newAlignment);
 		}
 	}
@@ -86,8 +92,8 @@ function DietAndFuel() {
 							exclusive
 							onChange={handleAlignment}
 							>
-							<ToggleButton value="HumanPowered"  color="info">Conventional</ToggleButton>
-							<ToggleButton value="ElectricPowered" color="warning">Electric</ToggleButton>
+							<ToggleButton value="Manual"  color="info">Conventional</ToggleButton>
+							<ToggleButton value="Electric" color="warning">Electric</ToggleButton>
 						</ToggleButtonGroup>
 					</Grid>
 				</Grid>
@@ -103,17 +109,15 @@ function SaveButton() {
 	const router = useRouter();
 	const [linkName, setLinkName] = useState(router.pathname);
 
-	const handleLinkName = (
-		event: React.MouseEvent<HTMLElement>
-	) => {
-		setItem("TravelData", {CarbonFootprint: carbonEmission(470), DietType: getItem("DietType", "aa"), PropulsionType: getItem("PropulsionType", "aa")});
+	const handleLinkName = ( event: React.MouseEvent<HTMLElement> ) => {
+		PutDataIntoSession(
+			transports.indexOf(emissionArr[0]) + 1,
+			fuels.indexOf(emissionArr[2]) + 1,
+		 	diets.indexOf(emissionArr[1])
+		);
 
 		setLinkName("/comparison");
 		router.push("/comparison");
-	};
-
-	let carbonEmission= (distance : number) => {
-		return (12 * distance / 100).toFixed(2).toString();
 	};
 
 	return (
@@ -126,24 +130,19 @@ function SaveButton() {
 }
 
 function BicyclePage() {
-	const [condition, setCondition] = useState(0);
-	const [alignment, setAlignment] = React.useState('Bicycle');
+	const receivedItem = emissionArr[0];
+	const [condition, setCondition] = useState(transports.indexOf(receivedItem));
+	const [alignment, setAlignment] = useState(receivedItem);
 
 	const handleAlignment = (
 		event: React.MouseEvent<HTMLElement>,
 		newAlignment: string | null
 	) => {
 		if(newAlignment !== null) {
-			setCondition((oldNum) => nameToNum(newAlignment));
+			emissionArr[0] = newAlignment;
+			setCondition((oldNum) => transports.indexOf(newAlignment));
 			setAlignment(newAlignment);
 		}
-	}
-
-	let nameToNum = (name : string) : number => {
-		if(name == "Bicycle") {
-			return 0;
-		}
-		return (name == "Electric Scooter" ? 1 : 2);
 	}
 	
 	return (
@@ -183,80 +182,95 @@ function BicyclePage() {
 	
 }
 
-/*function getBicycleData(): CarType {
-	const defaultData: BicycleType = {emissionPerKm:23};
+function getBicycleData(): BicycleType {
+	const defaultData: BicycleType = {
+		vehicleType: "Bicycle",
+		porpulsionType: "Manual",
+		emissionPerKm: 101.666673817
+	};
 	
-	return getTypedItem<CarType>("car", defaultData);
+	return getTypedItem<BicycleType>("bicycle", defaultData);
 }
 
 export function getBicycleCo2PerKm() {
 	let bicycleData = getBicycleData();
 	return bicycleData.emissionPerKm;
-}*/
+}
+
+
+function PutDataIntoSession(transport : number, propulsion : number, diet : number) : void {
+	/*
+	transport:
+		1 : Bicycle
+		2 : E-Scooter
+		3 : Walking
+	propulsion:
+		1 : Manual
+		2 : Electric
+	diet:
+		0 : Vegan
+		1 : Normal
+		2 : Carnivore
+	*/
+
+	let transportType = "Bicycle";
+	let driveType     = "Manual";
+
+	const carnivoreConstant = 4.43121361746;
+	const normalConstant    = 3.51923101673;
+	const veganConstant		= 2.13485714286;
+
+	const dietConst = [veganConstant, normalConstant, carnivoreConstant];
+
+	const MET_OVER_V_CONSTANT_CYCLING = 6.5/18;
+	const MET_OVER_V_CONSTANT_WALKING = 3.5/4.32;
+
+	const SWEDEN_CO2_PER_Wh = 0.017; /* g/Wh */
+
+	const eBikeWattsPerKm  = 18;
+	const eScooterWattsPer = 13.5;
+
+	let emissionPerKm = 0;
+
+	if(transport == 1) {
+		if(propulsion == 1) {
+			emissionPerKm = dietConst[diet] * 80 * MET_OVER_V_CONSTANT_CYCLING;
+		} else {
+			emissionPerKm = SWEDEN_CO2_PER_Wh * eBikeWattsPerKm;
+			driveType 	  = "Electric";
+		}
+	} else if(transport == 2) {
+		emissionPerKm = SWEDEN_CO2_PER_Wh * eScooterWattsPer;
+		transportType = "E-Scooter";
+		driveType 	  = "Electric";
+
+	} else if(transport == 3) {
+		emissionPerKm = dietConst[diet] * 80 * MET_OVER_V_CONSTANT_WALKING;
+		transportType = "Walking";
+	}
+
+	// Create object and SetItem
+	let emissionData : BicycleType = {
+		vehicleType: transportType,
+		porpulsionType: driveType,
+		emissionPerKm: emissionPerKm
+	};
+
+	updateItemObj("bicycle", emissionData);
+}
 
 const About: NextPage = () => {
 
-	setItem("PropulsionType", "HumanPowered");
-	setItem("DietType"      , "Vegan/Vegetarian");
+	/*let defaultObj : BicycleType = {
+		vehicleType: "Bicycle",
+		porpulsionType: "Manual",
+		emissionPerKm: 101.666673817
+	};
 
-	function PutDataIntoSession(transport : number, propulsion : number, diet : number) : void {
-		/*
-		transport:
-			1 : Bicycle
-			2 : E-Scooter
-			3 : Walking
-		propulsion:
-			1 : Manual
-			2 : Electric
-		diet:
-			0 : Vegan
-			1 : Normal
-			2 : Carnivore
-		*/
+	let object = getTypedItem<BicycleType>("bicycle", defaultObj);
 
-		let transportType = "Bicycle";
-		let driveType     = "Manual";
-
-		const carnivoreConstant = 4.43121361746;
-		const normalConstant    = 3.51923101673;
-		const veganConstant		= 2.13485714286;
-
-		const dietConst = [veganConstant, normalConstant, carnivoreConstant];
-
-		const MET_OVER_V_CONSTANT_CYCLING = 6.5/18;
-		const MET_OVER_V_CONSTANT_WALKING = 3.5/4.32;
-
-		const SWEDEN_CO2_PER_Wh = 0.017; /* g/Wh */
-
-		const eBikeWattsPerKm  = 18;
-		const eScooterWattsPer = 13.5;
-
-		let emissionPerKm = 0;
-
-		if(transport == 1) {
-			if(propulsion == 1) {
-				emissionPerKm = dietConst[diet] * 80 * MET_OVER_V_CONSTANT_CYCLING;
-			} else {
-				emissionPerKm = SWEDEN_CO2_PER_Wh * eBikeWattsPerKm;
-				driveType 	  = "Electric";
-			}
-		} else if(transport == 2) {
-			emissionPerKm = SWEDEN_CO2_PER_Wh * eScooterWattsPer;
-			transportType = "E-Scooter";
-			driveType 	  = "Electric";
-
-		} else if(transport == 3) {
-			emissionPerKm = dietConst[diet] * 80 * MET_OVER_V_CONSTANT_WALKING;
-			transportType = "Walking";
-		}
-
-		// Create object and SetItem
-		let obj = {
-			vehicleType: transportType,
-			porpulsionType: driveType,
-			emissionPerKm: emissionPerKm
-		};
-	}
+	emissionArr[0] = (object.vehicleType == "E-Scooter" ? "Electric Scooter" : object.vehicleType);
+	emissionArr[2] = object.porpulsionType;*/
 
 	return (
 		<Template>
