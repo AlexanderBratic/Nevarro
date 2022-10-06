@@ -1,9 +1,8 @@
 import type { NextPage } from 'next';
 import * as React from 'react';
 import { useState } from 'react';
-import { borders, shadows } from "@mui/system";
-import { ToggleButton, ToggleButtonGroup, Button, Container, Typography, Grid, Box, TextField, Icon } from "@mui/material";
-import { getItem, getTypedItem, setItem, updateItemObj } from "../src/sessionStorage";
+import { ToggleButton, ToggleButtonGroup, Button, Container, Typography, Grid, Box } from "@mui/material";
+import { getTypedItem, updateItemObj } from "../src/sessionStorage";
 import Template from '../src/components/Template';
 import { BicycleType } from '../types/sessionStorageTypes'
 
@@ -222,8 +221,8 @@ function PutDataIntoSession(transport : number, propulsion : number, diet : numb
 
 	const dietConst = [veganConstant, normalConstant, carnivoreConstant];
 
-	const MET_OVER_V_CONSTANT_CYCLING = 6.5/18;
-	const MET_OVER_V_CONSTANT_WALKING = 3.5/4.32;
+	const MET_OVER_V_CONSTANT_CYCLING = (6.5 - 1)/18;   // Accounting for BMR potential erroneous calculation
+	const MET_OVER_V_CONSTANT_WALKING = (3.5 - 1)/4.32; // Accounting for BMR potential erroneous calculation
 
 	const SWEDEN_CO2_PER_Wh = 0.017; /* g/Wh */
 
