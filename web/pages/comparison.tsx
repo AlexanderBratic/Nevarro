@@ -110,11 +110,17 @@ const ComparisonPage: NextPage = () => {
 		});
 	};
 
+	let css = {
+		transition: "opacity 0.2s",
+		"&:hover": {
+			opacity: "80%"
+		}
+	};
 
 	let Everyday_image_list = (
-		<ImageList sx={{ }} cols={4} >
+		<ImageList sx={{}} cols={4} >
 		  {ItemsJson.Items.map((item) => (
-			<ImageListItem key={item.img} onClick={() => handleClick(item)}>
+			<ImageListItem key={item.img} onClick={() => handleClick(item)} sx={css}>
 			  <img
 				src={`${item.img}?w=248&fit=crop&auto=format`}
 				srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
