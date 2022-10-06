@@ -261,17 +261,6 @@ function PutDataIntoSession(transport : number, propulsion : number, diet : numb
 
 const About: NextPage = () => {
 
-	/*let defaultObj : BicycleType = {
-		vehicleType: "Bicycle",
-		porpulsionType: "Manual",
-		emissionPerKm: 101.666673817
-	};
-
-	let object = getTypedItem<BicycleType>("bicycle", defaultObj);
-
-	emissionArr[0] = (object.vehicleType == "E-Scooter" ? "Electric Scooter" : object.vehicleType);
-	emissionArr[2] = object.porpulsionType;*/
-
 	return (
 		<Template>
 			<BicyclePage/>
