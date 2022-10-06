@@ -3,7 +3,7 @@ import * as React from 'react';
 import { useState } from 'react';
 import { borders, shadows } from "@mui/system";
 import { ToggleButton, ToggleButtonGroup, Button, Container, Typography, Grid, Box, TextField } from "@mui/material";
-import { getItem, setItem } from "../src/sessionStorage";
+import { getItem, setItem, getTypedItem } from "../src/sessionStorage";
 import Template from '../src/components/Template';
 import DirectionsBikeIcon from '@mui/icons-material/DirectionsBike';
 
@@ -12,7 +12,7 @@ import { useRouter } from "next/router";
 function getBicycleData(): CarType {
 	const defaultData: BicycleType = {emissionPerKm:23};
 	
-	return getTypedItem<CarType>("car", defaultData);
+	return getTypedItem<BicycleType>("bicycle", defaultData);
 }
 
 export function getBicycleCo2PerKm() {
