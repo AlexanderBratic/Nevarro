@@ -33,7 +33,7 @@ function Template({ children }: any) {
 
   const renderDropdown = useMediaQuery(useTheme().breakpoints.down('md'), { noSsr: true });
 
-	function calcHeight(dropDown) {
+	function calcHeight(dropDown: any) {
 		if (menuHeight == 0) {
 			const height = dropDown.current.childNodes[0].offsetHeight;
 			console.log(dropDown.current.childNodes[0]);
@@ -43,7 +43,7 @@ function Template({ children }: any) {
 		}
 	}
 
-	function ListItem(Icon, name, link) {
+	function ListItem(Icon: any, name: string, link: string) {
 		return (
 			<ListItemButton
 				selected={selectedLinkPathname === link}
@@ -85,7 +85,6 @@ function Template({ children }: any) {
 				</Box>
 				<Box sx={{float: "right", marginTop: "10px"}}>
 					<IconButton
-						variant="contained"
 						onClick={(e) => calcHeight(dropDownMenuRef)}
 					>
 						<MenuIcon />

@@ -17,7 +17,7 @@ const trainVariants: {type: string, emission: number}[] = [{type: "Diesel", emis
 
 function getTrainData(): TrainType {
 	const defaultData: TrainType = {
-		vehicleType: trainVariants[0].name,
+		vehicleType: trainVariants[0].type,
 		emissionPerKm: trainVariants[0].emission
 	};
 	
@@ -31,7 +31,7 @@ export function getTrainCo2PerKm() {
 
 function getBusData(): TrainType {
 	const defaultData: TrainType = {
-		vehicleType: busVariants[0].name,
+		vehicleType: busVariants[0].type,
 		emissionPerKm: busVariants[0].emission
 	};
 	
