@@ -23,7 +23,7 @@ import ItemsJson from "../src/items.json";
 import {useState, useEffect} from "react";
 
 import {getCarCo2PerKm} from './car.tsx';
-import {getBicycleCo2PerKm} from './bicycle.tsx';
+import {getBicycleCo2PerKm} from '../bicycle.tsx';
 import {getTrainCo2PerKm, getBusCo2PerKm} from './public-transport.tsx';
 
 const ComparisonPage: NextPage = () => {
