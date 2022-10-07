@@ -1,0 +1,12 @@
+WEEK 4
+what do I want to learn or understand better?
+	I'm continuing to learn about material design and react. 
+
+how can I help someone else, or the entire team, to learn something new?
+	I've had the opportunity to help some member in the team with git and such but not much else right now.
+
+what is my contribution towards the team’s use of Scrum?
+	This week I've been acting PO, in this role I started the week by prioritizing the tasks we had so that after the sprint planning meeting I could just add tasks in the order of priority. Then during the sprint i wrote up an MVP (Minimum Viable Product) which we then went over during the retrospective. I've also tried to lead a bit during the creation of new tasks. 
+
+what is my contribution towards the team’s deliveries?
+	This week I've closed two tasks for creating a web page for changing public transit settings and also one for storing that information in session storage in the webbrowser. I managed 
