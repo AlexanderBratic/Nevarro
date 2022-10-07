@@ -23,6 +23,8 @@ export interface TrainType {
 }
 
 export interface BicycleType {
+    vehicleType: string,
+    porpulsionType: string,
 	emissionPerKm: number
 }
 
