@@ -9,6 +9,7 @@ import Grid from "@mui/material/Unstable_Grid2";
 import {useRouter} from "next/router";
 import {getItem, getTypedItem, updateItemObj} from "../src/sessionStorage";
 import {ComparisonType} from "../types/sessionStorageTypes";
+import {dirRequest} from "../src/webApiUtil";
 
 const Home: NextPage  = () => {
     const [from, setFrom] = useState('');
@@ -18,7 +19,7 @@ const Home: NextPage  = () => {
     const handleSubmit = async (event: React.FormEvent) => {
         // prevent refresh
         event.preventDefault()
-        updateItemObj("comparison", {from, to});
+        await dirRequest(from, to, "DRIVING");
 
         await router.push('/comparison')
     }
