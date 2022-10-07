@@ -1,0 +1,14 @@
+Individual Reflections - Week 6
+David Azizi - Team Navarro
+
+• What do I want to learn or understand better?
+As a member of my team I want to make sure that I deliver my part of the weekly contribution and that my work aligns with my team members work. I plan on doing this by attending the sprint meetings.
+
+• How can I help someone else, or the entire team, to learn something new?
+As a member of my team I know a limited amount of Git. I want to become more proficient at using Git and I plan on achieving this by navigating the version control using the terminal and not the GUI. 
+
+• What is my contribution towards the team’s use of Scrum?
+As a member of a scrum team and as this weeks Scrum leader I lead the discussions during the sprint meetings and during the stand ups meetings. I booked the rooms in which the meetings would be held.
+
+• What is my contribution towards the team’s deliveries?
+I contributed to the team’s deliveries by adding further functionalities to the bicycle page such as e-bikes, e-scooters and walking.

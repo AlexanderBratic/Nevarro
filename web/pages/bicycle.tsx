@@ -1,10 +1,11 @@
 import type { NextPage } from 'next';
 import * as React from 'react';
 import { useState } from 'react';
+import { borders, shadows } from "@mui/system";
 import { ToggleButton, ToggleButtonGroup, Button, Container, Typography, Grid, Box } from "@mui/material";
-import { updateItemObj, getTypedItem } from "../src/sessionStorage";
 import Template from '../src/components/Template';
 import { BicycleType } from '../types/sessionStorageTypes'
+import { getItem, setItem, getTypedItem, updateItemObj } from "../src/sessionStorage";
 
 import { useRouter } from "next/router";
 

@@ -152,7 +152,7 @@ const CarSettings: NextPage = () => {
                                 fullWidth
                             >
                                 { vehicle.variants.map((fuelType) => (
-                                    <ToggleButton value={fuelType.emission}>{fuelType.name}</ToggleButton>
+                                    <ToggleButton key={vehicle.name + "--" + fuelType.name} value={fuelType.emission}>{fuelType.name}</ToggleButton>
                                 )) }
                             </ToggleButtonGroup>
                         </Grid>

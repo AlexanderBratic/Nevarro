@@ -1,0 +1,10 @@
+Minimum Viable Product
+ * Create Website startpage
+ * Create Template Page
+ * Find data on co2 for differnt types of transportations
+ * Create Comparisons Page
+ * Get Google API Request
+ * Store API request in session storage
+ * Create Staple Diagram
+ * Display Route on map
+ * Docker
