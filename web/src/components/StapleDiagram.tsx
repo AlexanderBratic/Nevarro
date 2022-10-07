@@ -22,11 +22,7 @@ interface StapleDiagramProps {
 }
 
 function StapleDiagramComponent(props: StapleDiagramProps) {
-	console.log(props);
-	
 	let staples = props.staples ?? [];
-	
-	console.log(staples);
 	
 	let highestStaple = 0.0;
 	
