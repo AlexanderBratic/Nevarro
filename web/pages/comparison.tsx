@@ -1,11 +1,15 @@
 import * as React from 'react';
 
+import Image from 'next/image';
+
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 
 import type { NextPage } from 'next';
 import Template from '../src/components/Template';
-import StapleDiagram from '../src/components/StapleDiagram';
+import {Staple, StapleDiagram} from '../src/components/StapleDiagram';
+
+import {ComparisonType} from '../types/sessionStorageTypes';
 import {setItem, getItem, getTypedItem } from '../src/sessionStorage';
 
 import ImageList from '@mui/material/ImageList';
@@ -22,9 +26,9 @@ import CoffeeIcon from '@mui/icons-material/Coffee';
 import ItemsJson from "../src/items.json";
 import {useState, useEffect} from "react";
 
-import {getCarCo2PerKm} from './car.tsx';
-import {getBicycleCo2PerKm} from './bicycle.tsx';
-import {getTrainCo2PerKm, getBusCo2PerKm} from './public-transport.tsx';
+import {getCarCo2PerKm} from './car';
+import {getBicycleCo2PerKm} from './bicycle';
+import {getTrainCo2PerKm, getBusCo2PerKm} from './public-transport';
 
 const ComparisonPage: NextPage = () => {
 
@@ -38,7 +42,7 @@ const ComparisonPage: NextPage = () => {
 	const busCo2PerKm = getBusCo2PerKm();
 
 
-	const [stapleState, setStaples] = useState<typeof stapleData>([
+	const [stapleState, setStaples] = useState<Staple[]>([
 		{
 			title: "Car",
 			icon: <CarIcon key={"Car"} />,
@@ -72,7 +76,7 @@ const ComparisonPage: NextPage = () => {
 	const handleClick = (event: {title: string, img: string, co2: number}) => {
 		console.log(event.title + ' image clicked');
 
-		setStaples((prevState:typeof stapleData) => {
+		setStaples((prevState: Staple[]) => {
 			const item = prevState.find(obj => {return obj.title == event.title});
 			if (typeof item === 'undefined') {
 				return [...prevState, {
@@ -99,12 +103,7 @@ const ComparisonPage: NextPage = () => {
 		<ImageList sx={{}} cols={4} >
 		  {ItemsJson.Items.map((item) => (
 			<ImageListItem key={item.img} onClick={() => handleClick(item)} sx={css}>
-			  <img
-				src={`${item.img}?w=248&fit=crop&auto=format`}
-				srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-				alt={`Item: ${item.title}: ${item.co2}`}
-				loading="lazy"
-			  />
+			  <Image src={item.img + "?w=248&fit=crop&auto=format"} alt="" width={248} height={248} layout="responsive"/>
 			  <ImageListItemBar
 				title={item.title}
 				subtitle={`Co2e: ${item.co2}g`}

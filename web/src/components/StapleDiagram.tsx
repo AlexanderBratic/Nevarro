@@ -1,4 +1,6 @@
 
+import React from 'react';
+
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Tooltip from '@mui/material/Tooltip';
@@ -6,12 +8,12 @@ import Tooltip from '@mui/material/Tooltip';
 import {setItem, getItem } from '../sessionStorage';
 
 interface StaplePart {
-	color: string;
+	color: number;
 	value: number;
 	hint: string;
 }
 
-interface Staple {
+export interface Staple {
 	icon: any;
 	title: string;
 	parts: StaplePart[];
@@ -21,7 +23,7 @@ interface StapleDiagramProps {
 	staples: Staple[];
 }
 
-function StapleDiagramComponent(props: StapleDiagramProps) {
+export function StapleDiagram(props: StapleDiagramProps) {
 	let staples = props.staples ?? [];
 	
 	let highestStaple = 0.0;
@@ -89,19 +91,15 @@ function StapleDiagramComponent(props: StapleDiagramProps) {
 				marginBottom: marginBottom,
 				marginTop: marginTop,
 				
+				borderTopLeftRadius:     isLast ? "5px" : "0px",
+				borderTopRightRadius:    isLast ? "5px" : "0px",
+				borderBottomLeftRadius:  isFirst ? "5px" : "0px",
+				borderBottomRightRadius: isFirst ? "5px" : "0px",
+				
 				"&:hover": {
 					opacity: "80%"
 				}
 			};
-			
-			if (isLast) {
-				css.borderTopLeftRadius = "5px";
-				css.borderTopRightRadius = "5px";
-			}
-			if (isFirst) {
-				css.borderBottomLeftRadius = "5px";
-				css.borderBottomRightRadius = "5px";
-			}
 			
 			let hint = (
 				<Box sx={{textAlign: "center"}}>
@@ -124,8 +122,8 @@ function StapleDiagramComponent(props: StapleDiagramProps) {
 		);
 	};
 	
-	let stapleComponents = [];
-	let stapleTitles = [];
+	let stapleComponents: any[] = [];
+	let stapleTitles: any[] = [];
 	staples.forEach(staple => {
 		stapleComponents.push(Staple(staple));
 		
@@ -165,5 +163,3 @@ function StapleDiagramComponent(props: StapleDiagramProps) {
 		</Box>
 	);
 }
-
-export default StapleDiagramComponent;
