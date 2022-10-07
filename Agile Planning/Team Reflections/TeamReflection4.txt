@@ -1,0 +1,25 @@
+Team Reflection 4 (07/10-2022)
+
+	User stories:
+We've evolved as a group due to misunderstanding in the beginning, it's gone better and we have opportunity and potential to evolve. Thos week has gone really well deviding user stories into smaller task. The user stories in trello has checks for each task that belongs to the user stories and make them easier to handle. We've been a bit thin on adding acceptance criteria to tasks. It's been a little few tasks to begin with since we have a problem of grasping what the next step is. But ever since we've all understood the project is has gone better, the tasks this week has been better. In the beginning we didnt really grasp the concept on that tasks are part of the user stories. And that the user story is meant to be understandable without technical knowledge, meanwhile the tasks are supposed to be able to read while knowing the technical stuff.
+
+	Acceptance tests:
+Up until now we haven't had any acceptance test before merging the tasks into main. But this week we've added that we have to be able to build the project before merging due to a lot of errors in main.
+
+	Time spent:
+Tomas has spent about 20h and has delivered a task that took about 3. Alexander h§as spent about 20h on the course, to compensate for last week, mostly time spent is on the task and how and why it struggles, it was definetly needed and has shown in the delivery. David has spent about 25h in total, most of the time is looking for data and fine tuning the design, it has definetly reflected on the delivery. Andin has spent about 15h on the course, mostly trying to research solutions to the task at hand and has reflected on the delivery. Alen has spent 7h, Henning 10h, Jesper about 15h. This makes up to about 102h in total of every participant in the group. This has reflected well onto our deliveries because a lot of tasks were done and almost all of our sprint backlog was emptied.
+
+	Use and update documentation:
+We talk about and update our social contract and update it regularly during the sprints, we also talk and look through our burndown chart and how it changes over time. Jesper also made a flowchart of our project. 
+
+	Code quality and standards:
+To ensure code quality we've previously only had that 2 people have to accept a pull request before merging into main branch, and now this week we've added a need to build the project with linting without errors before even creating the pull request into main.
+
+	Review and relation to scope and Customer value:
+We switch PO to one person in the group every sprint, the review is stepped through as part of the sprint meeting and this week we have changed the priotisation of the project by removing the flight option from our project. Our DoD has been changed due to a pull reuqest of a done task is awaiting confirmation but it is done anyhow. It has changed our way of working by optimising our workloads for smaller and bigger tasks.
+
+	Best practice to learn and using new tools/technologies:
+In the beginning we added README files explaining the groundwork of using yarn and npm, also using git. We also have a staple in trello that is titled "questions & resources/Links" that contains FAQ and resources for using our different languages.
+
+	Literature and guest lectures:
+ We've used most of the resources on canvas, but we could definetly have used more literature and resources but our understanding is that there is not much of it avaliable for use through canvas more than what we have used already. Taken part of excerices of the course, but most of it was not so giving as we would've thought. 
