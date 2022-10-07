@@ -2,7 +2,7 @@ import type { NextPage } from 'next';
 import * as React from 'react';
 import { useState } from 'react';
 import { ToggleButton, ToggleButtonGroup, Button, Container, Typography, Grid, Box } from "@mui/material";
-import { getTypedItem, updateItemObj } from "../src/sessionStorage";
+import { updateItemObj, getTypedItem } from "../src/sessionStorage";
 import Template from '../src/components/Template';
 import { BicycleType } from '../types/sessionStorageTypes'
 

@@ -21,14 +21,17 @@
             "co2_fuel": 3
         },
         {
-            "title": "Intercity Bus",
-            "co2_prod": 10,
-            "co2_fuel": 21
-        },
-        {
-            "title": "City bus",
-            "co2_prod": 28,
-            "co2_fuel": 25
+            "title": "Bus",
+            "variants": [
+                {"type": "Diesel", "emission": 53},
+                {"type": "Electric", "emission": 123},
+                {"type": "Hydrogen", "emission": 123},
+                {"type": "Intercity", "emission": 31}
+            ],
+            "sources": [
+                "A comparison of carbon dioxide emissions associated with motorised transport modes and cycling in Ireland",
+                ""
+            ]
         },
         {
             "title": "Moped",
@@ -37,8 +40,14 @@
         },
         {
             "title": "Train",
-            "co2_prod": 60,
-            "co2_fuel": 15
+            "variants":[
+                {"type": "Diesel", "emission": 75},
+                {"type": "Electric", "emission": 45},
+                {"type": "High Speed", "emission": 30}
+            ],
+            "sources": [
+                "https://uic.org/IMG/pdf/2012_uic-iea_railway_handbook_web_high.pdf"
+            ]
         },
         {
             "title": "Tram",
@@ -61,4 +70,5 @@
             "co2_fuel": 85
         }
     ]
+
 }

@@ -12,12 +12,12 @@ import {getTypedItem, setItem} from "../src/sessionStorage";
 import {BusType, TrainType} from "../types/sessionStorageTypes";
 import ItemsJson from "../src/co2_transport.json";
 
-const busVariants: {type: string, emission: number}[] = [{type: "Diesel", emission: 35},{type: "Electric", emission: 25},{type: "Hydrogen", emission: 30}]
-const trainVariants: {type: string, emission: number}[] = [{type: "Diesel", emission: 35},{type: "Electric", emission: 25}]
+const busVariants: {type: string, emission: number}[] = ItemsJson.Transport.find(t=>t.title == "Bus")?.variants as any
+const trainVariants: {type: string, emission: number}[] = ItemsJson.Transport.find(t=>t.title == "Train")?.variants as any
 
 function getTrainData(): TrainType {
 	const defaultData: TrainType = {
-		vehicleType: trainVariants[0].name,
+		vehicleType: trainVariants[0].type,
 		emissionPerKm: trainVariants[0].emission
 	};
 	
@@ -29,9 +29,9 @@ export function getTrainCo2PerKm() {
 	return trainData.emissionPerKm;
 }
 
-function getBusData(): TrainType {
-	const defaultData: TrainType = {
-		vehicleType: busVariants[0].name,
+function getBusData(): BusType {
+	const defaultData: BusType = {
+		vehicleType: busVariants[0].type,
 		emissionPerKm: busVariants[0].emission
 	};
 	
@@ -44,17 +44,19 @@ export function getBusCo2PerKm() {
 }
 
 const TransitSettings: NextPage = () => {
+
     const busData = getBusData()
     const trainData = getTrainData()
 
     const [bus, setBus] = useState(busVariants.find(v=>v.type === busData.vehicleType) ?? busVariants[0])
-    const [busType, setBusType] = useState(busData.vehicleType)
+    let [busType, setBusType] = useState(busData.vehicleType)
     const [busEmission, setBusEmission] = useState(busData.emissionPerKm)
     const [train, setTrain] = useState(trainVariants.find(v=>v.type === trainData.vehicleType) ?? trainVariants[0])
-    const [trainType, setTrainType] = useState(trainData.vehicleType)
+    let [trainType, setTrainType] = useState(trainData.vehicleType)
     const [trainEmission, setTrainEmission] = useState(trainData.emissionPerKm)
-
-
+    busType = getBusData().vehicleType
+    trainType = getTrainData().vehicleType
+    
     const changeBusType = (e: React.MouseEvent, v: string) => {
         if(!v){return}
 
