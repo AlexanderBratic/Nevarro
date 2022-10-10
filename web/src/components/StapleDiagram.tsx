@@ -104,7 +104,7 @@ export function StapleDiagram(props: StapleDiagramProps) {
 			let hint = (
 				<Box sx={{textAlign: "center"}}>
 					{box.hint}<br/>
-					{box.value}kgCo2
+					{box.value}gCo2
 				</Box>
 			);
 			
