@@ -96,7 +96,7 @@ const ComparisonPage: NextPage = () => {
 					title: event.title,
 					icon: <CoffeeIcon/>,
 					parts: [
-						{color: production_color, value: event.co2 / 1000, hint: "Production emissions"}
+						{color: production_color, value: event.co2, hint: "Production emissions"}
 					]
 				}];
 			} else{
