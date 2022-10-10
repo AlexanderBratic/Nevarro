@@ -1,13 +1,10 @@
 import type { NextPage } from 'next';
 import * as React from 'react';
 import { useState } from 'react';
-import { borders, shadows } from "@mui/system";
-import { ToggleButton, ToggleButtonGroup, Button, Container, Typography, Grid, Box } from "@mui/material";
+import { ToggleButton, ToggleButtonGroup, Container, Typography, Grid, Box } from "@mui/material";
 import Template from '../src/components/Template';
 import { BicycleType } from '../types/sessionStorageTypes'
-import { getItem, setItem, getTypedItem, updateItemObj } from "../src/sessionStorage";
-
-import { useRouter } from "next/router";
+import { getTypedItem, updateItemObj } from "../src/sessionStorage";
 
 const transports = ["Bicycle", "Electric Scooter", "Walking"];
 const diets 	 = ["Vegan", "Normal", "Carnivore"];
@@ -26,6 +23,12 @@ function ToggleButtonDiet() {
 		if(newAlignment !== null) {
 			emissionArr[1] = newAlignment;
 			setAlignment(newAlignment);
+
+			PutDataIntoSession(
+				transports.indexOf(emissionArr[0]) + 1,
+				fuels.indexOf(emissionArr[2]) + 1,
+				 diets.indexOf(emissionArr[1])
+			);
 		}
 	}
 	
@@ -73,6 +76,12 @@ function DietAndFuel() {
 			emissionArr[2] = newAlignment;
 			setHide((oldState) => newAlignment == "Manual");
 			setAlignment(newAlignment);
+
+			PutDataIntoSession(
+				transports.indexOf(emissionArr[0]) + 1,
+				fuels.indexOf(emissionArr[2]) + 1,
+				 diets.indexOf(emissionArr[1])
+			);
 		}
 	}
 
@@ -105,30 +114,6 @@ function DietAndFuel() {
 	);
 }
 
-function SaveButton() {
-	const router = useRouter();
-	const [linkName, setLinkName] = useState(router.pathname);
-
-	const handleLinkName = ( event: React.MouseEvent<HTMLElement> ) => {
-		PutDataIntoSession(
-			transports.indexOf(emissionArr[0]) + 1,
-			fuels.indexOf(emissionArr[2]) + 1,
-		 	diets.indexOf(emissionArr[1])
-		);
-
-		setLinkName("/comparison");
-		router.push("/comparison");
-	};
-
-	return (
-		<Box>
-			<Box mt={2} pb={1} textAlign="center" sx={{ borderBottom: 1 }}>
-				<Button color="primary" variant='contained' onClick={handleLinkName}>APPLY</Button>
-			</Box>
-		</Box>
-	);
-}
-
 function BicyclePage() {
 	const receivedItem = emissionArr[0];
 	const [condition, setCondition] = useState(transports.indexOf(receivedItem));
@@ -142,6 +127,12 @@ function BicyclePage() {
 			emissionArr[0] = newAlignment;
 			setCondition((oldNum) => transports.indexOf(newAlignment));
 			setAlignment(newAlignment);
+
+			PutDataIntoSession(
+				transports.indexOf(emissionArr[0]) + 1,
+				fuels.indexOf(emissionArr[2]) + 1,
+				 diets.indexOf(emissionArr[1])
+			);
 		}
 	}
 	
@@ -172,7 +163,6 @@ function BicyclePage() {
 				<Box mt={2}>
 					{condition == 0 && ( <DietAndFuel/> )}
 					{condition == 2 && ( <ToggleButtonDiet/> )}
-					<SaveButton/>
 				</Box>
 			</Box>
 			
@@ -186,7 +176,7 @@ function getBicycleData(): BicycleType {
 	const defaultData: BicycleType = {
 		vehicleType: "Bicycle",
 		porpulsionType: "Manual",
-		emissionPerKm: 101.666673817
+		emissionPerKm: 52.18539682546667
 	};
 	
 	return getTypedItem<BicycleType>("bicycle", defaultData);
