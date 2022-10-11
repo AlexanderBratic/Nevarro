@@ -10,7 +10,9 @@ import React, {useState} from "react";
 import Template from "../src/components/Template";
 import {getTypedItem, setItem} from "../src/sessionStorage";
 import {BusType, TrainType} from "../types/sessionStorageTypes";
+import {Staple, STAPLE_COLORS} from '../src/components/StapleDiagram';
 import ItemsJson from "../src/co2_transport.json";
+import PublicTransportIcon from '@mui/icons-material/CommuteRounded';
 
 const busVariants: {type: string, emission: number}[] = ItemsJson.Transport.find(t=>t.title == "Bus")?.variants as any
 const trainVariants: {type: string, emission: number}[] = ItemsJson.Transport.find(t=>t.title == "Train")?.variants as any
@@ -24,11 +26,6 @@ function getTrainData(): TrainType {
 	return getTypedItem<TrainType>("train", defaultData);
 }
 
-export function getTrainCo2PerKm() {
-	let trainData = getTrainData();
-	return trainData.emissionPerKm;
-}
-
 function getBusData(): BusType {
 	const defaultData: BusType = {
 		vehicleType: busVariants[0].type,
@@ -38,9 +35,25 @@ function getBusData(): BusType {
 	return getTypedItem<TrainType>("bus", defaultData);
 }
 
-export function getBusCo2PerKm() {
-	let busData = getBusData();
-	return busData.emissionPerKm;
+export function getPublicTransportStaples(distance: number): Staple[] {
+	let busData   = getBusData();
+	let trainData = getTrainData();
+	return [
+		{ 
+			title: "Train",
+			icon: <PublicTransportIcon key={"Public Transport"} />,
+			parts: [
+				{ color: STAPLE_COLORS.ROUTE, value: trainData.emissionPerKm * distance, hint: "Emissions for the route"  }
+			]
+		},
+		{ 
+			title: "Bus",
+			icon: <PublicTransportIcon key={"Public Transport"} />,
+			parts: [
+				{ color: STAPLE_COLORS.ROUTE, value: busData.emissionPerKm * distance, hint: "Emissions for the route"  }
+			]
+		}
+	];
 }
 
 const TransitSettings: NextPage = () => {
