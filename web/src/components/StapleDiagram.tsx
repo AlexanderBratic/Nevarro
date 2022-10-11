@@ -2,10 +2,12 @@
 import React from 'react';
 
 import Box from '@mui/material/Box';
+import Grow from '@mui/material/Grow';
 import Stack from '@mui/material/Stack';
 import Tooltip from '@mui/material/Tooltip';
 
-import {setItem, getItem } from '../sessionStorage';
+import {StapleHeights} from '../../types/sessionStorageTypes';
+import {setItem, getTypedItem } from '../sessionStorage';
 
 interface StaplePart {
 	color: number;
@@ -24,16 +26,19 @@ interface StapleDiagramProps {
 }
 
 export function StapleDiagram(props: StapleDiagramProps) {
+
 	let staples = props.staples ?? [];
-	
 	let highestStaple = 0.0;
 	
-	staples.forEach(staple => {
-		let stapleHeight = 0.0;
-		staple.parts.forEach(
-			part => { stapleHeight += part.value; }
-		);
-		highestStaple = Math.max(highestStaple, stapleHeight);
+	let oldHeights: StapleHeights = getTypedItem<StapleHeights>("staplediagram-oldheights", {});
+	let newHeights: StapleHeights = {};
+
+	let targetHeights: {ref: any, height: string}[] = [];
+		
+	React.useEffect(() => {
+		targetHeights.forEach((target) => {
+			target.ref.current.style = target.height;
+		});
 	});
 	
 	function toCssColor(color: number) {
@@ -58,9 +63,22 @@ export function StapleDiagram(props: StapleDiagramProps) {
 		return Math.min(blendedR1 * 255.0) << 16 | Math.min(blendedG1 * 255.0) << 8 | Math.min(blendedB1 * 255.0) << 0;
 	}
 	
+	staples.forEach(staple => {
+		let stapleHeight = 0.0;
+		staple.parts.forEach(
+			part => { stapleHeight += part.value; }
+		);
+		highestStaple = Math.max(highestStaple, stapleHeight);
+	});
 	let heightMultiplier = 100.0 / highestStaple;
-	function Staple(staple: Staple) {
+	
+	function Staple(staple: Staple, newHeights: StapleHeights) {
 		let boxes = [];
+		
+		let alreadyExisted = staple.title in oldHeights;
+		let oldBoxHeights = oldHeights[staple.title] ?? {};
+		let newBoxHeights: Record<string, number> = {};
+		newHeights[staple.title] = newBoxHeights;
 		
 		for (let i = 0; i < staple.parts.length; i++) {
 			let box = staple.parts[i];
@@ -75,7 +93,10 @@ export function StapleDiagram(props: StapleDiagramProps) {
 			background += darkColor + " 20px)";
 			
 			let height = (box.value * heightMultiplier);
-			
+			let oldHeight = oldBoxHeights[box.color.toString()] ?? height;
+			newBoxHeights[box.color.toString()] = height;
+			console.log(oldHeight, height);
+      
 			const isFirst = (i === 0);
 			const isLast  = (i === staple.parts.length - 1);
 			let marginBottom = !isFirst ? "1px" : "0px";
@@ -84,10 +105,10 @@ export function StapleDiagram(props: StapleDiagramProps) {
 			let css = {
 				boxSizing: "border-box",
 				width: "40px", 
-				height: "calc(" + height + "% - " + marginBottom + " - " +  marginTop + ")", 
+				height: "calc(" + oldHeight + "% - " + marginBottom + " - " +  marginTop + ")", 
 				background: background,
 				border: "2px solid " + box.color,
-				transition: "opacity 0.5s",
+				transition: "height 1s, opacity 0.5s",
 				marginBottom: marginBottom,
 				marginTop: marginTop,
 				
@@ -100,32 +121,43 @@ export function StapleDiagram(props: StapleDiagramProps) {
 					opacity: "80%"
 				}
 			};
-			
+      
 			let hint = (
 				<Box sx={{textAlign: "center"}}>
 					{box.hint}<br/>
-					{box.value}gCo2
+					{box.value}kgCo2
 				</Box>
 			);
 			
+			let ref = React.createRef();
+      
 			boxes.push(
 				<Tooltip placement="right" arrow title={hint}>
-					<Box sx={css} />
+					<Box sx={css} ref={ref} />
 				</Tooltip>
 			);
+			
+			if (box.color.toString() in oldBoxHeights) {
+				targetHeights.push({
+					ref: ref, 
+					height: "height: calc(" + height + "% - " + marginTop + " - " +  marginBottom + ")"
+				});
+			}
 		}
 		
 		return (
-			<Stack direction="column-reverse" justifyContent="flex-start">
-				{boxes}
-			</Stack>
+			<Grow in timeout={1000} style={{transformOrigin: "50% 100%"}} appear={!alreadyExisted}>
+				<Stack direction="column-reverse" justifyContent="flex-start">
+					{boxes}
+				</Stack>
+			</Grow>
 		);
 	};
 	
 	let stapleComponents: any[] = [];
 	let stapleTitles: any[] = [];
 	staples.forEach(staple => {
-		stapleComponents.push(Staple(staple));
+		stapleComponents.push(Staple(staple, newHeights));
 		
 		stapleTitles.push(
 			<Box sx={{
@@ -139,6 +171,8 @@ export function StapleDiagram(props: StapleDiagramProps) {
 			</Box>
 		);
 	});
+	
+	setItem("staplediagram-oldheights", newHeights);
 	
 	return (
 		<Box sx={{ width: "100%", height: "550px", position: "relative"}}>
@@ -154,7 +188,7 @@ export function StapleDiagram(props: StapleDiagramProps) {
 			<Box sx={{ position: "absolute", top: "309px", right: "calc(100% - 100px)", transform: "translateY(-50%)"}}>25%</Box>
 			<Box sx={{ position: "absolute", top: "409px", right: "calc(100% - 100px)", transform: "translateY(-50%)"}}>0%</Box>
 			
-			<Stack sx={{ position: "absolute", left: "100px", right: "0px", top: "9px", bottom: "141px" }} direction="row"  justifyContent="space-around">
+			<Stack sx={{ position: "absolute", left: "100px", right: "0px", top: "11px", bottom: "141px" }} direction="row"  justifyContent="space-around">
 				{stapleComponents}
 			</Stack>
 			<Stack sx={{ position: "absolute", left: "100px", right: "0px", top: "410px", bottom: "0px" }} direction="row"  justifyContent="space-around">
