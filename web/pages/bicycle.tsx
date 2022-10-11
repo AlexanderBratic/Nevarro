@@ -6,9 +6,20 @@ import Template from '../src/components/Template';
 import { BicycleType } from '../types/sessionStorageTypes'
 import { getTypedItem, updateItemObj } from "../src/sessionStorage";
 
-const transports = ["Bicycle", "Electric Scooter", "Walking"];
+import {Staple, STAPLE_COLORS} from '../src/components/StapleDiagram';
+import BikeIcon from '@mui/icons-material/DirectionsBikeRounded';
+import ElectricScooterIcon from '@mui/icons-material/ElectricScooterRounded';
+import WalkingIcon from '@mui/icons-material/DirectionsWalkRounded';
+
+const transports = ["Bicycle", "E-Scooter", "Walking"];
 const diets 	 = ["Vegan", "Normal", "Carnivore"];
 const fuels 	 = ["Manual", "Electric"];
+
+const transports_icons = [
+	<BikeIcon key={"Bicycle"} />, 
+	<ElectricScooterIcon key={"ElectricScooter"} />, 
+	<WalkingIcon key={"Walking"} />
+];
 
 const emissionArr = [transports[0], diets[0], fuels[0]];
 
@@ -155,7 +166,7 @@ function BicyclePage() {
 						color="primary"
 						>
 							<ToggleButton value="Bicycle">Bicycle</ToggleButton>
-							<ToggleButton value="Electric Scooter">Electric Scooter</ToggleButton>
+							<ToggleButton value="E-Scooter">Electric Scooter</ToggleButton>
 							<ToggleButton value="Walking">Walking</ToggleButton>
 						</ToggleButtonGroup>
 					</Grid>
@@ -182,9 +193,28 @@ function getBicycleData(): BicycleType {
 	return getTypedItem<BicycleType>("bicycle", defaultData);
 }
 
-export function getBicycleCo2PerKm() {
+export function getBicycleStaples(distance: number): Staple[] {
 	let bicycleData = getBicycleData();
-	return bicycleData.emissionPerKm;
+	
+	let Icon: any = null;
+	for (let i = 0; i < transports.length && i < transports_icons.length; i++) {
+		if (bicycleData.vehicleType === transports[i]) {
+			Icon = transports_icons[i];
+			break;
+		}
+	}
+	if (Icon == null)
+		Icon = transports_icons[0];
+	
+	return [
+		{
+			title: bicycleData.vehicleType,
+			icon: Icon,
+			parts: [
+				{ color: STAPLE_COLORS.ROUTE, value: bicycleData.emissionPerKm * distance, hint: "Emissions for the route"  }
+			]
+		}
+	];
 }
 
 
@@ -221,7 +251,7 @@ function PutDataIntoSession(transport : number, propulsion : number, diet : numb
 	const eScooterWattsPer = 13.5;
 
 	let emissionPerKm = 0;
-
+	
 	if(transport == 1) {
 		if(propulsion == 1) {
 			emissionPerKm = dietConst[diet] * 80 * MET_OVER_V_CONSTANT_CYCLING;

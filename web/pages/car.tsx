@@ -17,6 +17,8 @@ import {getTypedItem, setItem} from "../src/sessionStorage";
 import {CarType, ComparisonType} from "../types/sessionStorageTypes";
 import {useRouter} from "next/router";
 
+import {Staple, STAPLE_COLORS} from '../src/components/StapleDiagram';
+import CarIcon from '@mui/icons-material/DirectionsCarRounded';
 
 const vehicleTypes: {name: string, variants: {name: string, emission: number }[] }[] = [
 	{name: "bil", variants: [
@@ -45,9 +47,17 @@ function getCarData(): CarType {
 	return getTypedItem<CarType>("car", defaultData);
 }
 
-export function getCarCo2PerKm() {
+export function getCarStaples(distance: number): Staple[] {
 	let carData = getCarData();
-	return carData.emissionPerKm;
+	return [
+		{
+			title: "Car",
+			icon: <CarIcon key={"Car"} />,
+			parts: [
+				{ color: STAPLE_COLORS.ROUTE, value: carData.emissionPerKm * distance, hint: "Emissions for the route"  }
+			]
+		}
+	];
 }
 
 const CarSettings: NextPage = () => {

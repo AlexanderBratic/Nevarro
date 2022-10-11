@@ -13,6 +13,11 @@ interface StaplePart {
 	hint: string;
 }
 
+export const STAPLE_COLORS = {
+	ROUTE: 0x9b59b6,
+	PRODUCTION: 0xf1c40f
+};
+	
 export interface Staple {
 	icon: any;
 	title: string;

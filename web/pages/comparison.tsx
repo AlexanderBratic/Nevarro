@@ -6,7 +6,7 @@ import {Box, TextField, Button} from '@mui/material';
 
 import type { NextPage } from 'next';
 import Template from '../src/components/Template';
-import {Staple, StapleDiagram} from '../src/components/StapleDiagram';
+import {Staple, StapleDiagram, STAPLE_COLORS} from '../src/components/StapleDiagram';
 
 import {ComparisonType} from '../types/sessionStorageTypes';
 import {setItem, getItem, getTypedItem } from '../src/sessionStorage';
@@ -14,10 +14,7 @@ import {setItem, getItem, getTypedItem } from '../src/sessionStorage';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
-import CarIcon from '@mui/icons-material/DirectionsCarRounded';
 import AirplaneIcon from '@mui/icons-material/AirplanemodeActiveRounded';
-import PublicTransportIcon from '@mui/icons-material/CommuteRounded';
-import BikeIcon from '@mui/icons-material/DirectionsBikeRounded';
 import ElectricScooterIcon from '@mui/icons-material/ElectricScooterRounded';
 import WalkIcon from '@mui/icons-material/DirectionsWalkRounded';
 import CoffeeIcon from '@mui/icons-material/Coffee';
@@ -25,26 +22,24 @@ import ItemsJson from "../src/items.json";
 import Grid from "@mui/material/Unstable_Grid2";
 import {dirRequest} from "../src/webApiUtil";
 import {useRouter} from "next/router";
-import {getCarCo2PerKm} from './car';
-import {getBicycleCo2PerKm} from './bicycle';
-import {getTrainCo2PerKm, getBusCo2PerKm} from './public-transport';
+import {getCarStaples} from './car';
+import {getBicycleStaples} from './bicycle';
+import {getPublicTransportStaples} from './public-transport';
 import { useState } from 'react';
 
 const ComparisonPage: NextPage = () => {
 
 	const route_color      = 0x9b59b6;
 	const production_color = 0xf1c40f;
-	const carCo2PerKm = getCarCo2PerKm();
-	const bicycleCo2PerKm = getBicycleCo2PerKm();
-	const trainCo2PerKm = getTrainCo2PerKm();
-	const busCo2PerKm = getBusCo2PerKm();
-
+	
 	let [comparisonData, setComparisonData] = useState(getTypedItem<ComparisonType>('comparison', {to:'', from:'', distance:10}));
 	const [from, setFrom] = React.useState(comparisonData.from);
 	const [to, setTo] = React.useState(comparisonData.to);
     const router = useRouter();
 
-	
+	const publicTransportStaples = getPublicTransportStaples(comparisonData.distance);
+	const bicycleStaples = getBicycleStaples(comparisonData.distance);
+	const carStaples = getCarStaples(comparisonData.distance);
 
     const handleSubmit = async (event: React.FormEvent) => {
         // prevent refresh
@@ -56,34 +51,9 @@ const ComparisonPage: NextPage = () => {
     }
 
 	const [stapleState, setStaples] = useState<Staple[]>([
-		{
-			title: "Car",
-			icon: <CarIcon key={"Car"} />,
-			parts: [
-				{ color: route_color, value: carCo2PerKm * comparisonData.distance, hint: "Emissions for the route"  }
-			]
-		},
-		{ 
-			title: "Train",
-			icon: <PublicTransportIcon key={"Public Transport"} />,
-			parts: [
-				{ color: route_color, value: trainCo2PerKm * comparisonData.distance, hint: "Emissions for the route"  }
-			]
-		},
-		{ 
-			title: "Bus",
-			icon: <PublicTransportIcon key={"Public Transport"} />,
-			parts: [
-				{ color: route_color, value: busCo2PerKm * comparisonData.distance, hint: "Emissions for the route"  }
-			]
-		},
-		{
-			title: "Bicycle",
-			icon: <BikeIcon key={"Bicycle"} />,
-			parts: [
-				{ color: route_color, value: bicycleCo2PerKm * comparisonData.distance, hint: "Emissions for the route"  }
-			]
-		}
+		...carStaples,
+		...publicTransportStaples,
+		...bicycleStaples
 	]);
 	
 	const handleClick = (event: {title: string, img: string, co2: number}) => {
@@ -96,7 +66,7 @@ const ComparisonPage: NextPage = () => {
 					title: event.title,
 					icon: <CoffeeIcon/>,
 					parts: [
-						{color: production_color, value: event.co2, hint: "Production emissions"}
+						{color: STAPLE_COLORS.PRODUCTION, value: event.co2, hint: "Production emissions"}
 					]
 				}];
 			} else{
