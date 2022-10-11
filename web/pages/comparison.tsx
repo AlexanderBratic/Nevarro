@@ -29,17 +29,10 @@ import { useState } from 'react';
 
 const ComparisonPage: NextPage = () => {
 
-	const route_color      = 0x9b59b6;
-	const production_color = 0xf1c40f;
-	
 	let [comparisonData, setComparisonData] = useState(getTypedItem<ComparisonType>('comparison', {to:'', from:'', distance:10}));
 	const [from, setFrom] = React.useState(comparisonData.from);
 	const [to, setTo] = React.useState(comparisonData.to);
     const router = useRouter();
-
-	const publicTransportStaples = getPublicTransportStaples(comparisonData.distance);
-	const bicycleStaples = getBicycleStaples(comparisonData.distance);
-	const carStaples = getCarStaples(comparisonData.distance);
 
     const handleSubmit = async (event: React.FormEvent) => {
         // prevent refresh
@@ -51,9 +44,9 @@ const ComparisonPage: NextPage = () => {
     }
 
 	const [stapleState, setStaples] = useState<Staple[]>([
-		...carStaples,
-		...publicTransportStaples,
-		...bicycleStaples
+		...getCarStaples(comparisonData.distance),
+		...getPublicTransportStaples(comparisonData.distance),
+		...getBicycleStaples(comparisonData.distance)
 	]);
 	
 	const handleClick = (event: {title: string, img: string, co2: number}) => {
