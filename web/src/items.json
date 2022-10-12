@@ -3,92 +3,254 @@
         {
             "title": "New Car",
             "img": "https://images.unsplash.com/photo-1548712494-4853e9e3293b",
-            "co2": 17000000
+            "co2": 17000000,
+            "clicked": false,
+            "css": {
+                "transition": "all 0.2s",
+                "opacity": "100%",
+                "borderRadius": "5px",
+                "&:hover": {
+                    "opacity": "80%"
+                }
+            }
         },
         {
             "title": "T-shirt",
             "img": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab",
-            "co2": 7000
+            "co2": 7000,
+            "clicked": false,
+            "css": {
+                "transition": "all 0.2s",
+                "opacity": "100%",
+                "borderRadius": "5px",
+                "&:hover": {
+                    "opacity": "80%"
+                }
+            }
         },
         {
             "title": "Banana",
             "img": "https://images.unsplash.com/photo-1587132137056-bfbf0166836e",
-            "co2": 120
+            "co2": 120,
+            "clicked": false,
+            "css": {
+                "transition": "all 0.2s",
+                "opacity": "100%",
+                "borderRadius": "5px",
+                "&:hover": {
+                    "opacity": "80%"
+                }
+            }
         },
         {
             "title": "Big Mac",
             "img": "https://images.unsplash.com/photo-1586190848861-99aa4a171e90",
-            "co2": 2350
+            "co2": 2350,
+            "clicked": false,
+            "css": {
+                "transition": "all 0.2s",
+                "opacity": "100%",
+                "borderRadius": "5px",
+                "&:hover": {
+                    "opacity": "80%"
+                }
+            }
         },
         {
             "title": "One hour wash",
             "img": "https://images.unsplash.com/photo-1611878821586-eb39c951c236",
-            "co2": 125
+            "co2": 125,
+            "clicked": false,
+            "css": {
+                "transition": "all 0.2s",
+                "opacity": "100%",
+                "borderRadius": "5px",
+                "&:hover": {
+                    "opacity": "80%"
+                }
+            }
         },
         {
             "title": "Cup of Coffee",
             "img": "https://images.unsplash.com/photo-1520949044152-74b54c164c31",
-            "co2": 400
+            "co2": 400,
+            "clicked": false,
+            "css": {
+                "transition": "all 0.2s",
+                "opacity": "100%",
+                "borderRadius": "5px",
+                "&:hover": {
+                    "opacity": "80%"
+                }
+            }
         },
         {
             "title": "Avocado",
             "img": "https://images.unsplash.com/photo-1653819370651-e5d283ec84aa",
-            "co2": 420
+            "co2": 420,
+            "clicked": false,
+            "css": {
+                "transition": "all 0.2s",
+                "opacity": "100%",
+                "borderRadius": "5px",
+                "&:hover": {
+                    "opacity": "80%"
+                }
+            }
         },
         {
             "title": "200g Steak",
             "img": "https://images.unsplash.com/photo-1590091626142-167ee3798ca8",
-            "co2": 6264
+            "co2": 6264,
+            "clicked": false,
+            "css": {
+                "transition": "all 0.2s",
+                "opacity": "100%",
+                "borderRadius": "5px",
+                "&:hover": {
+                    "opacity": "80%"
+                }
+            }
         },
         {
             "title": "New Laptop",
             "img": "https://images.unsplash.com/photo-1550234646-8d03f6e034fb",
-            "co2": 331000
+            "co2": 331000,
+            "clicked": false,
+            "css": {
+                "transition": "all 0.2s",
+                "opacity": "100%",
+                "borderRadius": "5px",
+                "&:hover": {
+                    "opacity": "80%"
+                }
+            }
         },
         {
             "title": "Leather Jacker(cow)",
             "img": "https://images.unsplash.com/photo-1650663139582-c44e85a39364",
-            "co2": 176000
+            "co2": 176000,
+            "clicked": false,
+            "css": {
+                "transition": "all 0.2s",
+                "opacity": "100%",
+                "borderRadius": "5px",
+                "&:hover": {
+                    "opacity": "80%"
+                }
+            }
         },
         {
             "title": "Jeans",
             "img": "https://images.unsplash.com/photo-1604176354204-9268737828e4",
-            "co2": 20000
+            "co2": 20000,
+            "clicked": false,
+            "css": {
+                "transition": "all 0.2s",
+                "opacity": "100%",
+                "borderRadius": "5px",
+                "&:hover": {
+                    "opacity": "80%"
+                }
+            }
         },
         {
             "title": "Paper Towel Roll",
             "img": "https://images.unsplash.com/photo-1649328573624-1aa3bdddf13f",
-            "co2": 27
+            "co2": 27000,
+            "clicked": false,
+            "css": {
+                "transition": "all 0.2s",
+                "opacity": "100%",
+                "borderRadius": "5px",
+                "&:hover": {
+                    "opacity": "80%"
+                }
+            }
         },
         {
             "title": "Bike Manufacturing",
             "img": "https://images.unsplash.com/photo-1611373771444-f2f256643feb",
-            "co2": 96000
+            "co2": 96000,
+            "clicked": false,
+            "css": {
+                "transition": "all 0.2s",
+                "opacity": "100%",
+                "borderRadius": "5px",
+                "&:hover": {
+                    "opacity": "80%"
+                }
+            }
         },
         {
             "title": "E-Bike Manufacturing",
             "img": "https://images.unsplash.com/photo-1649879681709-2a3f0f49ab37",
-            "co2": 134000
+            "co2": 134000,
+            "clicked": false,
+            "css": {
+                "transition": "all 0.2s",
+                "opacity": "100%",
+                "borderRadius": "5px",
+                "&:hover": {
+                    "opacity": "80%"
+                }
+            }
         },
         {
             "title": "An Egg",
             "img": "https://images.unsplash.com/photo-1587486913049-53fc88980cfc",
-            "co2": 225
+            "co2": 225,
+            "clicked": false,
+            "css": {
+                "transition": "all 0.2s",
+                "opacity": "100%",
+                "borderRadius": "5px",
+                "&:hover": {
+                    "opacity": "80%"
+                }
+            }
         },
         {
             "title": "A Potato",
             "img": "https://images.unsplash.com/photo-1659177652084-c4a7c4e0bf28",
-            "co2": 40
+            "co2": 40,
+            "clicked": false,
+            "css": {
+                "transition": "all 0.2s",
+                "opacity": "100%",
+                "borderRadius": "5px",
+                "&:hover": {
+                    "opacity": "80%"
+                }
+            }
         },
         {
             "title": "Light Bulb(10W, 4hr)",
             "img": "https://images.unsplash.com/flagged/photo-1563831195461-db429c4bd4eb",
-            "co2": 17
+            "co2": 17,
+            "clicked": false,
+            "css": {
+                "transition": "all 0.2s",
+                "opacity": "100%",
+                "borderRadius": "5px",
+                "&:hover": {
+                    "opacity": "80%"
+                }
+            }
         },
         {
             "title": "Manufacturing TV(40\" screen)",
             "img": "https://images.unsplash.com/photo-1558888401-3cc1de77652d",
-            "co2": 320000
+            "co2": 320000,
+            "clicked": false,
+            "css": {
+                "transition": "all 0.2s",
+                "opacity": "100%",
+                "borderRadius": "5px",
+                "&:hover": {
+                    "opacity": "80%"
+                }
+            }
         }
     ]
 }

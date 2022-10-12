@@ -49,7 +49,26 @@ const ComparisonPage: NextPage = () => {
 		...getBicycleStaples(comparisonData.distance)
 	]);
 
-	const handleClick = (event: {title: string, img: string, co2: number}) => {
+
+	const [itemsState, setItems] = useState(ItemsJson.Items);
+
+	let css1 = {
+		transition: "all 0.2s",
+		opacity: "100%",
+		borderRadius: "5px",
+		"&:hover": {opacity: "80%",}
+	};
+
+	let css2 = {
+		transition: "all 0.2s",
+		opacity: "100%",
+		filter: "contrast(120%)",
+		borderRadius: "30px",
+		border: "solid 5px darkgreen",
+		"&:hover": {opacity: "80%",}
+	};
+	
+	const handleClick = (event: {title: string, img: string, co2: number, clicked: boolean}) => {
 		console.log(event.title + ' image clicked');
 
 		setStaples((prevState: Staple[]) => {
@@ -66,28 +85,32 @@ const ComparisonPage: NextPage = () => {
 				return prevState.filter(obj => {return obj.title != event.title});
 			}
 		});
-	};
-
-	let css = {
-		transition: "opacity 0.2s",
-		"&:hover": {
-			opacity: "80%"
-		}
+		setItems(prevState => {
+			const newList = prevState.map(obj => {
+				if (obj.title === event.title) {
+					return {...obj, clicked: !event.clicked, css: event.clicked ? css1 : css2}; //toggle boolean clicked + change css
+				}
+				return obj;
+			});
+			return newList;
+		});
 	};
 
 	let Everyday_image_list = (
-		<ImageList sx={{}} cols={4} >
-		  {ItemsJson.Items.map((item) => (
-			<ImageListItem key={item.img} onClick={() => handleClick(item)} sx={css}>
-			  <Image src={item.img + "?w=248&fit=crop&auto=format"} alt="" width={248} height={248} layout="responsive"/>
+		<ImageList sx={{}} cols={6} >
+		  {itemsState.map((item) => (
+			<ImageListItem key={item.img} onClick={() => handleClick(item)} sx={item.css}>
+			  <Image src={item.img + "?w=165&fit=crop&auto=format"} alt="" width={165} height={165} layout="responsive" style={{borderRadius: item.css.borderRadius,}}/>
 			  <ImageListItemBar
 				title={item.title}
 				subtitle={`Co2e: ${item.co2}g`}
+				style={{borderRadius: item.css.borderRadius,}}
 			  />
 			</ImageListItem>
 		  ))}
 		</ImageList>
 	  );
+
 
 	return (
 		<Template>
