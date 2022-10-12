@@ -13,6 +13,11 @@ interface StaplePart {
 	hint: string;
 }
 
+export const STAPLE_COLORS = {
+	ROUTE: 0x9b59b6,
+	PRODUCTION: 0xf1c40f
+};
+	
 export interface Staple {
 	icon: any;
 	title: string;
@@ -104,7 +109,7 @@ export function StapleDiagram(props: StapleDiagramProps) {
 			let hint = (
 				<Box sx={{textAlign: "center"}}>
 					{box.hint}<br/>
-					{box.value}kgCo2
+					{box.value}gCo2
 				</Box>
 			);
 			
