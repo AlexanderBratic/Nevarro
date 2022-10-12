@@ -24,6 +24,9 @@ import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 import { useRouter } from 'next/router';
+import {Paper, Typography} from "@mui/material";
+import Grid from "@mui/material/Unstable_Grid2";
+import {DirectionsBike} from "@mui/icons-material";
 
 
 function Template({ children }: any) {
@@ -59,11 +62,8 @@ function Template({ children }: any) {
 		<List component="nav">
 			{ListItem(ComparisonIcon, "Comparison", "/comparison")}
 			{ListItem(CarIcon, "Car", "/car")}
-			{ListItem(AirplaneIcon, "Plane", "/plane")}
 			{ListItem(PublicTransportIcon, "Public Transport", "/public-transport")}
-			{ListItem(BikeIcon, "Bicycle", "/bicycle")}
-			{ListItem(ElectricScooterIcon, "Electric Scooter", "/electric-scooter")}
-			{ListItem(WalkIcon, "Walking", "/walking")}
+            {ListItem(DirectionsBike, "Bicycle/Walking", "/bicycle")}
 		</List>
 	);
 
@@ -71,68 +71,59 @@ function Template({ children }: any) {
 	if (renderDropdown) {
 		let dropDownMenuRef = React.createRef();
 
-		result = (
+		return (
 			<Box>
 				<Box
-					ref={dropDownMenuRef}
-				  sx={{
-					transition: "height 100ms linear",
-					height: menuHeight,
-					overflow: "hidden"
-				  }}
+                    ref={dropDownMenuRef}
+                    sx={{
+                      transition: "height 100ms linear",
+                      height: menuHeight,
+                      overflow: "hidden",
+                      position: "fixed",
+                      top: 0,
+                      backgroundColor: "#eaefff",
+                      width: "100%",
+                      zIndex: 1000,
+                      opacity: "0.98"
+                }}
+                    component={Paper}
 				>
 					{ body }
 				</Box>
-				<Box sx={{float: "right", marginTop: "10px"}}>
+				<Box sx={{position: "fixed", top: "14px", right: "24px", zIndex: 1001}}>
 					<IconButton
+                        style={{backgroundColor: "#eaefff"}}
 						onClick={(e) => calcHeight(dropDownMenuRef)}
 					>
 						<MenuIcon />
 					</IconButton>
 				</Box>
 				<Box>
-                    <main>
+                    <Container maxWidth="lg" component="main">
                         { children }
-                    </main>
+                    </Container>
 				</Box>
 			</Box>
 		);
 	} else {
-		result = (
-			<Box sx={{
-					my: 2,
-					display: 'flex',
-					flexDirection: 'row',
-					justifyContent: 'center',
-					alignItems: 'top',
-				}}>
-				<Box sx={{
-						flex: "1 0 auto"
-					}}
-				>
-                    <main>
+        return (
+			<Grid container>
+                <Grid xs component="main">
+                    <Container maxWidth="xl">
                         { children }
-                    </main>
-				</Box>
-				<Box sx={{
-						width: "20%",
-						maxWidth: "260px",
-						flex: "0 0 auto"
-					}}
-				>
-					<Box marginLeft="20px">
-						<h1>Hello!</h1>
-					</Box>
-					{ body }
-				</Box>
-			</Box>
+                    </Container>
+                </Grid>
+                <Grid xs maxWidth="300px">
+                    <Paper elevation={5} style={{ height: '100%', top: '0', position: "fixed", width: "100%", backgroundColor: "#eaefff"}}>
+                        <Typography variant="h4" style={{margin: '24px 10px'}}> Travel Settings </Typography>
+                        { body }
+                    </Paper>
+                </Grid>
+            </Grid>
+
+
 		);
 	}
-	return (
-    <Container maxWidth="xl">
-			{result}
-		</Container>
-	);
 }
 
 export default Template;
