@@ -49,6 +49,7 @@ const ComparisonPage: NextPage = () => {
 		...getBicycleStaples(comparisonData.distance)
 	]);
 
+
 	const [itemsState, setItems] = useState(ItemsJson.Items);
 
 	let css1 = {
@@ -118,13 +119,13 @@ const ComparisonPage: NextPage = () => {
                 <form onSubmit={handleSubmit}>
                     <Grid container spacing={1}>
                         <Grid xs={12} sm>
-                            <TextField label="from" fullWidth value={from} onChange={e => setFrom(e.target.value)} />
+                            <TextField label="Start" fullWidth value={from} onChange={e => setFrom(e.target.value)} />
                         </Grid>
                         <Grid xs={12} sm>
-                            <TextField label="to" fullWidth value={to} onChange={e => setTo(e.target.value)} />
+                            <TextField label="Destination" fullWidth value={to} onChange={e => setTo(e.target.value)} />
                         </Grid>
                         <Grid xs sm={1}>
-                            <Button style={{height: '100%'}} fullWidth type="submit" variant="contained" disabled={to === '' || from === ''}> Sök </Button>
+                            <Button style={{height: '100%'}} fullWidth type="submit" variant="contained" disabled={to === '' || from === ''}> Search </Button>
                         </Grid>
                     </Grid>
                 </form>
