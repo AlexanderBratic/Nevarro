@@ -22,18 +22,18 @@ import CarIcon from '@mui/icons-material/DirectionsCarRounded';
 
 const vehicleTypes: {name: string, variants: {name: string, emission: number }[] }[] = [
 	{name: "car", variants: [
-		{name: "petrol", emission: 168},
-		{name: "diesel", emission: 188},
-		{name: "electricity", emission: 100},
-		{name: "hydrogen", emission: 120},
-		{name: "hybrid", emission: 143},
-		{name: "etanol", emission: 108},
-		{name: "LPG", emission: 111},
-		{name: "biodiesel", emission: 179},
+		{name: "petrol", emission: 168 + 241},
+		{name: "diesel", emission: 188 + 231},
+		{name: "electricity", emission: 100 + 190},
+		{name: "hydrogen", emission: 120 + 120},
+		{name: "hybrid", emission: 143 + 75},
+		{name: "etanol", emission: 108 + 120},
+		{name: "LPG", emission: 111 + 200},
+		{name: "biodiesel", emission: 179 + 120},
 	]},
-	{name: "suv", variants: [{name: "petrol", emission: 376}, {name: "diesel", emission: 421}]},
-	{name: "truck", variants: [{name: "petrol", emission: 1045}, {name: "diesel", emission: 1169}]},
-	{name: "motorcycle", variants: [{name: "petrol", emission: 103}, {name: "diesel", emission: 115}]},
+	{name: "suv", variants: [{name: "petrol", emission: 376 + 280}, {name: "diesel", emission: 421 + 244}]},
+	{name: "truck", variants: [{name: "petrol", emission: 1045 + 2685}, {name: "diesel", emission: 1169 + 2585}]},
+	{name: "motorcycle", variants: [{name: "petrol", emission: 103 + 215}, {name: "diesel", emission: 115 + 205}]},
 ];
 
 function getCarData(): CarType {
