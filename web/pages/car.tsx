@@ -10,7 +10,7 @@ import {
     ToggleButtonGroup,
     Typography
 } from "@mui/material";
-import React, {FormEvent, useState} from "react";
+import React, {FormEvent, useEffect, useState} from "react";
 import Template from "../src/components/Template";
 import {ExpandMore} from "@mui/icons-material";
 import {getTypedItem, setItem} from "../src/sessionStorage";
@@ -64,11 +64,8 @@ const CarSettings: NextPage = () => {
 
      const router = useRouter()
 
-     const submitHandler = (event: FormEvent) => {
-            event.preventDefault()
-            console.log(`vehicle=${JSON.stringify(vehicle)}, emission=${emission}, distance=${data.distance}`)
-            setItem("car", {emissionPerKm: emission, vehicleType: vehicleName, litersPerKm: LiterPerKm, CO2PerLiter: CO2PerLiter} as CarType)
-            router.push('/comparison')
+     const saveData = () => {
+         setItem("car", {emissionPerKm: emission, vehicleType: vehicleName, litersPerKm: LiterPerKm, CO2PerLiter: CO2PerLiter} as CarType)
      }
 
      const data = getTypedItem<ComparisonType>("comparison", {from: "", to: "", distance: 10})
@@ -79,6 +76,10 @@ const CarSettings: NextPage = () => {
      const [emission, setEmission] = useState(carData.emissionPerKm)
      const [CO2PerLiter, setCO2PerLiter] = useState<string>(carData.CO2PerLiter)
      const [LiterPerKm, setLiterPerKm] = useState<string>(carData.litersPerKm)
+
+    useEffect(() => {
+        saveData()
+    }, [emission])
 
      const changeVehicle = (e: React.MouseEvent, v: string) => {
          if(!v){
@@ -115,7 +116,6 @@ const CarSettings: NextPage = () => {
     return (
         <Template>
             <Container maxWidth="md">
-                <form onSubmit={submitHandler}>
                     <Grid container spacing={1}>
                         <Grid xs={12}>
                             <Typography variant="h3" textAlign="center"> Car Settings </Typography>
@@ -176,11 +176,7 @@ const CarSettings: NextPage = () => {
                                 </AccordionDetails>
                             </Accordion>
                         </Grid>
-                        <Grid xs={12}>
-                            <Button type="submit" variant="contained" disabled={carData.emissionPerKm === emission} fullWidth> Save </Button>
-                        </Grid>
                     </Grid>
-                </form>
             </Container>
         </Template>
     )
