@@ -22,7 +22,7 @@ function getTrainData(): TrainType {
 		vehicleType: trainVariants[0].type,
 		emissionPerKm: trainVariants[0].emission
 	};
-	
+
 	return getTypedItem<TrainType>("train", defaultData);
 }
 
@@ -31,7 +31,7 @@ function getBusData(): BusType {
 		vehicleType: busVariants[0].type,
 		emissionPerKm: busVariants[0].emission
 	};
-	
+
 	return getTypedItem<TrainType>("bus", defaultData);
 }
 
@@ -39,14 +39,14 @@ export function getPublicTransportStaples(distance: number): Staple[] {
 	let busData   = getBusData();
 	let trainData = getTrainData();
 	return [
-		{ 
+		{
 			title: "Train",
 			icon: <PublicTransportIcon key={"Public Transport"} />,
 			parts: [
 				{ color: STAPLE_COLORS.ROUTE, value: trainData.emissionPerKm * distance, hint: "Emissions for the route"  }
 			]
 		},
-		{ 
+		{
 			title: "Bus",
 			icon: <PublicTransportIcon key={"Public Transport"} />,
 			parts: [
@@ -67,9 +67,9 @@ const TransitSettings: NextPage = () => {
     const [train, setTrain] = useState(trainVariants.find(v=>v.type === trainData.vehicleType) ?? trainVariants[0])
     let [trainType, setTrainType] = useState(trainData.vehicleType)
     const [trainEmission, setTrainEmission] = useState(trainData.emissionPerKm)
-    busType = getBusData().vehicleType
-    trainType = getTrainData().vehicleType
-    
+    //busType = getBusData().vehicleType
+    //trainType = getTrainData().vehicleType
+
     const changeBusType = (e: React.MouseEvent, v: string) => {
         if(!v){return}
 
@@ -120,7 +120,7 @@ const TransitSettings: NextPage = () => {
                             { busVariants.map((transitTypes) => (
                                     <ToggleButton key={transitTypes.type} value={transitTypes.type}>{transitTypes.type}</ToggleButton>
                                 )) }
-                        </ToggleButtonGroup>    
+                        </ToggleButtonGroup>
                     </Grid>
                     <Grid xs={12}>
                         <Typography>Train Drive Types</Typography>
@@ -135,7 +135,7 @@ const TransitSettings: NextPage = () => {
                             { trainVariants.map((transitTypes) => (
                                     <ToggleButton key={transitTypes.type} value={transitTypes.type}>{transitTypes.type}</ToggleButton>
                                 )) }
-                        </ToggleButtonGroup>    
+                        </ToggleButtonGroup>
                     </Grid>
                 </Grid>
             </Container>
