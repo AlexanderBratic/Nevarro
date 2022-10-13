@@ -106,4 +106,5 @@ export interface GoggleMapsType {
     status: string | "OK" | "ZERO_RESULTS" | "MAX_WAYPOINTS_EXCEEDED" | "MAX_ROUTE_LENGTH_EXCEEDED" | "INVALID_REQUEST" | "OVER_QUERY_LIMIT" | "REQUEST_DENIED" | "UNKNOWN_ERROR";
 }
 
-export type StapleHeights = Record<string, Record<string, number>>;
+export type StaplePartHeights = Record<string, number>;
+export type StapleHeights = Record<string, StaplePartHeights>;
