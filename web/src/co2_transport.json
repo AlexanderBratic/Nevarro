@@ -23,14 +23,16 @@
         {
             "title": "Bus",
             "variants": [
-                {"type": "Diesel", "emission": 53},
-                {"type": "Electric", "emission": 123},
-                {"type": "Hydrogen", "emission": 123},
+                {"type": "Diesel", "emission": 63},
+                {"type": "Electric", "emission": 48},
+                {"type": "Hydrogen", "emission": 30.67},
+                {"type": "Biodiesel", "emission": 38},
                 {"type": "Intercity", "emission": 31}
             ],
             "sources": [
                 "A comparison of carbon dioxide emissions associated with motorised transport modes and cycling in Ireland",
-                ""
+                "Life cycle assessment of city buses powered by electricity, hydrogenated vegetable oil or diesel - Anders Nordelöf, Mia Romare & Johan Tivander",
+                "Life cycle assessment of hydrogen-powered city buses in the High V.LO-City project: integrating vehicle operation and refuelling infrastructure -     Davide W. Pederzoli, Cristina Carnevali, Riccardo Genova, Maurizio Mazzucchelli, Adriana Del Borghi, Michela Gallo & Luca Moreschi"
             ]
         },
         {
