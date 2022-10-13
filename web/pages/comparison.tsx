@@ -8,7 +8,7 @@ import type { NextPage } from 'next';
 import Template from '../src/components/Template';
 import {Staple, StapleDiagram, STAPLE_COLORS} from '../src/components/StapleDiagram';
 
-import {ComparisonType} from '../types/sessionStorageTypes';
+import {ComparisonType, ItemType} from '../types/sessionStorageTypes';
 import {setItem, getItem, getTypedItem } from '../src/sessionStorage';
 
 import ImageList from '@mui/material/ImageList';
@@ -26,6 +26,9 @@ import {getCarStaples} from './car';
 import {getBicycleStaples} from './bicycle';
 import {getPublicTransportStaples} from './public-transport';
 import { useState } from 'react';
+
+
+let Items_data = getItem("comparisonitems", ItemsJson.Items);
 
 const ComparisonPage: NextPage = () => {
 
@@ -48,9 +51,7 @@ const ComparisonPage: NextPage = () => {
 		...getPublicTransportStaples(comparisonData.distance),
 		...getBicycleStaples(comparisonData.distance)
 	]);
-
-
-	const [itemsState, setItems] = useState(ItemsJson.Items);
+	const [itemsState, setItems] = useState(getTypedItem<ItemType[]>('comparisonitems', ItemsJson.Items));
 
 	let css1 = {
 		transition: "all 0.2s",
@@ -92,6 +93,7 @@ const ComparisonPage: NextPage = () => {
 				}
 				return obj;
 			});
+			setItem('comparison', newList)
 			return newList;
 		});
 	};

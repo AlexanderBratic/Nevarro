@@ -22,6 +22,21 @@ export interface TrainType {
     emissionPerKm: number
 }
 
+export interface ItemType {
+    title: string;
+    img: string;
+    co2: number;
+    clicked: boolean;
+    css: {
+        transition: string;
+        opacity: string;
+        borderRadius: string;
+        "&8hover": {
+            opacity: string;
+        }
+    }
+}
+
 export interface BicycleType {
     vehicleType: string,
     porpulsionType: string,
