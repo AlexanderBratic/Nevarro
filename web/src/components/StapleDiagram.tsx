@@ -121,8 +121,6 @@ const Staple = ({staple,
 				 heightMultiplier, 
 				 targetLeft,
 				 firstRender}: StapleProps) => {
-	console.log("Rendering: " + staple.title);
-	
 	let alreadyExisted = staple.title in oldHeights;
 	let oldBoxHeights = oldHeights[staple.title] ?? {};
 	let newBoxHeights: Record<string, number> = {};
