@@ -14,7 +14,7 @@ import java.nio.file.Paths;
  * Where transportationMean is oneOf: driving walking bicycling or transit and default value is driving.
  * You will also need an apikey, put yore apikey in the document Nevarro//api//apiKey.
  * Else you will get a "MockResponse"
- * Address: http://localhost:8080/routes?origen=from&destination=to&transportationMean=transportmedel
+ * Address: http://localhost:8080/routes?origin=from&destination=to&mean=transportmedel
  */
 
 @RestController
@@ -39,12 +39,12 @@ public class RoutesDirectionApiController {
         Path keyPath = Paths.get(pathToKey);
 
         if(Files.exists(keyPath)){
-            System.out.println("Try to load apiKey");
-            contents = Files.readString(keyPath);
+            System.out.println("Try to load RoutsDirection apiKey");
+            contents = Files.readString(keyPath); //apiKey
             return routesDirectionApiService.routesDirectionCon(destination, origin, mean, contents);
         }
         else{
-            System.out.println("Try to load mochfile");
+            System.out.println("Try to load RoutsDirection mochfile");
             Path mochPath = Paths.get(pathToMoch);
             return Files.readString(mochPath);
         }

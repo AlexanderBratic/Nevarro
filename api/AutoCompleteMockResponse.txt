@@ -1,0 +1,185 @@
+{
+   "predictions" : [
+      {
+         "description" : "Vännäs, Sverige",
+         "matched_substrings" : [
+            {
+               "length" : 5,
+               "offset" : 0
+            }
+         ],
+         "place_id" : "ChIJWarIEjNifEYRp_-OvZUkBy4",
+         "reference" : "ChIJWarIEjNifEYRp_-OvZUkBy4",
+         "structured_formatting" : {
+            "main_text" : "Vännäs",
+            "main_text_matched_substrings" : [
+               {
+                  "length" : 5,
+                  "offset" : 0
+               }
+            ],
+            "secondary_text" : "Sverige"
+         },
+         "terms" : [
+            {
+               "offset" : 0,
+               "value" : "Vännäs"
+            },
+            {
+               "offset" : 8,
+               "value" : "Sverige"
+            }
+         ],
+         "types" : [ "locality", "political", "geocode" ]
+      },
+      {
+         "description" : "Vännäsby, Sverige",
+         "matched_substrings" : [
+            {
+               "length" : 5,
+               "offset" : 0
+            }
+         ],
+         "place_id" : "ChIJPf6B8YplfEYRlxKp0ma2SW4",
+         "reference" : "ChIJPf6B8YplfEYRlxKp0ma2SW4",
+         "structured_formatting" : {
+            "main_text" : "Vännäsby",
+            "main_text_matched_substrings" : [
+               {
+                  "length" : 5,
+                  "offset" : 0
+               }
+            ],
+            "secondary_text" : "Sverige"
+         },
+         "terms" : [
+            {
+               "offset" : 0,
+               "value" : "Vännäsby"
+            },
+            {
+               "offset" : 10,
+               "value" : "Sverige"
+            }
+         ],
+         "types" : [ "locality", "political", "geocode" ]
+      },
+      {
+         "description" : "Vannagårdsgatan, Malmö, Sverige",
+         "matched_substrings" : [
+            {
+               "length" : 5,
+               "offset" : 0
+            }
+         ],
+         "place_id" : "EiFWYW5uYWfDpXJkc2dhdGFuLCBNYWxtw7YsIFN2ZXJpZ2UiLiosChQKEgnpoN2C86FTRhG7af5rppugPxIUChIJ_5HEdKUFU0YRUC7S8GEpouM",
+         "reference" : "EiFWYW5uYWfDpXJkc2dhdGFuLCBNYWxtw7YsIFN2ZXJpZ2UiLiosChQKEgnpoN2C86FTRhG7af5rppugPxIUChIJ_5HEdKUFU0YRUC7S8GEpouM",
+         "structured_formatting" : {
+            "main_text" : "Vannagårdsgatan",
+            "main_text_matched_substrings" : [
+               {
+                  "length" : 5,
+                  "offset" : 0
+               }
+            ],
+            "secondary_text" : "Malmö, Sverige"
+         },
+         "terms" : [
+            {
+               "offset" : 0,
+               "value" : "Vannagårdsgatan"
+            },
+            {
+               "offset" : 17,
+               "value" : "Malmö"
+            },
+            {
+               "offset" : 24,
+               "value" : "Sverige"
+            }
+         ],
+         "types" : [ "route", "geocode" ]
+      },
+      {
+         "description" : "Vännäs ishall, Fritidsvägen, Vännäs, Sverige",
+         "matched_substrings" : [
+            {
+               "length" : 5,
+               "offset" : 0
+            }
+         ],
+         "place_id" : "ChIJ1c_PFG1lfEYRofKh9NqTsrI",
+         "reference" : "ChIJ1c_PFG1lfEYRofKh9NqTsrI",
+         "structured_formatting" : {
+            "main_text" : "Vännäs ishall",
+            "main_text_matched_substrings" : [
+               {
+                  "length" : 5,
+                  "offset" : 0
+               }
+            ],
+            "secondary_text" : "Fritidsvägen, Vännäs, Sverige"
+         },
+         "terms" : [
+            {
+               "offset" : 0,
+               "value" : "Vännäs ishall"
+            },
+            {
+               "offset" : 15,
+               "value" : "Fritidsvägen"
+            },
+            {
+               "offset" : 29,
+               "value" : "Vännäs"
+            },
+            {
+               "offset" : 37,
+               "value" : "Sverige"
+            }
+         ],
+         "types" : [ "point_of_interest", "establishment" ]
+      },
+      {
+         "description" : "Vännäs Ryttarförening, NORRMALM, Vännäs, Sverige",
+         "matched_substrings" : [
+            {
+               "length" : 5,
+               "offset" : 0
+            }
+         ],
+         "place_id" : "ChIJ-yZb6Ml6fEYRIYIgMWrv6FU",
+         "reference" : "ChIJ-yZb6Ml6fEYRIYIgMWrv6FU",
+         "structured_formatting" : {
+            "main_text" : "Vännäs Ryttarförening",
+            "main_text_matched_substrings" : [
+               {
+                  "length" : 5,
+                  "offset" : 0
+               }
+            ],
+            "secondary_text" : "NORRMALM, Vännäs, Sverige"
+         },
+         "terms" : [
+            {
+               "offset" : 0,
+               "value" : "Vännäs Ryttarförening"
+            },
+            {
+               "offset" : 23,
+               "value" : "NORRMALM"
+            },
+            {
+               "offset" : 33,
+               "value" : "Vännäs"
+            },
+            {
+               "offset" : 41,
+               "value" : "Sverige"
+            }
+         ],
+         "types" : [ "point_of_interest", "establishment" ]
+      }
+   ],
+   "status" : "OK"
+}
