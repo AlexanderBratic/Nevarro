@@ -28,6 +28,32 @@ export interface BicycleType {
 	emissionPerKm: number
 }
 
+export interface AutoCompleteType {
+    predictions: {
+        description: string;
+        matched_substrings: {
+            length: number;
+            offset: number;
+        }[];
+        place_id: string;
+        reference: string;
+        structured_formatting: {
+            main_text: string;
+            main_text_matched_substrings: {
+                length: number;
+                offset: number;
+            }[];
+            secondary_text: string;
+        }
+        terms: {
+            offset: number;
+            value: string;
+        }[];
+        types: (string | "locality" | "political" | "geocode" )[];
+    }[];
+    status: string | "OK" | "ZERO_RESULTS" | "OVER_QUERY_LIMIT" | "REQUEST_DENIED" | "INVALID_REQUEST" | "UNKNOWN_ERROR";
+}
+
 export interface GoggleMapsType {
     geocoded_waypoints: {
         geocoder_status: string | "OK" | "ZERO_RESULTS" | "OVER_QUERY_LIMIT" | "REQUEST_DENIED" | "INVALID_REQUEST" | "UNKNOWN_ERROR";
