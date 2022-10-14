@@ -6,6 +6,7 @@ import Stack from '@mui/material/Stack';
 import Tooltip from '@mui/material/Tooltip';
 
 import {setItem, getItem } from '../sessionStorage';
+import { TextField } from '@mui/material';
 
 interface StaplePart {
 	color: number;
@@ -109,7 +110,7 @@ export function StapleDiagram(props: StapleDiagramProps) {
 			let hint = (
 				<Box sx={{textAlign: "center"}}>
 					{box.hint}<br/>
-					{box.value}gCo2
+					{(100000 < highestStaple ? `${(box.value/1000).toFixed(2)}k` : ~~box.value) + "g"}Co2
 				</Box>
 			);
 			
@@ -144,6 +145,17 @@ export function StapleDiagram(props: StapleDiagramProps) {
 			</Box>
 		);
 	});
+
+	let verticalAxis = (h : number) => {
+
+		return (100000 < highestStaple ? `${~~(h/1000)}k` : ~~h) + "g";
+
+	/*	if(100000 < h) {
+			return `${(h/1000).toFixed(2)}kg`;
+		} else {
+			return h + "g";
+		}*/
+	};
 	
 	return (
 		<Box sx={{ width: "100%", height: "550px", position: "relative"}}>
@@ -153,11 +165,11 @@ export function StapleDiagram(props: StapleDiagramProps) {
 			<Box sx={{ width: "calc(100% - 100px)", height: "1px", backgroundColor: "gray", position: "absolute", top: "309px", right: "0px"}} />
 			<Box sx={{ width: "calc(100% - 100px)", height: "1px", backgroundColor: "gray", position: "absolute", top: "409px", right: "0px"}} />
 			
-			<Box sx={{ position: "absolute", top: "10px",  right: "calc(100% - 100px)", transform: "translateY(-50%)"}}>100%</Box>
-			<Box sx={{ position: "absolute", top: "109px", right: "calc(100% - 100px)", transform: "translateY(-50%)"}}>75%</Box>
-			<Box sx={{ position: "absolute", top: "209px", right: "calc(100% - 100px)", transform: "translateY(-50%)"}}>50%</Box>
-			<Box sx={{ position: "absolute", top: "309px", right: "calc(100% - 100px)", transform: "translateY(-50%)"}}>25%</Box>
-			<Box sx={{ position: "absolute", top: "409px", right: "calc(100% - 100px)", transform: "translateY(-50%)"}}>0%</Box>
+			<Box sx={{ position: "absolute", top: "10px", right: "calc(100% - 100px)", transform: "translateY(-50%)"}}>{verticalAxis(highestStaple)}</Box>
+			<Box sx={{ position: "absolute", top: "109px", right: "calc(100% - 100px)", transform: "translateY(-50%)"}}>{verticalAxis(highestStaple * .75)}</Box>
+			<Box sx={{ position: "absolute", top: "209px", right: "calc(100% - 100px)", transform: "translateY(-50%)"}}>{verticalAxis(highestStaple * .50)}</Box>
+			<Box sx={{ position: "absolute", top: "309px", right: "calc(100% - 100px)", transform: "translateY(-50%)"}}>{verticalAxis(highestStaple * .25)}</Box>
+			<Box sx={{ position: "absolute", top: "409px", right: "calc(100% - 100px)", transform: "translateY(-50%)"}}>{verticalAxis(0)}</Box>
 			
 			<Stack sx={{ position: "absolute", left: "100px", right: "0px", top: "9px", bottom: "141px" }} direction="row"  justifyContent="space-around">
 				{stapleComponents}
