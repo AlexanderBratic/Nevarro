@@ -10,7 +10,7 @@ import {
     ToggleButtonGroup,
     Typography
 } from "@mui/material";
-import React, {FormEvent, useState} from "react";
+import React, {FormEvent, useEffect, useState} from "react";
 import Template from "../src/components/Template";
 import {ExpandMore} from "@mui/icons-material";
 import {getTypedItem, setItem} from "../src/sessionStorage";
@@ -22,18 +22,18 @@ import CarIcon from '@mui/icons-material/DirectionsCarRounded';
 
 const vehicleTypes: {name: string, variants: {name: string, emission: number }[] }[] = [
 	{name: "car", variants: [
-		{name: "petrol", emission: 168},
-		{name: "diesel", emission: 188},
-		{name: "electricity", emission: 100},
-		{name: "hydrogen", emission: 120},
-		{name: "hybrid", emission: 143},
-		{name: "etanol", emission: 108},
-		{name: "LPG", emission: 111},
-		{name: "biodiesel", emission: 179},
+		{name: "petrol", emission: 168 + 241},
+		{name: "diesel", emission: 188 + 231},
+		{name: "electricity", emission: 100 + 190},
+		{name: "hydrogen", emission: 120 + 120},
+		{name: "hybrid", emission: 143 + 75},
+		{name: "etanol", emission: 108 + 120},
+		{name: "LPG", emission: 111 + 200},
+		{name: "biodiesel", emission: 179 + 120},
 	]},
-	{name: "suv", variants: [{name: "petrol", emission: 376}, {name: "diesel", emission: 421}]},
-	{name: "truck", variants: [{name: "petrol", emission: 1045}, {name: "diesel", emission: 1169}]},
-	{name: "motorcycle", variants: [{name: "petrol", emission: 103}, {name: "diesel", emission: 115}]},
+	{name: "suv", variants: [{name: "petrol", emission: 376 + 280}, {name: "diesel", emission: 421 + 244}]},
+	{name: "truck", variants: [{name: "petrol", emission: 1045 + 2685}, {name: "diesel", emission: 1169 + 2585}]},
+	{name: "motorcycle", variants: [{name: "petrol", emission: 103 + 215}, {name: "diesel", emission: 115 + 205}]},
 ];
 
 function getCarData(): CarType {
@@ -64,11 +64,8 @@ const CarSettings: NextPage = () => {
 
      const router = useRouter()
 
-     const submitHandler = (event: FormEvent) => {
-            event.preventDefault()
-            console.log(`vehicle=${JSON.stringify(vehicle)}, emission=${emission}, distance=${data.distance}`)
-            setItem("car", {emissionPerKm: emission, vehicleType: vehicleName, litersPerKm: LiterPerKm, CO2PerLiter: CO2PerLiter} as CarType)
-            router.push('/comparison')
+     const saveData = () => {
+         setItem("car", {emissionPerKm: emission, vehicleType: vehicleName, litersPerKm: LiterPerKm, CO2PerLiter: CO2PerLiter} as CarType)
      }
 
      const data = getTypedItem<ComparisonType>("comparison", {from: "", to: "", distance: 10})
@@ -79,6 +76,10 @@ const CarSettings: NextPage = () => {
      const [emission, setEmission] = useState(carData.emissionPerKm)
      const [CO2PerLiter, setCO2PerLiter] = useState<string>(carData.CO2PerLiter)
      const [LiterPerKm, setLiterPerKm] = useState<string>(carData.litersPerKm)
+
+    useEffect(() => {
+        saveData()
+    }, [emission, vehicleName, CO2PerLiter, LiterPerKm])
 
      const changeVehicle = (e: React.MouseEvent, v: string) => {
          if(!v){
@@ -115,7 +116,6 @@ const CarSettings: NextPage = () => {
     return (
         <Template>
             <Container maxWidth="md">
-                <form onSubmit={submitHandler}>
                     <Grid container spacing={1}>
                         <Grid xs={12}>
                             <Typography variant="h3" textAlign="center"> Car Settings </Typography>
@@ -176,11 +176,7 @@ const CarSettings: NextPage = () => {
                                 </AccordionDetails>
                             </Accordion>
                         </Grid>
-                        <Grid xs={12}>
-                            <Button type="submit" variant="contained" disabled={carData.emissionPerKm === emission} fullWidth> Save </Button>
-                        </Grid>
                     </Grid>
-                </form>
             </Container>
         </Template>
     )
