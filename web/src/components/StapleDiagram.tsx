@@ -6,7 +6,7 @@ import Stack from '@mui/material/Stack';
 import Tooltip from '@mui/material/Tooltip';
 
 import {setItem, getItem } from '../sessionStorage';
-import { TextField } from '@mui/material';
+import { TextField, Typography, Fade } from '@mui/material';
 
 interface StaplePart {
 	color: number;
@@ -149,12 +149,6 @@ export function StapleDiagram(props: StapleDiagramProps) {
 	let verticalAxis = (h : number) => {
 
 		return (100000 < highestStaple ? `${~~(h/1000)}k` : ~~h) + "g";
-
-	/*	if(100000 < h) {
-			return `${(h/1000).toFixed(2)}kg`;
-		} else {
-			return h + "g";
-		}*/
 	};
 	
 	return (
@@ -165,7 +159,7 @@ export function StapleDiagram(props: StapleDiagramProps) {
 			<Box sx={{ width: "calc(100% - 100px)", height: "1px", backgroundColor: "gray", position: "absolute", top: "309px", right: "0px"}} />
 			<Box sx={{ width: "calc(100% - 100px)", height: "1px", backgroundColor: "gray", position: "absolute", top: "409px", right: "0px"}} />
 			
-			<Box sx={{ position: "absolute", top: "10px", right: "calc(100% - 100px)", transform: "translateY(-50%)"}}>{verticalAxis(highestStaple)}</Box>
+			<Box sx={{ position: "absolute", top: "10px",  right: "calc(100% - 100px)", transform: "translateY(-50%)"}}>{verticalAxis(highestStaple)}</Box>
 			<Box sx={{ position: "absolute", top: "109px", right: "calc(100% - 100px)", transform: "translateY(-50%)"}}>{verticalAxis(highestStaple * .75)}</Box>
 			<Box sx={{ position: "absolute", top: "209px", right: "calc(100% - 100px)", transform: "translateY(-50%)"}}>{verticalAxis(highestStaple * .50)}</Box>
 			<Box sx={{ position: "absolute", top: "309px", right: "calc(100% - 100px)", transform: "translateY(-50%)"}}>{verticalAxis(highestStaple * .25)}</Box>

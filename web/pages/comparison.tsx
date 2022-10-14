@@ -98,7 +98,7 @@ const ComparisonPage: NextPage = () => {
 
 	let Everyday_image_list = (
 		<ImageList sx={{}} cols={6} >
-		  {itemsState.map((item) => (
+		  {itemsState.map((item : any) => (
 			<ImageListItem key={item.img} onClick={() => handleClick(item)} sx={item.css}>
 			  <Image src={item.img + "?w=165&fit=crop&auto=format"} alt="" width={165} height={165} layout="responsive" style={{borderRadius: item.css.borderRadius,}}/>
 			  <ImageListItemBar
@@ -110,7 +110,6 @@ const ComparisonPage: NextPage = () => {
 		  ))}
 		</ImageList>
 	  );
-
 
 	return (
 		<Template>
