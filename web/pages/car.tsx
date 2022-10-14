@@ -79,7 +79,7 @@ const CarSettings: NextPage = () => {
 
     useEffect(() => {
         saveData()
-    }, [emission])
+    }, [emission, vehicleName, CO2PerLiter, LiterPerKm])
 
      const changeVehicle = (e: React.MouseEvent, v: string) => {
          if(!v){
