@@ -28,7 +28,6 @@ import java.nio.file.Paths;
 
         @GetMapping @CrossOrigin(origins="*")
         public String autoComplete(@RequestParam String input) throws IOException {
-            System.out.println("Kommer vi hit?");
             String pathToKey = "api//apiKey";
             String pathToMoch = "api//AutoCompleteMockResponse.txt";
             String contents;
