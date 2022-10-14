@@ -9,6 +9,8 @@ import java.net.URL;
 
 /**
  * A class fore establishing a http connection to GoogleRoutsDirection Api
+ * https://maps.googleapis.com/maps/api/directions/json?destination=place_id:ChIJWarIEjNifEYRp_-OvZUkBy4&origin=place_id:ChIJ1c_PFG1lfEYRofKh9NqTsrI&key=YoureKeyHere
+ *         try {
  */
 
 public class RoutesDirectionApi {

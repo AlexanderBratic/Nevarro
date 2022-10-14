@@ -30,8 +30,8 @@ import { useState } from 'react';
 const ComparisonPage: NextPage = () => {
 
 	let [comparisonData, setComparisonData] = useState(getTypedItem<ComparisonType>('comparison', {to:'', from:'', distance:10}));
-	const [from, setFrom] = React.useState(comparisonData.from);
-	const [to, setTo] = React.useState(comparisonData.to);
+	const [from, setFrom] = React.useState(comparisonData.from.description);
+	const [to, setTo] = React.useState(comparisonData.to.description);
     const router = useRouter();
 
     const handleSubmit = async (event: React.FormEvent) => {

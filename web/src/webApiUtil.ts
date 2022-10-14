@@ -4,8 +4,13 @@
 import {setItem, updateItemObj} from "./sessionStorage";
 import {GoggleMapsType} from "../types/sessionStorageTypes";
 
-async function dirRequest(destination: string, origin: string, mean: "DRIVING" | "WALKING" | "BICYCLING" | "TRANSIT"): Promise<GoggleMapsType> {
-    let httpAddress= {url:"http://localhost:8080/routes?destination="+destination+"&origin="+origin+"&mean="+mean};
+interface Place {
+    description: string;
+    place_id: string;
+}
+
+async function dirRequest(destination: Place, origin: Place, mean: "DRIVING" | "WALKING" | "BICYCLING" | "TRANSIT"): Promise<GoggleMapsType> {
+    let httpAddress= {url:"http://localhost:8080/routes?destination=place_id:"+destination.place_id+"&origin=place_id:"+origin.place_id+"&mean="+mean};
     let data: GoggleMapsType = await fetch(httpAddress.url)
         .then(response => response.json())
     setItem('googlemaps',data)
