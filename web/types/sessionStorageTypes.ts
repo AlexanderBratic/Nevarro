@@ -4,6 +4,7 @@ export interface ComparisonType {
     from: string;
     to: string;
     distance: number;
+    selectedItemTitles: string[];
 }
 
 export interface CarType {
