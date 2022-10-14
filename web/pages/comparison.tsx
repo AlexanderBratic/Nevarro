@@ -57,7 +57,6 @@ const Item = ({item, selected, toggleItem}: ItemProps) => {
 		"&:hover": {opacity: "80%",}
 	};
 	
-  console.log(selected);
   let borderRadius = selected ? css2.borderRadius : css1.borderRadius;
   
   return (
