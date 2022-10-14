@@ -1,0 +1,55 @@
+Team Reflection 5 (14/10-2022)
+
+	Chosen Scope:
+This sprint we've chosen to limit our scope to only include Sweden in the search results to make searching easier. We also removed flights from the scope last sprint, this was done since it would entail a lot of extra work with new apis that we didnt have time for so we had to prioritize other things. 
+
+	Success Critera:
+Last sprint we created a document for our MVP (minimum viable product) which speced which features we need for the project. We have not deviated from that yet. We also had a number of personal goals connected to the course and to our personal development. Many of us wanted to learn webdevelopment with react. We think these goals have been achieved so far even if they haven't had clear success criterias.
+
+	User Stories:
+Our user stories are currently a lot better, compared to the beginning of the project we now work a lot more structured and do the same work faster when it comes to ticket creation. We've also made acceptance criterias for all tickets and made sure to break down all user stories that require it into useful tasks. Our effort estimation has also become a lot faster and more efficient, now we do an effort estimation for each task and discuss between the lowest and highest.
+
+	Test: 
+We havent built any unit tests but in the definition of done we have conditions that the project should be built and linted before making a pull request. 
+
+	KPIs:
+The KPIs we've used are velocity, burndown chart and user feedback. We used the acting Project owner as a proxy for the user feedback, the last two sprints the userfeedback has been good, probably due to the fact that we've managed to complete most of the tasks we added to the sprint. The Burndown chart has been going down steadily both of the last two sprints as well. 
+
+	Social contract: 
+There haven't been any problems following the social contract. We did add another point into the social contract last sprint though to say that we should have daily meetings, going from a single standup in the middle of the week to a stand up meeting on every that that we don't have other meetings.
+
+	Time spent: 
+We've come to the conclusion that we've spent the time a lot more efficiently in the last sprints, becoming better each sprint. We think that this is largely due to the fact that our planning/syncing has gotten a lot better. If we started a new project at the same relative skill level we would probably be able to get started a lot quicker than we did in this project due to better written tickets and having a shared vision more in with each other. 
+
+	Design Decisions:
+We could probably have chosen fewer technologies to make it easier to get of the ground faster for a lot of the teammembers. Other than that we're pretty happy with our decisions early on and havent changed much, even though we had some issues consolidating our shared vision at first.
+
+	Documentation:
+We haven't documented that much so far, we've a number of readmes on how to set up different parts of the project and run it. We've also created a number of mockups of the design on the website. Finally we've also written some comments in the code.
+
+	Update documentation:
+We've got a lot of our documentation in trello, we update it whenever we do things. The documentation we have has also been created when the relevant items it describes was created, so for example documentation for how to use the docker was created in combination with the setting up of the dockerscript.
+
+	Ensure code quality:
+Our only real rule right now is that we have to be able to build & lint after before committing and then we also require someone else in the team to accept the pull request before merging into main. We haven't been very strict with this though and it has been something that we've done more and more as the project progressed.
+
+	Roles in the team and impact:
+After the first sprint we decided to have one acting Project owner and an acting scrummaster each sprint and we switch them at the end of the sprint. This havent had a massive impact due to the fact that we've held the roles for such a short time. The PO has mainly been in charge of prioritizing the backlog and acting as a proxy for the user feedback at the end of the sprint and the scrummaster has mainly been in charge of leading the meetings.
+
+	Agile practices:
+At first we though it slowed down our work a lot that we had to put so much time on the agile processes. This mindset has changed somewhat and now we think that it helps us a lot that we have more structure. The Burndown chart feels like it would work a lot better if we had longer sprints though since now we have effectively 2.5day sprints (since we're only doing 50%), so we think that it would be better with more "normal-length" sprints.
+
+	Sprint review: 
+This sprint our PO was Jesper. In the beginning of the sprint our PO prioritized the tickets in the backlog, but other that there was no need to change anything in the social contract. The feedback was good, says that the product feels a lot more user friendly. 
+
+	Best practices for learning:
+For the project itself we've used NPM (node package manager), YARN and Docker. These have been more or less plug and play after the projects were created. Other than that we've also used Trello for our scrum board and git (with github) for version handling. People have also used different IDEs such as Intellij and Visual studio code. Intellij's graphical git-interface has been very good for some people with relatively low familiarity with git. Other than that we've taught/learnt mostly by asking eachother since most of the time the required knowledge has been inside the team.
+
+	Litterature:
+We didn't find a lot of litterature on canvas but we've search online whenever questions have arisen, for example when we didn't know what KPIs to use we looked at among others kpi.org for insights. By the time we had the guest lecture we didn't want to change our way of working since we felt that it worked well and didnt want to make any drastic changes.
+
+	What would we do differently next time:
+Focus the project more to use fewer technologies and also pick technologies that people have more knowledge in. We would also try to have more meetings, especially in the beginning of the project to get a clear shared vision. We would also change the definition of done to only include working code, in this project we did changes a few sprints in but ideally we would have been stricter from the start. We would also have focused on creating better userstories from the start, and also create more achievable epics. Finally we would set aside a bit more time to document the code (not a big thing but a tiny bit more).
+
+	What would >I< do in a new project group:
+We would take more care to not underestimate the points given to tasks. 
