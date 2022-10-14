@@ -17,37 +17,47 @@ import {getTypedItem, setItem} from "../src/sessionStorage";
 import {CarType, ComparisonType} from "../types/sessionStorageTypes";
 import {useRouter} from "next/router";
 
+import {Staple, STAPLE_COLORS} from '../src/components/StapleDiagram';
+import CarIcon from '@mui/icons-material/DirectionsCarRounded';
 
 const vehicleTypes: {name: string, variants: {name: string, emission: number }[] }[] = [
-	{name: "bil", variants: [
-		{name: "bensin", emission: 168},
+	{name: "car", variants: [
+		{name: "petrol", emission: 168},
 		{name: "diesel", emission: 188},
-		{name: "el", emission: 100},
-		{name: "väte", emission: 120},
+		{name: "electricity", emission: 100},
+		{name: "hydrogen", emission: 120},
 		{name: "hybrid", emission: 143},
 		{name: "etanol", emission: 108},
-		{name: "gasol", emission: 111},
+		{name: "LPG", emission: 111},
 		{name: "biodiesel", emission: 179},
 	]},
-	{name: "Lätt lastbil", variants: [{name: "bensin", emission: 376}, {name: "diesel", emission: 421}]},
-	{name: "Lastbil", variants: [{name: "bensin", emission: 1045}, {name: "diesel", emission: 1169}]},
-	{name: "motorcykel", variants: [{name: "bensin", emission: 103}, {name: "diesel", emission: 115}]},
+	{name: "suv", variants: [{name: "petrol", emission: 376}, {name: "diesel", emission: 421}]},
+	{name: "truck", variants: [{name: "petrol", emission: 1045}, {name: "diesel", emission: 1169}]},
+	{name: "motorcycle", variants: [{name: "petrol", emission: 103}, {name: "diesel", emission: 115}]},
 ];
 
 function getCarData(): CarType {
 	const defaultData: CarType = {
-		emissionPerKm: vehicleTypes[0].variants[0].emission, 
-		vehicleType: vehicleTypes[0].name, 
-		CO2PerLiter: "", 
+		emissionPerKm: vehicleTypes[0].variants[0].emission,
+		vehicleType: vehicleTypes[0].name,
+		CO2PerLiter: "",
 		litersPerKm: ""
 	};
-	
+
 	return getTypedItem<CarType>("car", defaultData);
 }
 
-export function getCarCo2PerKm() {
+export function getCarStaples(distance: number): Staple[] {
 	let carData = getCarData();
-	return carData.emissionPerKm;
+	return [
+		{
+			title: "Car",
+			icon: <CarIcon key={"Car"} />,
+			parts: [
+				{ color: STAPLE_COLORS.ROUTE, value: carData.emissionPerKm * distance, hint: "Emissions for the route"  }
+			]
+		}
+	];
 }
 
 const CarSettings: NextPage = () => {
@@ -61,23 +71,7 @@ const CarSettings: NextPage = () => {
             router.push('/comparison')
      }
 
-     const vehicleTypes: {name: string, variants: {name: string, emission: number }[] }[] = [
-         {name: "bil", variants: [
-                 {name: "bensin", emission: 168},
-                 {name: "diesel", emission: 188},
-                 {name: "el", emission: 100},
-                 {name: "väte", emission: 120},
-                 {name: "hybrid", emission: 143},
-                 {name: "etanol", emission: 108},
-                 {name: "gasol", emission: 111},
-                 {name: "biodiesel", emission: 179},
-             ]},
-         {name: "Lätt lastbil", variants: [{name: "bensin", emission: 376}, {name: "diesel", emission: 421}]},
-         {name: "Lastbil", variants: [{name: "bensin", emission: 1045}, {name: "diesel", emission: 1169}]},
-         {name: "motorcykel", variants: [{name: "bensin", emission: 103}, {name: "diesel", emission: 115}]},
-     ]
-
-     const data = getTypedItem<ComparisonType>("comparison", {from: "", to: "", distance: 0})
+     const data = getTypedItem<ComparisonType>("comparison", {from: "", to: "", distance: 10})
      const carData = getCarData();
 
      const [vehicle, setVehicle] = useState(vehicleTypes.find(v => v.name === carData.vehicleType) ?? vehicleTypes[0])
@@ -124,10 +118,10 @@ const CarSettings: NextPage = () => {
                 <form onSubmit={submitHandler}>
                     <Grid container spacing={1}>
                         <Grid xs={12}>
-                            <Typography variant="h3" textAlign="center"> Bil Inställningar </Typography>
+                            <Typography variant="h3" textAlign="center"> Car Settings </Typography>
                         </Grid>
                         <Grid xs={12}>
-                            <Typography variant="subtitle2"> Bil typ </Typography>
+                            <Typography variant="subtitle2"> Vehicle type </Typography>
                             <ToggleButtonGroup
                                 size="small"
                                 exclusive
@@ -142,7 +136,7 @@ const CarSettings: NextPage = () => {
                             </ToggleButtonGroup>
                         </Grid>
                         <Grid xs minWidth="300px">
-                            <Typography variant="subtitle2"> Bränsle typ </Typography>
+                            <Typography variant="subtitle2"> Fuel type </Typography>
                             <ToggleButtonGroup
                                 size="small"
                                 exclusive
@@ -157,18 +151,18 @@ const CarSettings: NextPage = () => {
                             </ToggleButtonGroup>
                         </Grid>
                         <Grid xs maxWidth="120px">
-                            <Typography variant="subtitle2"> Utsläpp: </Typography>
-                            <Typography variant="body2"> {getTotalEmission()} g av CO2 </Typography>
+                            <Typography variant="subtitle2"> Emission: </Typography>
+                            <Typography variant="body2"> {getTotalEmission()} g of CO2 </Typography>
                         </Grid>
                         <Grid xs={12}>
                             <Accordion>
-                                <AccordionSummary expandIcon={<ExpandMore/>}> Avancerat </AccordionSummary>
+                                <AccordionSummary expandIcon={<ExpandMore/>}> Advanced </AccordionSummary>
                                 <AccordionDetails>
                                     <Grid container spacing={1}>
                                         <Grid xs minWidth="200px">
                                             <TextField fullWidth type="number" value={CO2PerLiter}
                                                        onChange={e => changeEmissionManual(e.target.value, LiterPerKm)}
-                                                       label="Gram Koldioxid per Liter" />
+                                                       label="Gram Carbon per Liter" />
                                         </Grid>
                                         <Grid xs={12} sm minWidth="200px">
                                             <TextField fullWidth type="number" label="Liter per Kilometer" value={LiterPerKm}
@@ -183,7 +177,7 @@ const CarSettings: NextPage = () => {
                             </Accordion>
                         </Grid>
                         <Grid xs={12}>
-                            <Button type="submit" variant="contained" disabled={carData.emissionPerKm === emission} fullWidth> Spara </Button>
+                            <Button type="submit" variant="contained" disabled={carData.emissionPerKm === emission} fullWidth> Save </Button>
                         </Grid>
                     </Grid>
                 </form>

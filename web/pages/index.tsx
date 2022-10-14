@@ -99,7 +99,7 @@ const Home: NextPage  = () => {
                 disabled={startVal === '' || endVal === '' || startVal === null || endVal === null}
                 type="submit"
               >
-                Sök
+                Search
               </Button>
             </Grid>
         </Grid>
@@ -107,14 +107,14 @@ const Home: NextPage  = () => {
 
       <br/>
 
-      <Typography variant="h5"> Varför använda Eco Travel Planer? </Typography>
+      <Typography variant="h5"> Why use Eco Travel Planer </Typography>
 
       <Typography textAlign="justify">
-            Har du någonsin undrat hur mycket koldioxidutsläpp du producerar när du reser mellan två platser,
-            till exempel från hemmet till jobbet? Du kan jämföra flera resmetoder såsom promenad, cykling, körning och kollektivtrafik
-            för att hitta det bästa alternativet. Ibland kan en bil vara mer effektiv än att byta mellan flera bussar. Du kan också hitta
-            ut en uppskattad årlig utsläpp om du tar samma rutt regelbundet. För att komma igång kan du välja en startpunkt och destination
-            tillsammans med anpassning av fordonet.
+            Have you ever wondered the amount of carbon dioxide emissions you produce when you travel between two places,
+            for example from home to work? You can compare several travel methods such as walking, cycling, driving and public transport
+            to find the best alternative. Sometimes a car can be more efficient than switching between several buses.
+            You can also compare your emissions to standard everyday items!
+            To get started, you can choose a starting point and destination as well as customising your vehicle settings.
       </Typography>
 
     </Container>
