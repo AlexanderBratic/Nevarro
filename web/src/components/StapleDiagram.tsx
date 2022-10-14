@@ -31,6 +31,7 @@ interface StapleDiagramProps {
 
 export function StapleDiagram(props: StapleDiagramProps) {
 	let staples = props.staples ?? [];
+	const [s, setS] = React.useState(true);
 	
 	let highestStaple = 0.0;
 	
