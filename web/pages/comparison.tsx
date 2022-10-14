@@ -129,9 +129,11 @@ const ComparisonPage: NextPage = () => {
                         </Grid>
                     </Grid>
                 </form>
-
-				<StapleDiagram staples={stapleState} />
+				<div style={{marginTop: '40px'}}>
+					<StapleDiagram staples={stapleState} />
+				</div>
 			</Box>
+			<h3>Select the items you want to compare with in the diagram above</h3>
 			<Box>
 				{Everyday_image_list}
 			</Box>
