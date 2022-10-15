@@ -1,3 +1,6 @@
+
+import {getTypedItem} from '../src/sessionStorage';
+
 export type SessionStorageTypes = string | "googlemaps" | "comparison" | "car" | "bicycle" | "plane" | "walking" | "public transit" | "stapleheights";
 
 export interface Place {
@@ -9,6 +12,14 @@ export interface ComparisonType {
     to: Place;
     distance: number;
     selectedItemTitles: string[];
+}
+export function getComparisonData(): ComparisonType {
+	return getTypedItem<ComparisonType>('comparison', {
+		from: {description: "", place_id: ""}, 
+		to: { description: "", place_id: ""}, 
+		distance: 1,
+		selectedItemTitles: []
+	});
 }
 
 export interface CarType {

@@ -4,8 +4,8 @@ import { useState,
 import { Autocomplete, 
 		 TextField, 
 		 Button, 
-		 Typography, 
-		 Grid } from "@mui/material";
+		 Typography } from "@mui/material";
+import   Grid2  from '@mui/material/Unstable_Grid2';
 import { dirRequest } from "../webApiUtil";
 import { autoCompleteRequest } from "../webAutoCompleteApiUtil";
 
@@ -17,12 +17,12 @@ interface DirectionApiInputProps {
 }
 interface DirectionInputFieldProps {
 	hint: string;
-	setPlaceId: (string) => void;
+	setPlaceId: (place: Place) => void;
 }
 
-function DirectionInputField({hint, setPlaceId}: DirectionApiInputProps) {
-    const [options, setOptions] = useState<any[]>([]);
-    const [currentOption, setCurrentOption] = useState(null);
+function DirectionInputField({hint, setPlaceId}: DirectionInputFieldProps) {
+    const [options, setOptions] = useState<Place[]>([]);
+    const [currentOption, setCurrentOption] = useState<Place|null>(null);
 
     // Triggered whenever someone writes something in the boxes, one for the start and end box
     async function whenchanged(newval: string){
@@ -40,7 +40,7 @@ function DirectionInputField({hint, setPlaceId}: DirectionApiInputProps) {
     }
 
     return (
-        <Grid xs={12} sm={6} md={5}>
+        <Grid2 xs={12} sm={6} md={5}>
             <Autocomplete
                 value={currentOption}
                 onChange={(event: any, newValue:any)=>{ setPlaceId(newValue); setCurrentOption(newValue);}}
@@ -49,9 +49,10 @@ function DirectionInputField({hint, setPlaceId}: DirectionApiInputProps) {
                 options={options}
                 isOptionEqualToValue={(option, value) => option.valueOf === value.valueOf}
                 getOptionLabel={(option) => option.description}
-                sx={{ width: 300 }}
+                sx={{ width: "100%" }}
                 renderInput={(params) =>
                     <TextField {...params}
+							
                                label={hint}
                                variant='filled'
                                value={currentOption !== null ? currentOption.description : ""}
@@ -59,48 +60,47 @@ function DirectionInputField({hint, setPlaceId}: DirectionApiInputProps) {
                                    (event) =>
                                        whenchanged(event.target.value)
                                }
-                               fullWidth/>}
+                               fullWidth
+					/>
+				}
             />
-        </Grid>
+        </Grid2>
     );
 }
 
-export default function DirectionApiInput({onSubmit}: DirectionApiInputProps){
-    const [startVal, setstartVal] = useState<string | null>('');
-    const [endVal, setendVal] = useState<string | null>('');
+export default function DirectionApiInput({onSubmit}: DirectionApiInputProps) {
+    const [startVal, setStartVal] = useState<Place|null>(null);
+    const [endVal, setEndVal] = useState<Place|null>(null);
 
     const handleSubmit = async (event: FormEvent) => {
         // prevent refresh
         event.preventDefault()
-
-        await dirRequest(startVal, endVal, "DRIVING");
 		
-		if (onSubmit !== null)
-			await onSubmit();
+		if (startVal !== null && endVal !== null) {
+			await dirRequest(startVal, endVal, "DRIVING");
+			
+			if (onSubmit !== undefined && onSubmit !== null)
+				await onSubmit();
+		}
     }
 
     return (
         <form onSubmit={handleSubmit}>
-            <Grid container spacing={1}>
-                <Grid xs={12}>
-                    <Typography variant="h3" component="h1" gutterBottom align="center">
-                        Eco Travel Planner
-                    </Typography>
-                </Grid>
-                <DirectionInputField hint={"Start"} setPlaceId={setstartVal} />
-                <DirectionInputField hint={"End"} setPlaceId={setendVal} />
-                <Grid xs>
+            <Grid2 container spacing={1}>
+                <DirectionInputField hint={"Start"} setPlaceId={(place: Place) => setStartVal(place)} />
+                <DirectionInputField hint={"End"} setPlaceId={(place: Place) => setEndVal(place)} />
+                <Grid2 xs md={2}>
                     <Button
                         style={{height: '100%'}}
                         variant="contained"
                         fullWidth
-                        disabled={startVal === '' || endVal === '' || startVal === null || endVal === null}
+                        disabled={startVal === null || endVal === null}
                         type="submit"
                     >
                         Search
                     </Button>
-                </Grid>
-            </Grid>
+                </Grid2>
+            </Grid2>
         </form>
     );
 }

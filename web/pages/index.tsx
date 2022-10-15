@@ -1,4 +1,4 @@
-import * as React from 'react';
+
 import type { NextPage } from 'next';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
@@ -6,11 +6,16 @@ import {useRouter} from "next/router";
 import DirectionApiInput from '../src/components/DirectionApiInput';
 
 const Home: NextPage  = () => {
+	const router = useRouter();
+	
     // html
-	
-	
 	return (
 		<Container maxWidth="md" style={{marginTop: '20px'}}>
+
+			<Typography variant="h3" component="h1" gutterBottom align="center">
+				Eco Travel Planner
+			</Typography>
+		
 			<DirectionApiInput onSubmit={() => router.push('/comparison')}/>
 
 			<br/>
@@ -25,7 +30,7 @@ const Home: NextPage  = () => {
 				To get started, you can choose a starting point and destination as well as customising your vehicle settings.
 			</Typography>
 		</Container>
-  );
+	);
 };
 
 export default Home;

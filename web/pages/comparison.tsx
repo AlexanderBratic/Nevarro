@@ -1,13 +1,12 @@
-import * as React from 'react';
 
 import Image from 'next/image';
 
 import type { NextPage } from 'next';
 import Template from '../src/components/Template';
 import {Staple, StapleDiagram, STAPLE_COLORS} from '../src/components/StapleDiagram';
-import {DirectionApiInput} from '../src/components/DirectionApiInput';
+import DirectionApiInput from '../src/components/DirectionApiInput';
 
-import {ComparisonType} from '../types/sessionStorageTypes';
+import {getComparisonData} from '../types/sessionStorageTypes';
 import {setItem, getItem, getTypedItem } from '../src/sessionStorage';
 
 import { Box,
@@ -16,7 +15,7 @@ import { Box,
 		 Grid,
 		 ImageList, 
 		 ImageListItem,
-		 ImageListItemBar } from '@mui/material/ImageListItemBar';
+		 ImageListItemBar } from '@mui/material';
 
 import AirplaneIcon from '@mui/icons-material/AirplanemodeActiveRounded';
 import ElectricScooterIcon from '@mui/icons-material/ElectricScooterRounded';
@@ -34,7 +33,7 @@ interface ItemType {
   title: string;
   img: string;
   co2: number;
-}
+};
 interface ItemProps {
   item: any;
   selected: boolean;
@@ -86,27 +85,13 @@ const Item = ({item, selected, toggleItem}: ItemProps) => {
 
 const ComparisonPage: NextPage = () => {
 
-	let [comparisonData, setComparisonData] = useState(getTypedItem<ComparisonType>('comparison', {
-		to:'', 
-		from:'', 
-		distance:10,
-		selectedItemTitles: []
-	}));
+	let [comparisonData, setComparisonData] = useState(getComparisonData());
 	
-	const [from, setFrom] = React.useState(comparisonData.from);
-	const [to, setTo] = React.useState(comparisonData.to);
-    const router = useRouter();
-
-    const handleSubmit = async (event: React.FormEvent) => {
-        // prevent refresh
-        event.preventDefault()
-        //setItem("comparison", {from, to});
-        await dirRequest(from, to, "DRIVING");
-
-        setComparisonData(getTypedItem<ComparisonType>('comparison', {to:'', from:'', distance:0, selectedItemTitles: []}));
-    }
-  
-	const [selectedItemTitles, setSelectedItemTitles] = React.useState(comparisonData.selectedItemTitles);
+	const onDirectionSubmit = () => {
+		setComparisonData(getComparisonData()); 
+	};
+	
+	const [selectedItemTitles, setSelectedItemTitles] = useState(comparisonData.selectedItemTitles);
   
 	function toggleItem(title: string) {
 		let newSelectedItemTitles = [...selectedItemTitles];
@@ -165,7 +150,7 @@ const ComparisonPage: NextPage = () => {
 		<Template>
 			<Box>
 				<h1>Comparison</h1>
-				<DirectionApiInput />
+				<DirectionApiInput onSubmit={onDirectionSubmit} />
 				<div style={{marginTop: '40px'}}>
 					<StapleDiagram staples={staples} />
 				</div>
