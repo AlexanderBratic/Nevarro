@@ -27,30 +27,20 @@ import {getBicycleStaples} from './bicycle';
 import {getPublicTransportStaples} from './public-transport';
 import { useState } from 'react';
 
-const ComparisonPage: NextPage = () => {
-
-	let [comparisonData, setComparisonData] = useState(getTypedItem<ComparisonType>('comparison', {to:'', from:'', distance:10}));
-	const [from, setFrom] = React.useState(comparisonData.from);
-	const [to, setTo] = React.useState(comparisonData.to);
-    const router = useRouter();
-
-    const handleSubmit = async (event: React.FormEvent) => {
-        // prevent refresh
-        event.preventDefault()
-        //setItem("comparison", {from, to});
-        await dirRequest(from, to, "DRIVING");
-
-        setComparisonData(getTypedItem<ComparisonType>('comparison', {to:'', from:'', distance:0}));
-    }
-
-	const [stapleState, setStaples] = useState<Staple[]>([
-		...getCarStaples(comparisonData.distance),
-		...getPublicTransportStaples(comparisonData.distance),
-		...getBicycleStaples(comparisonData.distance)
-	]);
-
-
-	const [itemsState, setItems] = useState(ItemsJson.Items);
+interface ItemType {
+  title: string;
+  img: string;
+  co2: number;
+}
+interface ItemProps {
+  item: any;
+  selected: boolean;
+  toggleItem: any;
+};
+const Item = ({item, selected, toggleItem}: ItemProps) => {
+  function itemClicked() {
+    toggleItem(item.title);
+  }
 
 	let css1 = {
 		transition: "all 0.2s",
@@ -64,53 +54,108 @@ const ComparisonPage: NextPage = () => {
 		opacity: "100%",
 		filter: "contrast(120%)",
 		borderRadius: "30px",
-		border: "solid 5px darkgreen",
 		"&:hover": {opacity: "80%",}
 	};
 	
-	const handleClick = (event: {title: string, img: string, co2: number, clicked: boolean}) => {
-		console.log(event.title + ' image clicked');
-
-		setStaples((prevState: Staple[]) => {
-			const item = prevState.find(obj => {return obj.title == event.title});
-			if (typeof item === 'undefined') {
-				return [...prevState, {
-					title: event.title,
-					icon: <CoffeeIcon/>,
-					parts: [
-						{color: STAPLE_COLORS.PRODUCTION, value: event.co2, hint: "Production emissions"}
-					]
-				}];
-			} else{
-				return prevState.filter(obj => {return obj.title != event.title});
-			}
-		});
-		setItems(prevState => {
-			const newList = prevState.map(obj => {
-				if (obj.title === event.title) {
-					return {...obj, clicked: !event.clicked, css: event.clicked ? css1 : css2}; //toggle boolean clicked + change css
-				}
-				return obj;
-			});
-			return newList;
-		});
-	};
-
-	let Everyday_image_list = (
-		<ImageList sx={{}} cols={6} >
-		  {itemsState.map((item) => (
-			<ImageListItem key={item.img} onClick={() => handleClick(item)} sx={item.css}>
-			  <Image src={item.img + "?w=165&fit=crop&auto=format"} alt="" width={165} height={165} layout="responsive" style={{borderRadius: item.css.borderRadius,}}/>
+  let borderRadius = selected ? css2.borderRadius : css1.borderRadius;
+  
+  return (
+    <ImageListItem key={item.img} onClick={itemClicked} sx={selected ? css2 : css1}>
+			  <Image 
+          src={item.img + "?w=165&fit=crop&auto=format"} 
+          alt="" 
+          width={165} 
+          height={165} 
+          layout="responsive" 
+          style={{borderRadius: borderRadius}}
+        />
 			  <ImageListItemBar
-				title={item.title}
-				subtitle={`Co2e: ${item.co2}g`}
-				style={{borderRadius: item.css.borderRadius,}}
+          title={item.title}
+          subtitle={`Co2e: ${item.co2}g`}
+          style={{
+            borderRadius: borderRadius,
+            backgroundColor: selected ? "#2ecc7199" : "#00000033"
+          }}
 			  />
-			</ImageListItem>
-		  ))}
-		</ImageList>
-	  );
+		</ImageListItem>
+  );
+};
 
+const ComparisonPage: NextPage = () => {
+
+	let [comparisonData, setComparisonData] = useState(getTypedItem<ComparisonType>('comparison', {
+    to:'', 
+    from:'', 
+    distance:10,
+    selectedItemTitles: []
+  }));
+	const [from, setFrom] = React.useState(comparisonData.from);
+	const [to, setTo] = React.useState(comparisonData.to);
+    const router = useRouter();
+
+    const handleSubmit = async (event: React.FormEvent) => {
+        // prevent refresh
+        event.preventDefault()
+        //setItem("comparison", {from, to});
+        await dirRequest(from, to, "DRIVING");
+
+        setComparisonData(getTypedItem<ComparisonType>('comparison', {to:'', from:'', distance:0, selectedItemTitles: []}));
+    }
+  
+  const [selectedItemTitles, setSelectedItemTitles] = React.useState(comparisonData.selectedItemTitles);
+  
+  function toggleItem(title: string) {
+    let newSelectedItemTitles = [...selectedItemTitles];
+   
+    let index = selectedItemTitles.indexOf(title);
+    if (index != -1)
+      delete newSelectedItemTitles[index];
+    else
+      newSelectedItemTitles.push(title);
+  
+    setSelectedItemTitles(newSelectedItemTitles);
+    comparisonData.selectedItemTitles = newSelectedItemTitles;
+    setItem('comparison', comparisonData);
+  }
+  
+  function getItemStaple(item: ItemType) {
+    return {
+      title: item.title,
+			icon: <CoffeeIcon/>,
+			parts: [
+				{
+          color: STAPLE_COLORS.PRODUCTION, 
+          value: item.co2, 
+          hint: "Production emissions"
+        }
+			]
+    };
+  }
+  
+  function getSelectedItemStaples(selectedItemTitles: string[]) {
+    let result: any[] = [];
+    
+    selectedItemTitles.forEach((title) => {
+      let item = null;
+      for (let i = 0; i < ItemsJson.Items.length; i++) {
+        if (ItemsJson.Items[i].title === title) {
+          item = ItemsJson.Items[i];
+          break;
+        }
+      }
+      if (item !== null)
+        result.push(getItemStaple(item));
+    });
+    
+    return result;
+  }
+
+	let staples = [
+		...getCarStaples(comparisonData.distance),
+		...getPublicTransportStaples(comparisonData.distance),
+		...getBicycleStaples(comparisonData.distance),
+    ...getSelectedItemStaples(selectedItemTitles)
+	];
 
 	return (
 		<Template>
@@ -130,12 +175,21 @@ const ComparisonPage: NextPage = () => {
                     </Grid>
                 </form>
 				<div style={{marginTop: '40px'}}>
-					<StapleDiagram staples={stapleState} />
+					<StapleDiagram staples={staples} />
 				</div>
 			</Box>
 			<h3>Select the items you want to compare with in the diagram above</h3>
 			<Box>
-				{Everyday_image_list}
+				<ImageList cols={6} >
+          {ItemsJson.Items.map((item) =>
+            <Item 
+              key={item.title} 
+              item={item} 
+              selected={selectedItemTitles.includes(item.title)}
+              toggleItem={toggleItem} 
+            />
+          )}
+        </ImageList>
 			</Box>
 		</Template>
 	);
