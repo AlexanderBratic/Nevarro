@@ -8,6 +8,7 @@ export interface ComparisonType {
     from: Place;
     to: Place;
     distance: number;
+    selectedItemTitles: string[];
 }
 
 export interface CarType {

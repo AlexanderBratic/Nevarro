@@ -68,7 +68,7 @@ const CarSettings: NextPage = () => {
          setItem("car", {emissionPerKm: emission, vehicleType: vehicleName, litersPerKm: LiterPerKm, CO2PerLiter: CO2PerLiter} as CarType)
      }
 
-     const data = getTypedItem<ComparisonType>("comparison", {from: "", to: "", distance: 10})
+     const data = getTypedItem<ComparisonType>("comparison", {from: "", to: "", distance: 10, selectedItemTitles: []})
      const carData = getCarData();
 
      const [vehicle, setVehicle] = useState(vehicleTypes.find(v => v.name === carData.vehicleType) ?? vehicleTypes[0])
