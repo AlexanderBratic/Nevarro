@@ -1,8 +1,12 @@
 export type SessionStorageTypes = string | "googlemaps" | "comparison" | "car" | "bicycle" | "plane" | "walking" | "public transit" | "stapleheights";
 
+export interface Place {
+	description: string;
+	place_id: string;
+}
 export interface ComparisonType {
-    from: string;
-    to: string;
+    from: Place;
+    to: Place;
     distance: number;
 }
 

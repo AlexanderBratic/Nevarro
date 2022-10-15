@@ -2,46 +2,37 @@ import * as React from 'react';
 
 import Image from 'next/image';
 
-import {Box, TextField, Button} from '@mui/material';
-
 import type { NextPage } from 'next';
 import Template from '../src/components/Template';
 import {Staple, StapleDiagram, STAPLE_COLORS} from '../src/components/StapleDiagram';
+import {DirectionApiInput} from '../src/components/DirectionApiInput';
 
 import {ComparisonType} from '../types/sessionStorageTypes';
 import {setItem, getItem, getTypedItem } from '../src/sessionStorage';
 
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
-import ImageListItemBar from '@mui/material/ImageListItemBar';
+import { Box,
+		 TextField,
+		 Button,
+		 Grid,
+		 ImageList, 
+		 ImageListItem,
+		 ImageListItemBar } from '@mui/material/ImageListItemBar';
+
 import AirplaneIcon from '@mui/icons-material/AirplanemodeActiveRounded';
 import ElectricScooterIcon from '@mui/icons-material/ElectricScooterRounded';
 import WalkIcon from '@mui/icons-material/DirectionsWalkRounded';
 import CoffeeIcon from '@mui/icons-material/Coffee';
+
 import ItemsJson from "../src/items.json";
-import Grid from "@mui/material/Unstable_Grid2";
-import {dirRequest} from "../src/webApiUtil";
-import {useRouter} from "next/router";
+
 import {getCarStaples} from './car';
 import {getBicycleStaples} from './bicycle';
 import {getPublicTransportStaples} from './public-transport';
 import { useState } from 'react';
 
 const ComparisonPage: NextPage = () => {
-
 	let [comparisonData, setComparisonData] = useState(getTypedItem<ComparisonType>('comparison', {to:'', from:'', distance:10}));
-	const [from, setFrom] = React.useState(comparisonData.from.description);
-	const [to, setTo] = React.useState(comparisonData.to.description);
-    const router = useRouter();
 
-    const handleSubmit = async (event: React.FormEvent) => {
-        // prevent refresh
-        event.preventDefault()
-        //setItem("comparison", {from, to});
-        await dirRequest(from, to, "DRIVING");
-
-        setComparisonData(getTypedItem<ComparisonType>('comparison', {to:'', from:'', distance:0}));
-    }
 
 	const [stapleState, setStaples] = useState<Staple[]>([
 		...getCarStaples(comparisonData.distance),
@@ -116,19 +107,7 @@ const ComparisonPage: NextPage = () => {
 		<Template>
 			<Box>
 				<h1>Comparison</h1>
-                <form onSubmit={handleSubmit}>
-                    <Grid container spacing={1}>
-                        <Grid xs={12} sm>
-                            <TextField label="Start" fullWidth value={from} onChange={e => setFrom(e.target.value)} />
-                        </Grid>
-                        <Grid xs={12} sm>
-                            <TextField label="Destination" fullWidth value={to} onChange={e => setTo(e.target.value)} />
-                        </Grid>
-                        <Grid xs sm={1}>
-                            <Button style={{height: '100%'}} fullWidth type="submit" variant="contained" disabled={to === '' || from === ''}> Search </Button>
-                        </Grid>
-                    </Grid>
-                </form>
+				<DirectionApiInput />
 				<div style={{marginTop: '40px'}}>
 					<StapleDiagram staples={stapleState} />
 				</div>

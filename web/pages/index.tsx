@@ -7,23 +7,24 @@ import DirectionApiInput from '../src/components/DirectionApiInput';
 
 const Home: NextPage  = () => {
     // html
-  return (
-    <Container maxWidth="md" style={{marginTop: '20px'}}>
-      <DirectionApiInput />
+	
+	
+	return (
+		<Container maxWidth="md" style={{marginTop: '20px'}}>
+			<DirectionApiInput onSubmit={() => router.push('/comparison')}/>
 
-      <br/>
+			<br/>
 
-      <Typography variant="h5"> Why use Eco Travel Planer </Typography>
+			<Typography variant="h5"> Why use Eco Travel Planer </Typography>
 
-      <Typography textAlign="justify">
-            Have you ever wondered the amount of carbon dioxide emissions you produce when you travel between two places,
-            for example from home to work? You can compare several travel methods such as walking, cycling, driving and public transport
-            to find the best alternative. Sometimes a car can be more efficient than switching between several buses.
-            You can also compare your emissions to standard everyday items!
-            To get started, you can choose a starting point and destination as well as customising your vehicle settings.
-      </Typography>
-
-    </Container>
+			<Typography textAlign="justify">
+				Have you ever wondered the amount of carbon dioxide emissions you produce when you travel between two places,
+				for example from home to work? You can compare several travel methods such as walking, cycling, driving and public transport
+				to find the best alternative. Sometimes a car can be more efficient than switching between several buses.
+				You can also compare your emissions to standard everyday items!
+				To get started, you can choose a starting point and destination as well as customising your vehicle settings.
+			</Typography>
+		</Container>
   );
 };
 
