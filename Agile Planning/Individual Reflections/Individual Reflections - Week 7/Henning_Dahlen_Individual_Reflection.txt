@@ -1,0 +1,12 @@
+WEEK 4
+what do I want to learn or understand better?
+	I would still like to learn React and typescript better. 
+
+how can I help someone else, or the entire team, to learn something new?
+	I have helped out mainly with git support this week as well. 
+
+what is my contribution towards the team’s use of Scrum?
+	I've been active on all the meetings, voted on tickets and contributed to the teams reflections near the end of the sprint.
+
+what is my contribution towards the team’s deliveries?
+	This week I've been focusing on pairprogramming with Tomas. We've worked on the Autocomplete feature which has been hard but worked out near the end of the sprint. 

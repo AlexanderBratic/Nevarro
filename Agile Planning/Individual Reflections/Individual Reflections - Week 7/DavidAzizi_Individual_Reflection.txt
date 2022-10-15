@@ -1,0 +1,14 @@
+Individual Reflections - Week 7
+David Azizi - Team Nevarro
+
+• What do I want to learn or understand better?
+As a member of my team I want to learn the Next.Js framework, our team is using it and I want to improve by studying how the rest of my team are using it.
+
+• How can I help someone else, or the entire team, to learn something new?
+As a member of my team I know a certain amount of frontend skills. I want my team to know that if the ever wondered something the can ask and I plan on acheiving this by constantly being available on our discord server.
+
+• What is my contribution towards the team’s use of Scrum?
+As a member of a scrum team I participated in the discussions during the sprint meetings and during the stand ups meetings. I contributed to the estimations of the tickets and I aided in the process of making everybody on the team on the same page.
+
+• What is my contribution towards the team’s deliveries?
+I contributed to the team’s deliveries by fixing bugs, adjusting styling and by completing my tickets.
