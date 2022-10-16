@@ -6,5 +6,5 @@ RUN gradle bootJar
 FROM openjdk:17-jdk-slim AS deploy
 WORKDIR /app
 COPY --from=build /app/build/libs/*.jar app.jar
-COPY GoogleApiMockResponse.txt apiKe[y] ./api/
+COPY GoogleApiMockResponse.txt AutoCompleteMockResponse.txt apiKe[y] ./api/
 ENTRYPOINT ["java", "-jar", "app.jar"]
