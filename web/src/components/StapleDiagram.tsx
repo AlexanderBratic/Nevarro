@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 import Box from '@mui/material/Box';
@@ -10,6 +9,8 @@ import {StapleHeights, StaplePartHeights} from '../../types/sessionStorageTypes'
 import {setItem, getTypedItem } from '../sessionStorage';
 
 import styles from './css/StapleDiagram.module.css';
+
+let trueIfKg = false;
 
 interface StaplePart {
 	color: number;
@@ -104,7 +105,7 @@ const StaplePart = ({part,
 		<Tooltip placement="right" arrow title={
 			<Box sx={{textAlign: "center"}}>
 				{part.hint}<br/>
-				{part.value}kgCo2
+				{(trueIfKg ? `${(part.value/1000).toFixed(2)}k` : ~~part.value) + "g"}Co2
 			</Box>
 		}>
 			<Box sx={css} className={styles.part} />
@@ -194,6 +195,16 @@ export const StapleDiagram = (props: StapleDiagramProps) => {
 			/>
 		);
 	}
+
+	let verticalAxis = (h : number) => {
+		if(100000 < highestStaple) {
+			trueIfKg = true;
+			return `${~~(h/1000)}kg`;
+		} else {
+			trueIfKg = false;
+			return `${~~h}g`
+		}
+	};
 	
 	return (
 		<Box className={styles.stapleDiagram}>
@@ -203,11 +214,11 @@ export const StapleDiagram = (props: StapleDiagramProps) => {
 			<Box sx={{ width: "calc(100% - 100px)", height: "1px", backgroundColor: "gray", position: "absolute", top: "309px", right: "0px"}} />
 			<Box sx={{ width: "calc(100% - 100px)", height: "1px", backgroundColor: "gray", position: "absolute", top: "409px", right: "0px"}} />
 			
-			<Box sx={{ position: "absolute", top: "10px",  right: "calc(100% - 100px)", transform: "translateY(-50%)"}}>100%</Box>
-			<Box sx={{ position: "absolute", top: "109px", right: "calc(100% - 100px)", transform: "translateY(-50%)"}}>75%</Box>
-			<Box sx={{ position: "absolute", top: "209px", right: "calc(100% - 100px)", transform: "translateY(-50%)"}}>50%</Box>
-			<Box sx={{ position: "absolute", top: "309px", right: "calc(100% - 100px)", transform: "translateY(-50%)"}}>25%</Box>
-			<Box sx={{ position: "absolute", top: "409px", right: "calc(100% - 100px)", transform: "translateY(-50%)"}}>0%</Box>
+			<Box sx={{ position: "absolute", top: "10px",  right: "calc(100% - 100px)", transform: "translateY(-50%)"}}>{verticalAxis(highestStaple)}</Box>
+			<Box sx={{ position: "absolute", top: "109px", right: "calc(100% - 100px)", transform: "translateY(-50%)"}}>{verticalAxis(highestStaple * .75)}</Box>
+			<Box sx={{ position: "absolute", top: "209px", right: "calc(100% - 100px)", transform: "translateY(-50%)"}}>{verticalAxis(highestStaple * .50)}</Box>
+			<Box sx={{ position: "absolute", top: "309px", right: "calc(100% - 100px)", transform: "translateY(-50%)"}}>{verticalAxis(highestStaple * .25)}</Box>
+			<Box sx={{ position: "absolute", top: "409px", right: "calc(100% - 100px)", transform: "translateY(-50%)"}}>{verticalAxis(0)}</Box>
 			
 			<Box sx={{ position: "absolute", left: "100px", right: "0px", top: "11px", bottom: "0" }}>
 				{stapleComponents}
