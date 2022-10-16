@@ -1,16 +1,16 @@
 
-import { useState, 
+import { useState,
 		 FormEvent } from "react";
-import { Autocomplete, 
-		 TextField, 
-		 Button, 
+import { Autocomplete,
+		 TextField,
+		 Button,
 		 Typography } from "@mui/material";
 import   Grid2  from '@mui/material/Unstable_Grid2';
 import { dirRequest } from "../webApiUtil";
 import { autoCompleteRequest } from "../webAutoCompleteApiUtil";
 
 import {Place} from '../../types/sessionStorageTypes';
-import {getItem} from '../sessionStorage';
+import {getTypedItem} from '../sessionStorage';
 
 interface DirectionApiInputProps {
 	onSubmit?: () => void;
@@ -18,11 +18,12 @@ interface DirectionApiInputProps {
 interface DirectionInputFieldProps {
 	hint: string;
 	setPlaceId: (place: Place) => void;
+    startValue: Place | null;
 }
 
-function DirectionInputField({hint, setPlaceId}: DirectionInputFieldProps) {
+function DirectionInputField({hint, setPlaceId, startValue}: DirectionInputFieldProps) {
     const [options, setOptions] = useState<Place[]>([]);
-    const [currentOption, setCurrentOption] = useState<Place|null>(null);
+    const [currentOption, setCurrentOption] = useState<Place|null>(startValue);
 
     // Triggered whenever someone writes something in the boxes, one for the start and end box
     async function whenchanged(newval: string){
@@ -47,12 +48,14 @@ function DirectionInputField({hint, setPlaceId}: DirectionInputFieldProps) {
                 disablePortal
                 id="combo-box-demo"
                 options={options}
+                autoComplete
+                forcePopupIcon={false}
                 isOptionEqualToValue={(option, value) => option.valueOf === value.valueOf}
                 getOptionLabel={(option) => option.description}
                 sx={{ width: "100%" }}
                 renderInput={(params) =>
                     <TextField {...params}
-							
+
                                label={hint}
                                variant='filled'
                                value={currentOption !== null ? currentOption.description : ""}
@@ -69,16 +72,17 @@ function DirectionInputField({hint, setPlaceId}: DirectionInputFieldProps) {
 }
 
 export default function DirectionApiInput({onSubmit}: DirectionApiInputProps) {
-    const [startVal, setStartVal] = useState<Place|null>(null);
-    const [endVal, setEndVal] = useState<Place|null>(null);
+    const initialStartPlace = getTypedItem<{ to: Place | null, from: Place | null }>("comparison", {to: null, from: null});
+    const [startVal, setStartVal] = useState<Place|null>(initialStartPlace.from);
+    const [endVal, setEndVal] = useState<Place|null>(initialStartPlace.to);
 
     const handleSubmit = async (event: FormEvent) => {
         // prevent refresh
         event.preventDefault()
-		
+
 		if (startVal !== null && endVal !== null) {
 			await dirRequest(startVal, endVal, "DRIVING");
-			
+
 			if (onSubmit !== undefined && onSubmit !== null)
 				await onSubmit();
 		}
@@ -87,8 +91,8 @@ export default function DirectionApiInput({onSubmit}: DirectionApiInputProps) {
     return (
         <form onSubmit={handleSubmit}>
             <Grid2 container spacing={1}>
-                <DirectionInputField hint={"Start"} setPlaceId={(place: Place) => setStartVal(place)} />
-                <DirectionInputField hint={"End"} setPlaceId={(place: Place) => setEndVal(place)} />
+                <DirectionInputField hint={"Start"} setPlaceId={(place: Place) => setStartVal(place)} startValue={initialStartPlace.from} />
+                <DirectionInputField hint={"End"} setPlaceId={(place: Place) => setEndVal(place)} startValue={initialStartPlace.to} />
                 <Grid2 xs md={2}>
                     <Button
                         style={{height: '100%'}}

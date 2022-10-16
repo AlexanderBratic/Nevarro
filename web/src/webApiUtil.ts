@@ -2,7 +2,7 @@
  * Function to connect to RoutesDirectionApiService.
  */
 import {setItem, updateItemObj} from "./sessionStorage";
-import {GoggleMapsType} from "../types/sessionStorageTypes";
+import {ComparisonType, GoggleMapsType} from "../types/sessionStorageTypes";
 
 interface Place {
     description: string;
@@ -14,7 +14,7 @@ async function dirRequest(destination: Place, origin: Place, mean: "DRIVING" | "
     let data: GoggleMapsType = await fetch(httpAddress.url)
         .then(response => response.json())
     setItem('googlemaps',data)
-    setItem('comparison', {to: destination, from: origin, distance: data.routes[0].legs[0].distance.value / 1000})
+    setItem('comparison', {to: destination, from: origin, distance: data.routes[0].legs[0].distance.value / 1000, selectedItemTitles: []} as ComparisonType)
     return data;
 }
 
