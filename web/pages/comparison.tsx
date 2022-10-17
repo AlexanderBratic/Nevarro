@@ -26,6 +26,7 @@ import {getCarStaples} from './car';
 import {getBicycleStaples} from './bicycle';
 import {getPublicTransportStaples} from './public-transport';
 import { useState } from 'react';
+import {Wrapper} from "@googlemaps/react-wrapper";
 
 const ComparisonPage: NextPage = () => {
 
@@ -67,7 +68,7 @@ const ComparisonPage: NextPage = () => {
 		border: "solid 5px darkgreen",
 		"&:hover": {opacity: "80%",}
 	};
-	
+
 	const handleClick = (event: {title: string, img: string, co2: number, clicked: boolean}) => {
 		console.log(event.title + ' image clicked');
 
@@ -112,8 +113,43 @@ const ComparisonPage: NextPage = () => {
 	  );
 
 
+	interface MapProps extends google.maps.MapOptions {
+		style: { [key: string]: string };
+		children?: React.ReactNode;
+		zoom: number;
+		center: google.maps.LatLngLiteral;
+		//onIdle?: (map: google.maps.Map) => void;
+	}
+
+	const Map: React.FC<MapProps> = (
+		{/*onIdle,*/ children, style, center, ...options}) => {
+		const ref = React.useRef<HTMLDivElement>(null);
+		const [map, setMap] = React.useState<google.maps.Map>();
+
+		React.useEffect(() => {
+			if (ref.current && !map) {
+				setMap(new window.google.maps.Map(ref.current, {}));
+			}
+		}, [ref, map]);
+
+		return (
+			<>
+				<div ref={ref} style={style}/>
+				{React.Children.map(children, (child) => {
+					if (React.isValidElement(child)) {
+						return React.cloneElement(child, map);
+					}
+				})}
+			</>
+		);
+	}
 	return (
 		<Template>
+			<div style={{height: '500px', width: '1500px'}}>
+				<Wrapper apiKey={"YOUR_API_KEY"}>
+					<Map style={ {display: "flex", height: "100%" }} zoom={5} center={{lat: 57.706391, lng: 11.936703,}}/>
+				</Wrapper>
+			</div>
 			<Box>
 				<h1>Comparison</h1>
                 <form onSubmit={handleSubmit}>
