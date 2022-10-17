@@ -14,7 +14,7 @@ import React, {FormEvent, useEffect, useState} from "react";
 import Template from "../src/components/Template";
 import {ExpandMore} from "@mui/icons-material";
 import {getTypedItem, setItem} from "../src/sessionStorage";
-import {CarType, ComparisonType} from "../types/sessionStorageTypes";
+import {CarType, getComparisonData} from "../types/sessionStorageTypes";
 import {useRouter} from "next/router";
 
 import {Staple, STAPLE_COLORS} from '../src/components/StapleDiagram';
@@ -62,56 +62,52 @@ export function getCarStaples(distance: number): Staple[] {
 
 const CarSettings: NextPage = () => {
 
-     const router = useRouter()
+    const router = useRouter()
 
-     const saveData = () => {
-         setItem("car", {emissionPerKm: emission, vehicleType: vehicleName, litersPerKm: LiterPerKm, CO2PerLiter: CO2PerLiter} as CarType)
-     }
+    const data = getComparisonData();
+    const carData = getCarData();
 
-     const data = getTypedItem<ComparisonType>("comparison", {from: "", to: "", distance: 10, selectedItemTitles: []})
-     const carData = getCarData();
-
-     const [vehicle, setVehicle] = useState(vehicleTypes.find(v => v.name === carData.vehicleType) ?? vehicleTypes[0])
-     const [vehicleName, setVehicleName] = useState(carData.vehicleType)
-     const [emission, setEmission] = useState(carData.emissionPerKm)
-     const [CO2PerLiter, setCO2PerLiter] = useState<string>(carData.CO2PerLiter)
-     const [LiterPerKm, setLiterPerKm] = useState<string>(carData.litersPerKm)
+    const [vehicle, setVehicle] = useState(vehicleTypes.find(v => v.name === carData.vehicleType) ?? vehicleTypes[0])
+    const [vehicleName, setVehicleName] = useState(carData.vehicleType)
+    const [emission, setEmission] = useState(carData.emissionPerKm)
+    const [CO2PerLiter, setCO2PerLiter] = useState<string>(carData.CO2PerLiter)
+    const [LiterPerKm, setLiterPerKm] = useState<string>(carData.litersPerKm)
 
     useEffect(() => {
-        saveData()
+        setItem("car", {emissionPerKm: emission, vehicleType: vehicleName, litersPerKm: LiterPerKm, CO2PerLiter: CO2PerLiter} as CarType)
     }, [emission, vehicleName, CO2PerLiter, LiterPerKm])
 
-     const changeVehicle = (e: React.MouseEvent, v: string) => {
-         if(!v){
-             return
-         }
-
-         setVehicleName(v)
-         const vehicle = vehicleTypes.find(e => e.name === v)
-         if(!vehicle){
-             return
-         }
-         setVehicle(vehicle)
-         setEmission(vehicle.variants[0].emission)
-     }
-
-     const changeEmissionManual = (cpl: string, lpk: string) => {
-         setCO2PerLiter(cpl)
-         setLiterPerKm(lpk)
-         if(!cpl || !lpk){
-             return
-         }
-         const cl = parseFloat(cpl)
-         const lk = parseFloat(lpk)
-         if(isNaN(cl) || isNaN(lk)){
+    const changeVehicle = (e: React.MouseEvent, v: string) => {
+        if(!v){
             return
-         }
-         setEmission(cl / lk)
-     }
+        }
 
-     const getTotalEmission = () => {
-            return emission * (data.distance ?? 0)
-     }
+        setVehicleName(v)
+        const vehicle = vehicleTypes.find(e => e.name === v)
+        if(!vehicle){
+            return
+        }
+        setVehicle(vehicle)
+        setEmission(vehicle.variants[0].emission)
+    }
+
+    const changeEmissionManual = (cpl: string, lpk: string) => {
+        setCO2PerLiter(cpl)
+        setLiterPerKm(lpk)
+        if(!cpl || !lpk){
+            return
+        }
+        const cl = parseFloat(cpl)
+        const lk = parseFloat(lpk)
+        if(isNaN(cl) || isNaN(lk)){
+           return
+        }
+        setEmission(cl / lk)
+    }
+
+    const getTotalEmission = () => {
+        return emission * (data.distance ?? 0)
+    }
 
     return (
         <Template>

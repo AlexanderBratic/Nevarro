@@ -1,10 +1,25 @@
+
+import {getTypedItem} from '../src/sessionStorage';
+
 export type SessionStorageTypes = string | "googlemaps" | "comparison" | "car" | "bicycle" | "plane" | "walking" | "public transit" | "stapleheights";
 
+export interface Place {
+	description: string;
+	place_id: string;
+}
 export interface ComparisonType {
-    from: string;
-    to: string;
+    from: Place;
+    to: Place;
     distance: number;
     selectedItemTitles: string[];
+}
+export function getComparisonData(): ComparisonType {
+	return getTypedItem<ComparisonType>('comparison', {
+		from: {description: "", place_id: ""}, 
+		to: { description: "", place_id: ""}, 
+		distance: 1,
+		selectedItemTitles: []
+	});
 }
 
 export interface CarType {
@@ -27,6 +42,32 @@ export interface BicycleType {
     vehicleType: string,
     porpulsionType: string,
 	emissionPerKm: number
+}
+
+export interface AutoCompleteType {
+    predictions: {
+        description: string;
+        matched_substrings: {
+            length: number;
+            offset: number;
+        }[];
+        place_id: string;
+        reference: string;
+        structured_formatting: {
+            main_text: string;
+            main_text_matched_substrings: {
+                length: number;
+                offset: number;
+            }[];
+            secondary_text: string;
+        }
+        terms: {
+            offset: number;
+            value: string;
+        }[];
+        types: (string | "locality" | "political" | "geocode" )[];
+    }[];
+    status: string | "OK" | "ZERO_RESULTS" | "OVER_QUERY_LIMIT" | "REQUEST_DENIED" | "INVALID_REQUEST" | "UNKNOWN_ERROR";
 }
 
 export interface GoggleMapsType {
