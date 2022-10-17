@@ -9,8 +9,8 @@ import   Grid2  from '@mui/material/Unstable_Grid2';
 import { dirRequest } from "../webApiUtil";
 import { autoCompleteRequest } from "../webAutoCompleteApiUtil";
 
-import {Place} from '../../types/sessionStorageTypes';
-import {getTypedItem} from '../sessionStorage';
+import {Place, getComparisonData} from '../../types/sessionStorageTypes';
+
 
 interface DirectionApiInputProps {
 	onSubmit?: () => void;
@@ -72,7 +72,7 @@ function DirectionInputField({hint, setPlaceId, startValue}: DirectionInputField
 }
 
 export default function DirectionApiInput({onSubmit}: DirectionApiInputProps) {
-    const initialStartPlace = getTypedItem<{ to: Place | null, from: Place | null }>("comparison", {to: null, from: null});
+    const initialStartPlace = getComparisonData();
     const [startVal, setStartVal] = useState<Place|null>(initialStartPlace.from);
     const [endVal, setEndVal] = useState<Place|null>(initialStartPlace.to);
 
@@ -81,7 +81,7 @@ export default function DirectionApiInput({onSubmit}: DirectionApiInputProps) {
         event.preventDefault()
 
 		if (startVal !== null && endVal !== null) {
-			await dirRequest(startVal, endVal, "DRIVING");
+			await dirRequest(endVal, startVal, "DRIVING");
 
 			if (onSubmit !== undefined && onSubmit !== null)
 				await onSubmit();
