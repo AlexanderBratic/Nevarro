@@ -3,6 +3,11 @@ import {getTypedItem} from '../src/sessionStorage';
 
 export type SessionStorageTypes = string | "googlemaps" | "comparison" | "car" | "bicycle" | "plane" | "walking" | "public transit" | "stapleheights";
 
+/* key "comparison"
+ * types/sessionStorageTypes.ts read
+ * src/webApiUtils.tsx          write
+ * pages/comparison.tsx         write
+ */
 export interface Place {
 	description: string;
 	place_id: string;
@@ -22,6 +27,9 @@ export function getComparisonData(): ComparisonType {
 	});
 }
 
+/* key "car"
+ * pages/car.tsx read write
+ */
 export interface CarType {
     emissionPerKm: number
     vehicleType: string
@@ -29,15 +37,26 @@ export interface CarType {
     CO2PerLiter: string
 }
 
+/* key "bus"
+ * src/components/DirectionApiInput read
+ * pages/public-transport.tsx read write
+ */
 export interface BusType {
     vehicleType: string
     emissionPerKm: number
 }
+/* key "train"
+ * src/components/DirectionApiInput read
+ * pages/public-transport.tsx read write
+ */
 export interface TrainType {
     vehicleType: string
     emissionPerKm: number
 }
 
+/* key "bicycle"
+ * pages/bicycle.tsx read write
+ */
 export interface BicycleType {
     vehicleType: string,
     porpulsionType: string,
@@ -70,6 +89,9 @@ export interface AutoCompleteType {
     status: string | "OK" | "ZERO_RESULTS" | "OVER_QUERY_LIMIT" | "REQUEST_DENIED" | "INVALID_REQUEST" | "UNKNOWN_ERROR";
 }
 
+/* key "googlemaps"
+ * src/webApiUtils.tsx write
+ */
 export interface GoggleMapsType {
     geocoded_waypoints: {
         geocoder_status: string | "OK" | "ZERO_RESULTS" | "OVER_QUERY_LIMIT" | "REQUEST_DENIED" | "INVALID_REQUEST" | "UNKNOWN_ERROR";
@@ -148,5 +170,8 @@ export interface GoggleMapsType {
     status: string | "OK" | "ZERO_RESULTS" | "MAX_WAYPOINTS_EXCEEDED" | "MAX_ROUTE_LENGTH_EXCEEDED" | "INVALID_REQUEST" | "OVER_QUERY_LIMIT" | "REQUEST_DENIED" | "UNKNOWN_ERROR";
 }
 
+/* key "stapleheights"
+ * src/components/StapleDiagram read write
+ */
 export type StaplePartHeights = Record<string, number>;
 export type StapleHeights = Record<string, StaplePartHeights>;
