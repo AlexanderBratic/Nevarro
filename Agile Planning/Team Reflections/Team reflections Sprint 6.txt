@@ -1,0 +1,5 @@
+Team Reflection 6 (19/10-2022)
+This sprint has only been half a week long since we've planned the last retrospective on wednesday and then we plan on working on and turning in the course-retrospective til friday. For this reason we haven't planned any tasks related to the project other than documentation. We've also focused a lot on the presentation and also setting up the website with docker for better easy of use during the presentation. 
+
+	Code Quality
+This sprint we've improved our documentation. We've come to realize that we need to store the web utils as an environment variables and not just in a plain file as we do now, but havent yet had time to do change this.
