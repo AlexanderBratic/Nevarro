@@ -40,8 +40,8 @@ import java.nio.file.Paths;
          */
         @GetMapping @CrossOrigin(origins="*")
         public String autoComplete(@RequestParam String input) throws IOException {
-            String pathToKey = "api//apiKey";
-            String pathToMoch = "api//AutoCompleteMockResponse.txt";
+            String pathToKey = "apiKey";
+            String pathToMoch = "AutoCompleteMockResponse.txt";
             String contents;
             Path keyPath = Paths.get(pathToKey);
 
@@ -50,6 +50,17 @@ import java.nio.file.Paths;
                 contents = Files.readString(keyPath); //apiKey
                 // passes the parameters to the service
                 return placesAutoCompleteService.placesAutoCompleteCon(input, contents);
+            }
+            else if(Files.exists(Path.of("api//" + pathToKey))){
+                System.out.println("Try to load autoComplete apiKey");
+                contents = Files.readString(Path.of("api//" + pathToKey)); //apiKey
+                // passes the parameters to the service
+                return placesAutoCompleteService.placesAutoCompleteCon(input, contents);
+            }
+            else if(Files.exists(Path.of("api//" + pathToMoch))){
+                System.out.println("Try to load autoComplete Mochfile");
+                Path mochPath = Path.of("api//" + pathToMoch); //MockResponse
+                return Files.readString(mochPath);
             }
             else{
                 System.out.println("Try to load autoComplete Mochfile");

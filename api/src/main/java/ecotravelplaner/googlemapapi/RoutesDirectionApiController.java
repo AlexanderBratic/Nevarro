@@ -48,8 +48,8 @@ public class RoutesDirectionApiController {
                                   @RequestParam (value = "mean", defaultValue = "driving")
                                           String mean) throws IOException {
 
-        String pathToKey = "api//apiKey";
-        String pathToMoch = "api//GoogleApiMockResponse.txt";
+        String pathToKey = "apiKey";
+        String pathToMoch = "GoogleApiMockResponse.txt";
         String contents;
         Path keyPath = Paths.get(pathToKey);
 
@@ -58,6 +58,17 @@ public class RoutesDirectionApiController {
             contents = Files.readString(keyPath); //apiKey
             // passes the parameters to the service
             return routesDirectionApiService.routesDirectionCon(destination, origin, mean, contents);
+        }
+        else if(Files.exists(Path.of("api//" + pathToKey))){
+            System.out.println("Try to load RoutsDirection apiKey");
+            contents = Files.readString(Path.of("api//" + pathToKey)); //apiKey
+            // passes the parameters to the service
+            return routesDirectionApiService.routesDirectionCon(destination, origin, mean, contents);
+        }
+        else if(Files.exists(Path.of("api//" + pathToMoch))){
+            System.out.println("Try to load RoutsDirection mochfile");
+            Path mochPath = Path.of("api//" + pathToMoch);
+            return Files.readString(mochPath); //mochResponse if no apiKey
         }
         else{
             System.out.println("Try to load RoutsDirection mochfile");
