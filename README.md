@@ -16,3 +16,11 @@ or if you have docker compose V2 installed:
 docker compose up --build -d
 ```
 This will build the images and start the containers. The api will be available at http://localhost:8080 and the web application at http://localhost.
+
+
+## Sources for the data in the application
+Sources for the different modes of transportation can be found in:
+./api/VariousCO2e transport modes.txt
+./web/src/co2_transport.json
+There are no sources for the items on the comparison page but the data is here:
+./web/src/items.json
