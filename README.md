@@ -3,6 +3,27 @@ Group project in DAT257 / DIT257 Agile software project management which is the 
 The project is a web application that helps users to plan their trips in a more sustainable way. 
 The application is built with react as frontend and java spring boot as backend.
 
+### Links
+[Trello](https://trello.com/invite/b/syo51Img/ATTI331a8775b7de6c06267cdac5edc7f0491EA7937E/agile-board)
+
+### Directories
+`Agile Planning` contains planning docs, relfections and so on.
+`api` contains the java spring boot project, see the readme in it for how to run.
+`web` contains the react project, see readme in it for how to run.
+
+### Git username refrence (who is who)
+```
+Name              | Git username(s)
+------------------------------------
+Andin Blomgren    - lesonion
+Jesper Jansson    - skruven96
+Alen Mukaca       - ShinzenATT
+Henning Dahlen    - Anaemix
+Alexander Bratic  - AlexanderBratic
+Tomas Alander     - tomasal5817
+David Azizi       - QodeMaster, Dav
+```
+
 ## Deploying the application
 The production version of the application is deployed using docker to quickly deploy the application to a server.
 To run the application locally then read the readmes in the api and web folder.
