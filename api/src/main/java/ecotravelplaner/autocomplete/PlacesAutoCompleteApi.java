@@ -7,24 +7,32 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * A class fore establishing a http connection to GooglePlaces Auto Complete Api
+ * A class for establishing a http connection to GooglePlaces Auto Complete Api
  * Addres: https://maps.googleapis.com/maps/api/place/autocomplete/json?input=InPutStringGoesHere&components=country:se&key=YoureApiKeyGoesHere
  */
-
-
 public class PlacesAutoCompleteApi {
 
+    /** the http connection object */
     private HttpURLConnection con;
+    /** the input string to be autocompleted */
     private String input;
+    /** the current line of the response */
     private String inPutLine;
+    /** the apikey for GooglePlaces Auto Complete Api */
     private String apiKey;
 
+    /**
+     * Constructor for PlacesAutoCompleteApi where it takes the parameters and saves them as class variables.
+     * @param input the input string to be autocompleted
+     * @param apiKey the apikey for GooglePlaces Auto Complete Api
+     */
     public PlacesAutoCompleteApi(String input, String apiKey) {
         this.input = input;
         this.apiKey = apiKey; //key in http request
     }
 
     /**
+     * Method for getting the response from GooglePlaces Auto Complete Api and returning it as a String.
      * @return A JSON object as a String
      */
 
@@ -48,6 +56,12 @@ public class PlacesAutoCompleteApi {
         return ret;
     }
 
+    /**
+     * Method for establishing a http connection to GooglePlaces Auto Complete Api
+     * @param urlAddress the url to the api
+     * @return the http connection
+     * @throws IOException if the connection fails
+     */
     private HttpURLConnection getConnected(String urlAddress) throws IOException {
         URL url = new URL(urlAddress);
         this.con = (HttpURLConnection)url.openConnection();
