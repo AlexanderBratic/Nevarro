@@ -38,6 +38,8 @@ docker compose up --build -d
 ```
 This will build the images and start the containers. The api will be available at http://localhost:8080 and the web application at http://localhost.
 
+### Git Inspector
+./Agile Planning/Gitinspector.txt
 
 ## Sources for the data in the application
 Sources for the different modes of transportation can be found in:
