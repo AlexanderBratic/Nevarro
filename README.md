@@ -8,8 +8,13 @@ The application is built with react as frontend and java spring boot as backend.
 
 ### Directories
 `Agile Planning` contains planning docs, relfections and so on.
+
 `api` contains the java spring boot project, see the readme in it for how to run.
+
 `web` contains the react project, see readme in it for how to run.
+
+### Git Inspector
+[./Agile Planning/Gitinspector.txt](https://github.com/AlexanderBratic/Nevarro/blob/main/Agile%20Planning/Gitinspector.txt)
 
 ### Git username refrence (who is who)
 ```
@@ -37,9 +42,6 @@ or if you have docker compose V2 installed:
 docker compose up --build -d
 ```
 This will build the images and start the containers. The api will be available at http://localhost:8080 and the web application at http://localhost.
-
-### Git Inspector
-./Agile Planning/Gitinspector.txt
 
 ## Sources for the data in the application
 Sources for the different modes of transportation can be found in:
