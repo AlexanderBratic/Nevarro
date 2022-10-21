@@ -1,0 +1,30 @@
+### Git Inspector
+-f "java,tsx,ts,js,yml,gradle,json,css,*" 
+
+Statistical information for the repository 'Nevarro.git' was gathered on 2022/10/21.
+The following historical commit information, by author, was found:
+
+←[1mAuthor                     Commits    Insertions      Deletions    % of changes←[0;0m
+Alen Mukaca                      1            24              0            0.33
+AlexanderBratic                  9           417             71            6.64
+Anaemix                          5           204             51            3.47
+Dav                             24           614            343           13.02
+Henning Dahlén                   4           274             12            3.89
+Jesper Jansson                  19          1372            796           29.49
+LesOnion                         1             7              0            0.10
+QodeMaster                       7            57              5            0.84
+ShinzenATT                       2            70             61            1.78
+shinzenatt                      30          1721            577           31.26
+tomasalander                    13           493            182            9.18
+
+Below are the number of rows from each author that have survived and are still intact in the current revision:
+
+←[1mAuthor                     Rows      Stability          Age       % in comments←[0;0m
+AlexanderBratic             154           36.9          0.9                1.95
+Anaemix                     122           59.8          0.6                0.00
+Dav                         398           64.8          0.5                0.00
+Henning Dahlén              228           83.2          0.5                0.00
+Jesper Jansson              636           46.4          0.5                0.00
+QodeMaster                   41           71.9          0.7                0.00
+shinzenatt                  857           49.8          0.8               10.50
+tomasalander                347           70.4          0.5                8.07
