@@ -1,0 +1,14 @@
+Individual Reflections - Week 8
+David Azizi - Team Nevarro
+
+• What do I want to learn or understand better?
+As a member of my team I want to learn React, Next.Js and Java. I want to able to learn how to create an application from scratch by doing it in my freetime.
+
+• How can I help someone else, or the entire team, to learn something new?
+As a member of my team I can write documentation to the code so that I can ease the workload of my team.
+
+• What is my contribution towards the team’s use of Scrum?
+As a member of a scrum team I participated in the discussions during the sprint meetings and during the stand ups meetings. I contributed to the estimations of the tickets and I aided in the process of putting everybody on the same page.
+
+• What is my contribution towards the team’s deliveries?
+I contributed to the team’s deliveries by writing my part of the report and by reviewing the portion my team members wrote.
